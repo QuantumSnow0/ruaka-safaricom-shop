@@ -102,7 +102,10 @@ export default function Home() {
                 animate={{ scale: 1 }}
                 transition={{ duration: 0.8, type: "spring" }}
               >
-                <div className="relative group">
+                <Link
+                  href="/lipamdogomdogo/products"
+                  className="relative group"
+                >
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-r from-yellow-500/40 to-orange-500/40 rounded-full blur-xl"
                     animate={{
@@ -126,7 +129,7 @@ export default function Home() {
                       className="w-16 h-16 sm:w-20 sm:h-20 lg:w-18 lg:h-18 object-cover"
                     />
                   </motion.div>
-                </div>
+                </Link>
               </motion.div>
 
               {/* Revolving Container */}

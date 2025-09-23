@@ -95,7 +95,10 @@ const ProductCard: React.FC<ProductCardProps> = ({
         }
       >
         <div className="flex">
-          <Link href={"/lipamdogomdogo/products/" + product.id} className="flex-shrink-0">
+          <Link
+            href={"/lipamdogomdogo/products/" + product.id}
+            className="flex-shrink-0"
+          >
             <div className="relative w-32 h-32 overflow-hidden bg-gray-50">
               {/* Discount Badge */}
               {product.discount_percentage &&
@@ -127,7 +130,10 @@ const ProductCard: React.FC<ProductCardProps> = ({
           </Link>
 
           <div className="flex-1 p-4 flex flex-col justify-between">
-            <Link href={"/lipamdogomdogo/products/" + product.id} className="cursor-pointer">
+            <Link
+              href={"/lipamdogomdogo/products/" + product.id}
+              className="cursor-pointer"
+            >
               <div>
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-xs font-medium text-orange-600 bg-orange-50 px-2 py-1 rounded-full">

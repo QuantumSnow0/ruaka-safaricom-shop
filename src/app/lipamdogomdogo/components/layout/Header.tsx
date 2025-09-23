@@ -77,32 +77,80 @@ const Header: React.FC = () => {
 
   // Categories for mobile menu
   const categories = [
-    { name: "All Products", href: "/shop", icon: "📱" },
-    { name: "Smartphones", href: "/products/category/smartphones", icon: "📱" },
-    { name: "Tablets", href: "/products/category/tablets", icon: "📱" },
-    { name: "Accessories", href: "/products/category/accessories", icon: "🎧" },
-    { name: "Cases & Covers", href: "/products/category/cases", icon: "🛡️" },
-    { name: "Chargers", href: "/products/category/chargers", icon: "🔌" },
-    { name: "Earphones", href: "/products/category/earphones", icon: "🎧" },
-    { name: "Power Banks", href: "/products/category/powerbanks", icon: "🔋" },
-    { name: "Gaming", href: "/products/category/gaming", icon: "🎮" },
+    { name: "All Products", href: "/lipamdogomdogo/shop", icon: "📱" },
+    {
+      name: "Smartphones",
+      href: "/lipamdogomdogo/products/category/smartphones",
+      icon: "📱",
+    },
+    {
+      name: "Tablets",
+      href: "/lipamdogomdogo/products/category/tablets",
+      icon: "📱",
+    },
+    {
+      name: "Accessories",
+      href: "/lipamdogomdogo/products/category/accessories",
+      icon: "🎧",
+    },
+    {
+      name: "Cases & Covers",
+      href: "/lipamdogomdogo/products/category/cases",
+      icon: "🛡️",
+    },
+    {
+      name: "Chargers",
+      href: "/lipamdogomdogo/products/category/chargers",
+      icon: "🔌",
+    },
+    {
+      name: "Earphones",
+      href: "/lipamdogomdogo/products/category/earphones",
+      icon: "🎧",
+    },
+    {
+      name: "Power Banks",
+      href: "/lipamdogomdogo/products/category/powerbanks",
+      icon: "🔋",
+    },
+    {
+      name: "Gaming",
+      href: "/lipamdogomdogo/products/category/gaming",
+      icon: "🎮",
+    },
     {
       name: "Smart Watches",
-      href: "/products/category/smart-watches",
+      href: "/lipamdogomdogo/products/category/smart-watches",
       icon: "⌚",
     },
-    { name: "Laptops", href: "/products/category/laptops", icon: "💻" },
-    { name: "Cameras", href: "/products/category/cameras", icon: "📷" },
+    {
+      name: "Laptops",
+      href: "/lipamdogomdogo/products/category/laptops",
+      icon: "💻",
+    },
+    {
+      name: "Cameras",
+      href: "/lipamdogomdogo/products/category/cameras",
+      icon: "📷",
+    },
   ];
 
   const brandCategories = [
-    { name: "Apple", href: "/products/brand/apple", icon: "📱" },
-    { name: "Samsung", href: "/products/brand/samsung", icon: "📱" },
-    { name: "Tecno", href: "/products/brand/tecno", icon: "📱" },
-    { name: "Oppo", href: "/products/brand/oppo", icon: "📱" },
-    { name: "Redmi", href: "/products/brand/redmi", icon: "📱" },
-    { name: "Infinix", href: "/products/brand/infinix", icon: "📱" },
-    { name: "Vivo", href: "/products/brand/vivo", icon: "📱" },
+    { name: "Apple", href: "/lipamdogomdogo/products/brand/apple", icon: "📱" },
+    {
+      name: "Samsung",
+      href: "/lipamdogomdogo/products/brand/samsung",
+      icon: "📱",
+    },
+    { name: "Tecno", href: "/lipamdogomdogo/products/brand/tecno", icon: "📱" },
+    { name: "Oppo", href: "/lipamdogomdogo/products/brand/oppo", icon: "📱" },
+    { name: "Redmi", href: "/lipamdogomdogo/products/brand/redmi", icon: "📱" },
+    {
+      name: "Infinix",
+      href: "/lipamdogomdogo/products/brand/infinix",
+      icon: "📱",
+    },
+    { name: "Vivo", href: "/lipamdogomdogo/products/brand/vivo", icon: "📱" },
   ];
   const priceRanges = [
     { label: "Under KES 2,000", value: "under-2k" },
@@ -222,7 +270,10 @@ const Header: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Desktop Logo */}
-            <Link href="/lipamdogomdogo/products" className="hidden md:flex items-center">
+            <Link
+              href="/lipamdogomdogo/products"
+              className="hidden md:flex items-center"
+            >
               <Image
                 src="/logo.png"
                 alt="Lipamdogomdogo"
@@ -245,7 +296,10 @@ const Header: React.FC = () => {
               </button>
 
               {/* Mobile Logo - Center */}
-              <Link href="/lipamdogomdogo/products" className="flex items-center">
+              <Link
+                href="/lipamdogomdogo/products"
+                className="flex items-center"
+              >
                 <Image
                   src="/logo.png"
                   alt="Lipamdogomdogo"
@@ -405,13 +459,13 @@ const Header: React.FC = () => {
                     </button>
                     <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-1 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                       <Link
-                        href="/profile"
+                        href="/lipamdogomdogo/profile"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       >
                         Profile
                       </Link>
                       <Link
-                        href="/orders"
+                        href="/lipamdogomdogo/orders"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       >
                         My Orders
@@ -566,7 +620,7 @@ const Header: React.FC = () => {
                         {/* Navigation Links */}
                         <nav className="p-4 space-y-2">
                           <Link
-                            href="/products"
+                            href="/lipamdogomdogo/products"
                             className="flex items-center px-4 py-3 text-gray-700 hover:text-orange-600 hover:bg-orange-50 transition-colors rounded-lg"
                             onClick={() => setIsMenuOpen(false)}
                           >
@@ -650,7 +704,7 @@ const Header: React.FC = () => {
                         {isClient && user ? (
                           <>
                             <Link
-                              href="/profile"
+                              href="/lipamdogomdogo/profile"
                               className="w-full flex items-center px-4 py-3 text-gray-700 hover:text-orange-600 hover:bg-orange-50 transition-colors rounded-lg"
                               onClick={() => setIsMenuOpen(false)}
                             >
@@ -660,7 +714,7 @@ const Header: React.FC = () => {
                               </span>
                             </Link>
                             <Link
-                              href="/orders"
+                              href="/lipamdogomdogo/orders"
                               className="w-full flex items-center px-4 py-3 text-gray-700 hover:text-orange-600 hover:bg-orange-50 transition-colors rounded-lg"
                               onClick={() => setIsMenuOpen(false)}
                             >

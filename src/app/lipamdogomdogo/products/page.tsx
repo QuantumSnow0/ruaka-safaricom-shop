@@ -1250,7 +1250,10 @@ Please let me know about availability and delivery options.`;
               <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1 sm:gap-6">
                 {curvedProducts.length > 0 ? (
                   curvedProducts.slice(0, 8).map((product, index) => (
-                    <Link key={product.id} href={`/lipamdogomdogo/products/${product.id}`}>
+                    <Link
+                      key={product.id}
+                      href={`/lipamdogomdogo/products/${product.id}`}
+                    >
                       <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
