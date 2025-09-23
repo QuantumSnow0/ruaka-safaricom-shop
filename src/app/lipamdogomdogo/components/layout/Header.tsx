@@ -328,7 +328,7 @@ const Header: React.FC = () => {
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
               <Link
-                href="/lipamdogomdogo/products"
+                href="/"
                 className="text-gray-700 hover:text-blue-600 transition-colors"
               >
                 Home
@@ -620,7 +620,7 @@ const Header: React.FC = () => {
                         {/* Navigation Links */}
                         <nav className="p-4 space-y-2">
                           <Link
-                            href="/lipamdogomdogo/products"
+                            href="/"
                             className="flex items-center px-4 py-3 text-gray-700 hover:text-orange-600 hover:bg-orange-50 transition-colors rounded-lg"
                             onClick={() => setIsMenuOpen(false)}
                           >
