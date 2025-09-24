@@ -2,8 +2,43 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { MapPin, ExternalLink } from "lucide-react";
 
 export default function Home() {
+  // Function to open maps with directions to the shop
+  const openMaps = () => {
+    // Shop location coordinates (you can update these with the actual shop location)
+    const shopLatitude = -1.205584; // Example coordinates for Ruaka area
+    const shopLongitude = 36.779357;
+    const shopName = "Safaricom Shop Ruaka";
+
+    // Detect if user is on mobile device
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    if (isMobile) {
+      // For mobile devices, try Apple Maps first (iOS) or Google Maps (Android)
+      const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+      if (isIOS) {
+        // Open Apple Maps
+        window.open(
+          `http://maps.apple.com/?q=${shopLatitude},${shopLongitude}&z=15&t=m`
+        );
+      } else {
+        // Open Google Maps for Android
+        window.open(
+          `https://www.google.com/maps/dir/?api=1&destination=${shopLatitude},${shopLongitude}&travelmode=driving`
+        );
+      }
+    } else {
+      // For desktop, open Google Maps in new tab
+      window.open(
+        `https://www.google.com/maps/dir/?api=1&destination=${shopLatitude},${shopLongitude}&travelmode=driving`,
+        "_blank"
+      );
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100">
       {/* Navigation */}
@@ -38,6 +73,12 @@ export default function Home() {
                 >
                   About
                 </a>
+                <Link
+                  href="/customer-care"
+                  className="text-gray-700 hover:text-green-600 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-green-50"
+                >
+                  Support
+                </Link>
                 <a
                   href="#contact"
                   className="text-gray-700 hover:text-green-600 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-green-50"
@@ -83,8 +124,13 @@ export default function Home() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <button className="group relative px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-green-500/25 text-sm sm:text-base">
+                <button
+                  onClick={openMaps}
+                  className="group relative px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-green-500/25 text-sm sm:text-base flex items-center justify-center gap-2"
+                >
+                  <MapPin className="w-4 h-4" />
                   <span className="relative z-10">Visit Our Shop</span>
+                  <ExternalLink className="w-3 h-3" />
                   <div className="absolute inset-0 bg-gradient-to-r from-green-600 to-emerald-700 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </button>
                 <button className="px-4 sm:px-6 py-2 sm:py-3 backdrop-blur-md bg-white/80 border border-green-300 text-gray-700 font-bold rounded-xl transition-all duration-300 hover:bg-green-50 hover:border-green-400 text-sm sm:text-base">
@@ -425,7 +471,7 @@ export default function Home() {
               <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 to-pink-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
               <div className="relative bg-white/90 backdrop-blur-md border border-green-200 rounded-2xl p-6 hover:bg-green-50 transition-all duration-500 shadow-lg">
                 <div className="flex items-center mb-4">
-                  <div className="w-12 h-12flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-12 h-12 flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
                     <img
                       src="/assets/icons/battery.png"
                       alt="App Icon"
@@ -505,7 +551,10 @@ export default function Home() {
             </div>
 
             {/* Service 4 - Customer Care */}
-            <div className="relative group">
+            <Link
+              href="/customer-care"
+              className="relative group hover:cursor-pointer"
+            >
               <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
               <div className="relative bg-white/90 backdrop-blur-md border border-green-200 rounded-2xl p-6 hover:bg-green-50 transition-all duration-500 shadow-lg">
                 <div className="flex items-center mb-4">
@@ -528,7 +577,7 @@ export default function Home() {
                   best service experience.
                 </p>
                 <div className="flex items-center text-green-600 font-semibold group-hover:translate-x-2 transition-transform duration-300">
-                  Learn More
+                  Get Support
                   <svg
                     className="w-4 h-4 ml-2"
                     fill="none"
@@ -544,10 +593,13 @@ export default function Home() {
                   </svg>
                 </div>
               </div>
-            </div>
+            </Link>
 
             {/* Service 5 - Internet Services */}
-            <div className="relative group">
+            <Link
+              href="/internet-services"
+              className="relative group hover:cursor-pointer"
+            >
               <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-indigo-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
               <div className="relative bg-white/90 backdrop-blur-md border border-green-200 rounded-2xl p-6 hover:bg-green-50 transition-all duration-500 shadow-lg">
                 <div className="flex items-center mb-4">
@@ -565,12 +617,12 @@ export default function Home() {
                   </div>
                 </div>
                 <p className="text-gray-700 text-sm leading-relaxed mb-4">
-                  Fast and reliable internet connectivity solutions for homes
-                  and businesses. Get connected with our high-speed internet
-                  packages and enjoy seamless online experiences.
+                  Experience blazing-fast internet with our 5G and secure fiber
+                  packages. Choose from flexible plans perfect for your home or
+                  business needs.
                 </p>
                 <div className="flex items-center text-purple-600 font-semibold group-hover:translate-x-2 transition-transform duration-300">
-                  Get Connected
+                  View Plans
                   <svg
                     className="w-4 h-4 ml-2"
                     fill="none"
@@ -586,7 +638,7 @@ export default function Home() {
                   </svg>
                 </div>
               </div>
-            </div>
+            </Link>
           </div>
         </div>
       </section>
@@ -740,6 +792,173 @@ export default function Home() {
                       </p>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Visit Our Shop Section */}
+      <section className="py-20 bg-gradient-to-br from-orange-50 via-white to-red-50 relative overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute top-10 left-10 w-32 h-32 bg-orange-500/20 rounded-full blur-2xl animate-pulse"></div>
+          <div className="absolute bottom-10 right-10 w-40 h-40 bg-red-500/20 rounded-full blur-2xl animate-pulse delay-1000"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-yellow-500/20 rounded-full blur-2xl animate-pulse delay-500"></div>
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <span className="inline-block px-4 py-2 bg-orange-500/20 text-orange-600 text-sm font-semibold rounded-full mb-4">
+              PHYSICAL LOCATION
+            </span>
+            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
+              Visit Our{" "}
+              <span className="bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
+                Physical Shop
+              </span>
+            </h2>
+            <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+              Experience our products in person at our conveniently located shop
+              in Ruaka. Get hands-on with the latest devices and speak directly
+              with our experts.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left Side - Shop Info */}
+            <div className="space-y-8">
+              <div className="bg-white/90 backdrop-blur-md border border-orange-200 rounded-2xl p-6 shadow-lg">
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">
+                      Location
+                    </h3>
+                    <p className="text-gray-700 mb-2">
+                      Safaricom Shop Ruaka
+                      <br />
+                      Ruaka Town Center
+                      <br />
+                      Kiambu County, Kenya
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      Near Ruaka Mall, easily accessible by public transport
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white/90 backdrop-blur-md border border-orange-200 rounded-2xl p-6 shadow-lg">
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <svg
+                      className="w-6 h-6 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">
+                      Opening Hours
+                    </h3>
+                    <div className="space-y-1 text-gray-700">
+                      <p>Monday - Friday: 8:00 AM - 7:00 PM</p>
+                      <p>Saturday: 9:00 AM - 6:00 PM</p>
+                      <p>Sunday: 10:00 AM - 5:00 PM</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white/90 backdrop-blur-md border border-orange-200 rounded-2xl p-6 shadow-lg">
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <svg
+                      className="w-6 h-6 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">
+                      Contact
+                    </h3>
+                    <p className="text-gray-700 mb-1">
+                      Phone: +254 700 000 000
+                    </p>
+                    <p className="text-gray-700">
+                      Email: shop@ruaka.safaricom.co.ke
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Side - Map and CTA */}
+            <div className="space-y-6">
+              {/* Map Placeholder */}
+              <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl h-64 flex items-center justify-center border-2 border-dashed border-gray-300">
+                <div className="text-center">
+                  <MapPin className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                  <p className="text-gray-500 font-medium">Interactive Map</p>
+                  <p className="text-sm text-gray-400">
+                    Click "Get Directions" to view in maps
+                  </p>
+                </div>
+              </div>
+
+              {/* CTA Buttons */}
+              <div className="space-y-4">
+                <button
+                  onClick={openMaps}
+                  className="w-full group relative px-6 py-4 bg-gradient-to-r from-orange-500 to-red-600 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-orange-500/25 flex items-center justify-center gap-3"
+                >
+                  <MapPin className="w-5 h-5" />
+                  <span>Get Directions</span>
+                  <ExternalLink className="w-4 h-4" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-700 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </button>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <button className="px-4 py-3 bg-white border-2 border-orange-200 text-orange-600 font-semibold rounded-xl transition-all duration-300 hover:bg-orange-50 hover:border-orange-300 flex items-center justify-center gap-2">
+                    <svg
+                      className="w-4 h-4"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                    </svg>
+                    Call Us
+                  </button>
+                  <button className="px-4 py-3 bg-white border-2 border-orange-200 text-orange-600 font-semibold rounded-xl transition-all duration-300 hover:bg-orange-50 hover:border-orange-300 flex items-center justify-center gap-2">
+                    <svg
+                      className="w-4 h-4"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                    </svg>
+                    WhatsApp
+                  </button>
                 </div>
               </div>
             </div>
