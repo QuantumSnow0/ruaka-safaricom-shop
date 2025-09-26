@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Safaricom Shop Ruaka - Your Trusted Mobile Partner",
   description:
     "Visit Safaricom Shop Ruaka for customer care, mobile accessories, phones, and Lipa Mdogo Mdogo services. Your one-stop shop for all Safaricom needs in Ruaka.",
+  metadataBase: new URL("https://safaricomshopruaka.co.ke"),
 };
 
 export default function RootLayout({

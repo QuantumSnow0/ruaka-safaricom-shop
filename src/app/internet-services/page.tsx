@@ -645,8 +645,7 @@ Please let me know how to proceed with the order. Thank you!`;
               href="tel:0700776994"
               className="px-8 py-3 bg-green-600 text-white font-bold rounded-xl hover:bg-green-700 transition-colors flex items-center justify-center space-x-2"
             >
-              <Phone className="w-5 h-5" />
-              <span>Call Now</span>
+              <Phone className="w-5 h-5" />d <span>Call Now</span>
             </a>
             <a
               href="https://wa.me/254700776994?text=Hello! I'm interested in your internet services. Can you help me choose the right plan?"

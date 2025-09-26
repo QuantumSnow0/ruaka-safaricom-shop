@@ -49,6 +49,17 @@
       "source": "/admin",
       "destination": "/admin"
     }
+  ],
+  "redirects": [
+    {
+      "source": "http://www.safaricomshopruaka.co.ke/:path*",
+      "destination": "https://safaricomshopruaka.co.ke/:path*",
+      "permanent": true
+    },
+    {
+      "source": "https://www.safaricomshopruaka.co.ke/:path*",
+      "destination": "https://safaricomshopruaka.co.ke/:path*",
+      "permanent": true
+    }
   ]
 }
-
