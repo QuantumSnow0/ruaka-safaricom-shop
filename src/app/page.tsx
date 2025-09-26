@@ -46,11 +46,16 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <h1 className="text-3xl font-black bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent">
+              <div className="relative flex-shrink-0">
+                <img
+                  src="/mobile-logo.svg"
+                  alt="Safaricom Logo"
+                  className="absolute left-[30px] top-[-18px] lg:top-[-20px] lg:left-[27px] z-[-100]  w-17 h-17 sm:w-20 sm:h-20 lg:w-18 lg:h-18 object-contain"
+                />
+                <h1 className="ml-16 text-3xl font-black bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent">
                   Safaricom Shop
                 </h1>
-                <p className="text-sm text-gray-600 font-medium">Ruaka</p>
+                <p className="ml-16 text-sm text-gray-600 font-medium">Ruaka</p>
               </div>
             </div>
             <div className="hidden md:block">
@@ -109,9 +114,11 @@ export default function Home() {
             <div className="text-center lg:text-left order-2 lg:order-1">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-6 leading-tight">
                 Welcome to{" "}
-                <span className="bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent">
-                  Ruaka Safaricom Shop
-                </span>
+                <div>
+                  <span className="bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                    Ruaka Safaricom Shop
+                  </span>
+                </div>
               </h1>
 
               <p className="text-base sm:text-lg text-gray-700 mb-8 leading-relaxed">
