@@ -845,7 +845,7 @@ export default function Home() {
                       Kiambu County, Kenya
                     </p>
                     <p className="text-sm text-gray-500">
-                      Near Ruaka Mall, easily accessible by public transport
+                      Sandton plaza, opposite Cleanshelf supermarket
                     </p>
                   </div>
                 </div>
@@ -903,10 +903,10 @@ export default function Home() {
                       Contact
                     </h3>
                     <p className="text-gray-700 mb-1">
-                      Phone: +254 700 000 000
+                      Phone: +254 700 776 994
                     </p>
                     <p className="text-gray-700">
-                      Email: shop@ruaka.safaricom.co.ke
+                      Email: safaricomshopruaka@gmail.com
                     </p>
                   </div>
                 </div>
