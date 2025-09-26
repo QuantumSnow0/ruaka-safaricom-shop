@@ -1,11 +1,5 @@
 "use client";
 
-export const metadata = {
-  alternates: {
-    canonical: "/customer-care",
-  },
-};
-
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
