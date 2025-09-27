@@ -62,7 +62,7 @@ export default function CustomerCarePage() {
       if (isIOS) {
         // Open Apple Maps
         window.open(
-          `http://maps.apple.com/?q=${shopLatitude},${shopLongitude}&z=15&t=m`
+          `https://maps.apple.com/?q=${shopLatitude},${shopLongitude}&z=15&t=m`
         );
       } else {
         // Open Google Maps for Android

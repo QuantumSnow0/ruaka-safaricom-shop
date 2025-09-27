@@ -22,7 +22,7 @@ export default function Home() {
       if (isIOS) {
         // Open Apple Maps
         window.open(
-          `http://maps.apple.com/?q=${shopLatitude},${shopLongitude}&z=15&t=m`
+          `https://maps.apple.com/?q=${shopLatitude},${shopLongitude}&z=15&t=m`
         );
       } else {
         // Open Google Maps for Android
@@ -42,8 +42,8 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100">
       {/* Navigation */}
-      <nav className="backdrop-blur-md bg-white/90 border-b border-green-200 sticky top-0 z-50 shadow-lg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav className="backdrop-blur-md bg-white/90 sm:border-b sm:border-green-200 sticky top-0 z-50 sm:shadow-lg">
+        <div className="max-w-7xl mx-auto px-0 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center">
               <div className="relative flex-shrink-0">
@@ -99,7 +99,7 @@ export default function Home() {
       {/* Hero Section */}
       <section
         id="home"
-        className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden"
+        className="relative py-5 px-4 sm:px-6 lg:px-8 overflow-hidden"
       >
         {/* Animated Background Elements */}
         <div className="absolute inset-0">
@@ -111,7 +111,7 @@ export default function Home() {
         <div className="relative z-10 max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left Content */}
-            <div className="text-center lg:text-left order-2 lg:order-1">
+            <div className="text-center lg:text-left order-1 lg:order-1">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-6 leading-tight">
                 Welcome to{" "}
                 <div>
@@ -140,14 +140,17 @@ export default function Home() {
                   <ExternalLink className="w-3 h-3" />
                   <div className="absolute inset-0 bg-gradient-to-r from-green-600 to-emerald-700 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </button>
-                <button className="px-4 sm:px-6 py-2 sm:py-3 backdrop-blur-md bg-white/80 border border-green-300 text-gray-700 font-bold rounded-xl transition-all duration-300 hover:bg-green-50 hover:border-green-400 text-sm sm:text-base">
+                <Link
+                  href="#services"
+                  className="px-4 sm:px-6 py-2 sm:py-3 backdrop-blur-md bg-white/80 border border-green-300 text-gray-700 font-bold rounded-xl transition-all duration-300 hover:bg-green-50 hover:border-green-400 text-sm sm:text-base"
+                >
                   Explore Services
-                </button>
+                </Link>
               </div>
             </div>
 
             {/* Right Visual - Circular Layout */}
-            <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 mx-auto order-1 lg:order-2">
+            <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 mx-auto order-2 lg:order-2">
               {/* Center Card - Lipa Mdogo Mdogo (The Sun) */}
               <motion.div
                 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
@@ -403,7 +406,7 @@ export default function Home() {
       {/* Services Section - Zigzag Layout */}
       <section
         id="services"
-        className="py-20 bg-gradient-to-b from-green-100 to-white relative overflow-hidden"
+        className="py-10 bg-gradient-to-b from-green-100 to-white relative overflow-hidden"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
