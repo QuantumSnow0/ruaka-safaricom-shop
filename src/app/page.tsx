@@ -158,8 +158,10 @@ export default function Home() {
                 animate={{ scale: 1 }}
                 transition={{ duration: 0.8, type: "spring" }}
               >
-                <Link
-                  href="/lipamdogomdogo/products"
+                <a
+                  href="https://lipapolepole.net/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="relative group"
                 >
                   <motion.div
@@ -185,7 +187,7 @@ export default function Home() {
                       className="w-16 h-16 sm:w-20 sm:h-20 lg:w-18 lg:h-18 object-cover"
                     />
                   </motion.div>
-                </Link>
+                </a>
               </motion.div>
 
               {/* Revolving Container */}
@@ -429,9 +431,11 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Service 1 - Lipa Mdogo Mdogo */}
-            <Link
-              href="/lipamdogomdogo/products"
-              className="relative group hover:cursor-pointer"
+            <a
+              href="https://lipapolepole.net/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative group"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
               <div className="relative bg-white/90 backdrop-blur-md border border-yellow-500/30 rounded-2xl p-6 hover:bg-yellow-50 transition-all duration-500 ring-2 ring-yellow-500/20 shadow-lg">
@@ -474,7 +478,7 @@ export default function Home() {
                   </svg>
                 </div>
               </div>
-            </Link>
+            </a>
 
             {/* Service 2 - Mobile Accessories */}
             <div className="relative group">
