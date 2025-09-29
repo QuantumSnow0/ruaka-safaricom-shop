@@ -1149,12 +1149,12 @@ Please let me know about availability and delivery options.`;
                                       getPriceDisplayWithOriginal(product);
                                     return (
                                       <div>
-                                        {priceDisplay.hasDiscount &&
+                                        {/* {priceDisplay.hasDiscount &&
                                           priceDisplay.originalPrice && (
                                             <div className="text-xs text-gray-500 line-through truncate mb-1">
                                               {priceDisplay.originalPrice}
                                             </div>
-                                          )}
+                                          )} */}
                                         <div className="text-sm font-bold text-orange-600 truncate">
                                           {priceDisplay.currentPrice}
                                         </div>
@@ -1292,12 +1292,12 @@ Please let me know about availability and delivery options.`;
                                 getPriceDisplayWithOriginal(product);
                               return (
                                 <div className="text-start">
-                                  {priceDisplay.hasDiscount &&
+                                  {/* {priceDisplay.hasDiscount &&
                                     priceDisplay.originalPrice && (
                                       <div className="text-[10px] text-gray-500 line-through mb-1">
                                         {priceDisplay.originalPrice}
                                       </div>
-                                    )}
+                                    )} */}
                                   <div className="text-[12px] font-bold text-orange-600 truncate">
                                     {priceDisplay.currentPrice}
                                   </div>

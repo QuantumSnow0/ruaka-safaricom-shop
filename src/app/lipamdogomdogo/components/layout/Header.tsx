@@ -275,10 +275,10 @@ const Header: React.FC = () => {
               className="hidden md:flex items-center"
             >
               <Image
-                src="/logo.png"
+                src="/android-chrome-192x192.png"
                 alt="Lipamdogomdogo"
-                width={60}
-                height={60}
+                width={40}
+                height={40}
                 className="mr-2"
                 style={{ width: "auto", height: "auto" }}
                 priority
@@ -301,7 +301,7 @@ const Header: React.FC = () => {
                 className="flex items-center"
               >
                 <Image
-                  src="/logo.png"
+                  src="/android-chrome-192x192.png"
                   alt="Lipamdogomdogo"
                   width={50}
                   height={50}

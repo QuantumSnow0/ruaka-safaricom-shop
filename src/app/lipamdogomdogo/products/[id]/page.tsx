@@ -608,7 +608,7 @@ export default function ProductDetailPage() {
           <h1 className="text-2xl font-bold text-gray-900 mb-4">
             {error || "Product not found"}
           </h1>
-          <Link href="/products">
+          <Link href="/lipamdogomdogo/products">
             <Button>Back to Products</Button>
           </Link>
         </div>
@@ -806,52 +806,6 @@ Please let me know about availability and delivery options.`;
                             )
                           )}
                         {/* Installment Plans */}
-                        {product.installment_plans &&
-                          product.installment_plans.length > 0 && (
-                            <>
-                              <tr className="border-b border-gray-200">
-                                <td className="py-3 pr-4 font-medium text-gray-900 w-1/3">
-                                  Deposit
-                                </td>
-                                <td className="py-3 text-gray-700">
-                                  {product.installment_plans.map(
-                                    (plan, index) => (
-                                      <span key={index}>
-                                        {plan.storage} – Ksh {plan.deposit}
-                                        {index <
-                                        (product.installment_plans?.length ||
-                                          0) -
-                                          1
-                                          ? "; "
-                                          : ""}
-                                      </span>
-                                    )
-                                  )}
-                                </td>
-                              </tr>
-                              <tr className="border-b border-gray-200">
-                                <td className="py-3 pr-4 font-medium text-gray-900 w-1/3">
-                                  Installments
-                                </td>
-                                <td className="py-3 text-gray-700">
-                                  {product.installment_plans.map(
-                                    (plan, index) => (
-                                      <span key={index}>
-                                        {plan.storage} – Ksh{" "}
-                                        {plan.daily_installment} Daily
-                                        {index <
-                                        (product.installment_plans?.length ||
-                                          0) -
-                                          1
-                                          ? "; "
-                                          : ""}
-                                      </span>
-                                    )
-                                  )}
-                                </td>
-                              </tr>
-                            </>
-                          )}
                       </tbody>
                     </table>
                   </div>
@@ -865,11 +819,11 @@ Please let me know about availability and delivery options.`;
                 const priceDisplay = getPriceDisplayWithOriginal(product);
                 return (
                   <div>
-                    {priceDisplay.hasDiscount && priceDisplay.originalPrice && (
+                    {/* {priceDisplay.hasDiscount && priceDisplay.originalPrice && (
                       <div className="text-xl text-gray-500 line-through mb-2">
                         {priceDisplay.originalPrice}
                       </div>
-                    )}
+                    )} */}
                     <div className="text-3xl font-bold text-gray-900">
                       {priceDisplay.currentPrice}
                     </div>

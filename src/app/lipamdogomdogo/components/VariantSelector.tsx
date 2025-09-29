@@ -321,7 +321,7 @@ export default function VariantSelector({
             </div>
 
             {/* Installment Details */}
-            {installmentDetails.deposit &&
+            {/* {installmentDetails.deposit &&
               installmentDetails.daily_installment && (
                 <div className="mt-3 pt-3 border-t border-gray-200">
                   <div className="text-xs text-gray-700 mb-1 font-medium">
@@ -336,7 +336,7 @@ export default function VariantSelector({
                     </span>
                   </div>
                 </div>
-              )}
+              )} */}
           </div>
         )}
 

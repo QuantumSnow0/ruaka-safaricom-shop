@@ -154,12 +154,12 @@ const ProductCard: React.FC<ProductCardProps> = ({
                     const priceDisplay = getPriceDisplayWithOriginal(product);
                     return (
                       <div className="mb-1">
-                        {priceDisplay.hasDiscount &&
+                        {/* {priceDisplay.hasDiscount &&
                           priceDisplay.originalPrice && (
                             <div className="text-sm text-gray-500 line-through mb-1">
                               {priceDisplay.originalPrice}
                             </div>
-                          )}
+                          )} */}
                         <div className="text-xl font-bold text-orange-500">
                           {priceDisplay.currentPrice}
                         </div>
@@ -353,11 +353,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
             const priceDisplay = getPriceDisplayWithOriginal(product);
             return (
               <div className="flex items-center gap-2">
-                {priceDisplay.hasDiscount && priceDisplay.originalPrice && (
+                {/* {priceDisplay.hasDiscount && priceDisplay.originalPrice && (
                   <div className="text-xs text-gray-500 line-through">
                     {priceDisplay.originalPrice}
                   </div>
-                )}
+                )} */}
                 <div className="text-xs font-bold text-orange-500">
                   {priceDisplay.currentPrice}
                 </div>

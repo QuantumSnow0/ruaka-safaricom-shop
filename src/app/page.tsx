@@ -523,7 +523,7 @@ export default function Home() {
             </div>
 
             {/* Service 3 - Mobile Phones */}
-            <div className="relative group">
+            <Link href="/lipamdogomdogo/products" className="relative group">
               <div className="absolute inset-0  blur-xl group-hover:blur-2xl transition-all duration-500"></div>
               <div className="relative bg-white/90 backdrop-blur-md border border-green-200 rounded-2xl p-6 hover:bg-green-50 transition-all duration-500 shadow-lg">
                 <div className="flex items-center mb-4">
@@ -562,7 +562,7 @@ export default function Home() {
                   </svg>
                 </div>
               </div>
-            </div>
+            </Link>
 
             {/* Service 4 - Customer Care */}
             <Link
