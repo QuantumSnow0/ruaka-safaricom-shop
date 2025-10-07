@@ -123,52 +123,108 @@ Please let me know how to proceed with the order. Thank you!`;
   // Secure Fiber Plans
   const fiberPlans = [
     {
-      id: "fiber10",
-      name: "Secure Fiber 10",
-      speed: "Up to 10 Mbps",
-      price: "3,000",
+      id: "bronze",
+      name: "Bronze",
+      speed: "15 Mbps",
+      originalPrice: "2,999",
+      price: "2,250",
       features: [
-        "Secure Connection",
-        "Dedicated Line",
-        "Free Router",
-        "Free Installation",
+        "Fast web browsing",
+        "SD Movie & music streaming",
+        "Internet surfing, social media & email",
+        "Multiple device streaming",
+        "Superfast video downloads",
+        "CCTV devices Capability",
       ],
-      color: "from-emerald-500 to-emerald-600",
-      bgColor: "bg-emerald-50",
-      borderColor: "border-emerald-200",
+      includedFeatures: [0, 1, 2], // First 3 features are included
+      color: "from-amber-600 to-amber-700",
+      bgColor: "bg-amber-50",
+      borderColor: "border-amber-200",
       popular: false,
+      headerBg: "bg-amber-600",
     },
     {
-      id: "fiber15",
-      name: "Secure Fiber 15",
-      speed: "Up to 15 Mbps",
-      price: "4,000",
+      id: "silver",
+      name: "Silver",
+      speed: "30 Mbps",
+      originalPrice: "4,100",
+      price: "3,075",
       features: [
-        "Secure Connection",
-        "Dedicated Line",
-        "Free Router",
-        "Free Installation",
+        "Fast web browsing & Video calls",
+        "HD TV shows and movies upto 3 connected devices",
+        "Internet surfing, social media & email",
+        "Moderate streaming",
+        "Superfast video downloads",
+        "CCTV devices Capability",
       ],
-      color: "from-teal-500 to-teal-600",
-      bgColor: "bg-teal-50",
-      borderColor: "border-teal-200",
+      includedFeatures: [0, 1, 2, 3, 4, 5], // All features included
+      color: "from-gray-500 to-gray-600",
+      bgColor: "bg-gray-50",
+      borderColor: "border-gray-200",
       popular: true,
+      headerBg: "bg-gray-600",
     },
     {
-      id: "fiber20",
-      name: "Secure Fiber 20",
-      speed: "Up to 20 Mbps",
-      price: "4,500",
+      id: "gold",
+      name: "Gold",
+      speed: "80 Mbps",
+      originalPrice: "6,299",
+      price: "4,725",
       features: [
-        "Secure Connection",
-        "Dedicated Line",
-        "Free Router",
-        "Free Installation",
+        "Fast web browsing",
+        "4K Movies & TV Shows",
+        "Online gaming and downloading",
+        "Multiple device music streaming",
+        "Superfast video downloads",
+        "CCTV devices Capability",
       ],
-      color: "from-cyan-500 to-cyan-600",
-      bgColor: "bg-cyan-50",
-      borderColor: "border-cyan-200",
+      includedFeatures: [0, 1, 2, 3, 4, 5], // All features included
+      color: "from-yellow-500 to-yellow-600",
+      bgColor: "bg-yellow-50",
+      borderColor: "border-yellow-200",
       popular: false,
+      headerBg: "bg-yellow-500",
+    },
+    {
+      id: "diamond",
+      name: "Diamond",
+      speed: "500 Mbps",
+      originalPrice: "12,499",
+      price: "9,375",
+      features: [
+        "Fast web browsing",
+        "4K Movie & TV Shows",
+        "Heavy online gaming and downloading",
+        "Multiple device streaming",
+        "Superfast video downloads & music streaming",
+        "CCTV devices Capability",
+      ],
+      includedFeatures: [0, 1, 2, 3, 4, 5], // All features included
+      color: "from-pink-500 to-pink-600",
+      bgColor: "bg-pink-50",
+      borderColor: "border-pink-200",
+      popular: false,
+      headerBg: "bg-pink-600",
+    },
+    {
+      id: "platinum",
+      name: "Platinum",
+      speed: "1000 Mbps",
+      originalPrice: null,
+      price: "20,000",
+      features: [
+        "High-definition Movie and TV shows streaming 4K/8K",
+        "Heavy online gaming and downloading",
+        "Home Automation",
+        "Multiple device streaming",
+        "Superfast video downloads & music streaming",
+      ],
+      includedFeatures: [0, 1, 2, 3, 4], // All features included
+      color: "from-purple-500 to-purple-600",
+      bgColor: "bg-purple-50",
+      borderColor: "border-purple-200",
+      popular: false,
+      headerBg: "bg-purple-600",
     },
   ];
 
@@ -467,7 +523,7 @@ Please let me know how to proceed with the order. Thank you!`;
             </div>
 
             {/* Fiber Plans Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-12 mt-8">
               {fiberPlans.map((plan, index) => (
                 <motion.div
                   key={plan.id}
@@ -476,58 +532,77 @@ Please let me know how to proceed with the order. Thank you!`;
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   className={`relative ${plan.bgColor} border-2 ${
                     plan.borderColor
-                  } rounded-2xl p-6 hover:shadow-xl transition-all duration-300 ${
+                  } rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 ${
                     plan.popular ? "ring-2 ring-green-500 ring-opacity-50" : ""
                   }`}
                 >
                   {plan.popular && (
-                    <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                      <span className="bg-green-500 text-white px-4 py-1 rounded-full text-sm font-bold">
-                        Recommended
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-20">
+                      <span className="bg-green-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                        Most Popular
                       </span>
                     </div>
                   )}
 
-                  <div className="text-center">
-                    <div
-                      className={`w-16 h-16 bg-gradient-to-r ${plan.color} rounded-2xl flex items-center justify-center mx-auto mb-4`}
-                    >
-                      <Shield className="w-8 h-8 text-white" />
-                    </div>
+                  {/* Plan Header */}
+                  <div
+                    className={`${plan.headerBg} text-white p-4 text-center`}
+                  >
+                    <h3 className="text-lg font-bold uppercase">{plan.name}</h3>
+                    <div className="text-2xl font-black mt-2">{plan.speed}</div>
+                  </div>
 
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">
-                      {plan.name}
-                    </h3>
-
-                    <div className="mb-4">
-                      <div className="text-2xl font-bold text-gray-700 mb-1">
-                        {plan.speed}
-                      </div>
+                  <div className="p-6">
+                    {/* Pricing */}
+                    <div className="text-center mb-6">
+                      {plan.originalPrice && (
+                        <div className="text-sm text-gray-500 line-through mb-1">
+                          KES {plan.originalPrice}
+                        </div>
+                      )}
                       <div className="text-2xl font-bold text-gray-900">
                         KES {plan.price}
                         <span className="text-sm font-normal text-gray-500">
                           /month
                         </span>
                       </div>
+                      <div className="text-xs text-gray-500 mt-1">
+                        Valid for 30 days
+                      </div>
                     </div>
 
-                    <ul className="space-y-2 mb-6">
+                    {/* Features */}
+                    <ul className="space-y-3 mb-6">
                       {plan.features.map((feature, idx) => (
                         <li
                           key={idx}
-                          className="flex items-center text-sm text-gray-600"
+                          className="flex items-start text-sm text-gray-600"
                         >
-                          <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
-                          {feature}
+                          {plan.includedFeatures.includes(idx) ? (
+                            <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                          ) : (
+                            <div className="w-4 h-4 mr-2 flex-shrink-0 mt-0.5 flex items-center justify-center">
+                              <div className="w-3 h-0.5 bg-red-400 rounded"></div>
+                            </div>
+                          )}
+                          <span
+                            className={
+                              plan.includedFeatures.includes(idx)
+                                ? "text-gray-700"
+                                : "text-gray-400"
+                            }
+                          >
+                            {feature}
+                          </span>
                         </li>
                       ))}
                     </ul>
 
                     <button
                       onClick={() => openWhatsApp(plan, "Secure Fiber")}
-                      className={`w-full px-6 py-3 bg-gradient-to-r ${plan.color} text-white font-bold rounded-xl hover:shadow-lg transition-all duration-300`}
+                      className={`w-full px-4 py-3 bg-gradient-to-r ${plan.color} text-white font-bold rounded-lg hover:shadow-lg transition-all duration-300 text-sm`}
                     >
-                      Choose Plan
+                      Get Connected
                     </button>
                   </div>
                 </motion.div>

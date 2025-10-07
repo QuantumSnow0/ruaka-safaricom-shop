@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { ChatProvider } from "./lipamdogomdogo/contexts/ChatContext";
+import ConditionalChatWidget from "./components/ConditionalChatWidget";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -77,7 +79,12 @@ export default function RootLayout({
           sizes="180x180"
         />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <ChatProvider>
+          {children}
+          <ConditionalChatWidget />
+        </ChatProvider>
+      </body>
     </html>
   );
 }
