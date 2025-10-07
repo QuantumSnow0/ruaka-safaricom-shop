@@ -163,3 +163,82 @@ export interface MpesaCallbackData {
     };
   };
 }
+
+// ===== LIVE CHAT SYSTEM TYPES =====
+export interface ChatConversation {
+  id: string;
+  customer_id?: string;
+  customer_name?: string;
+  customer_email?: string;
+  customer_phone?: string;
+  agent_id?: string;
+  status: "waiting" | "active" | "closed";
+  priority: "low" | "medium" | "high";
+  subject?: string;
+  created_at: string;
+  updated_at: string;
+  last_message_at?: string;
+}
+
+export interface ChatMessage {
+  id: string;
+  conversation_id: string;
+  sender_id?: string;
+  sender_type: "customer" | "agent" | "system";
+  sender_name: string;
+  content: string;
+  message_type: "text" | "image" | "file" | "system";
+  is_read: boolean;
+  created_at: string;
+}
+
+export interface ChatAgent {
+  id: string;
+  user_id: string;
+  name: string;
+  email: string;
+  status: "online" | "away" | "offline";
+  max_concurrent_chats: number;
+  current_chats_count: number;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ChatAssignment {
+  id: string;
+  conversation_id: string;
+  agent_id: string;
+  assigned_at: string;
+  assigned_by?: string;
+}
+
+export interface ChatEvent {
+  id: string;
+  conversation_id: string;
+  event_type:
+    | "conversation_started"
+    | "agent_assigned"
+    | "conversation_ended"
+    | "message_sent";
+  event_data: Record<string, any>;
+  created_at: string;
+}
+
+export interface ChatWidgetConfig {
+  is_enabled: boolean;
+  welcome_message: string;
+  offline_message: string;
+  business_hours: {
+    enabled: boolean;
+    timezone: string;
+    schedule: {
+      [key: string]: {
+        is_open: boolean;
+        open_time?: string;
+        close_time?: string;
+      };
+    };
+  };
+  auto_assign: boolean;
+}
