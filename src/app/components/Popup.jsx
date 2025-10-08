@@ -61,11 +61,11 @@ export default function Popup() {
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-[101] flex items-center justify-center p-4"
           >
-            <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-4xl md:max-w-5xl max-h-[90vh] overflow-hidden">
+            <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-4xl md:max-w-5xl max-h-[85vh] overflow-auto">
               {/* Close Button */}
               <button
                 onClick={handleClose}
-                className="absolute top-4 right-4 z-20 w-9 h-9 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center transition-colors"
+                className="absolute top-3 right-3 z-20 w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center transition-colors"
               >
                 <X className="w-5 h-5 text-gray-600" />
               </button>
@@ -87,37 +87,34 @@ export default function Popup() {
                 </div>
 
                 {/* Right Side - Content */}
-                <div className="lg:w-3/5 p-6 sm:p-8 lg:p-12">
+                <div className="lg:w-3/5 p-5 sm:p-6 lg:p-8 overflow-y-auto max-h-[75vh]">
                   {/* Heading */}
-                  <div className="mb-4 sm:mb-6">
-                    <span className="inline-block bg-green-100 text-green-700 text-xs font-semibold px-3 py-1 rounded-full mb-2">
-                      Special Offer
-                    </span>
-                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
+                  <div className="mb-3">
+                    <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-1.5">
                       Get Up to 25% Off Internet Plans
                     </h2>
-                    <p className="text-gray-600 text-base sm:text-lg">
+                    <p className="text-gray-600 text-sm sm:text-base">
                       Enjoy lightning-fast speeds with our 5G and Fiber packages
                     </p>
                   </div>
 
                   {/* Plans */}
-                  <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-6">
+                  <div className="space-y-2 sm:space-y-3 mb-3 sm:mb-4">
                     {/* 5G Plan */}
-                    <div className="border border-gray-200 rounded-xl p-3 sm:p-4 hover:border-green-300 hover:shadow-md transition-all">
+                    <div className="border border-gray-200 rounded-xl p-2 sm:p-3 hover:border-green-300 hover:shadow-md transition-all">
                       <div className="flex items-start justify-between">
                         <div>
-                          <h3 className="font-bold text-gray-900 text-base sm:text-lg mb-1">
+                          <h3 className="font-bold text-gray-900 text-sm sm:text-base mb-1">
                             5G Internet
                           </h3>
-                          <p className="text-xs sm:text-sm text-gray-600 mb-2">
+                          <p className="text-[11px] sm:text-xs text-gray-600 mb-2">
                             Up to 250 Mbps • Unlimited Data • Free Setup
                           </p>
                           <div className="flex items-baseline">
-                            <span className="text-xl sm:text-2xl font-bold text-green-600">
+                            <span className="text-lg sm:text-xl font-bold text-green-600">
                               KES 2,999
                             </span>
-                            <span className="text-xs sm:text-sm text-gray-500 ml-1">
+                            <span className="text-[11px] sm:text-xs text-gray-500 ml-1">
                               /month
                             </span>
                           </div>
@@ -126,26 +123,26 @@ export default function Popup() {
                     </div>
 
                     {/* Fiber Plan */}
-                    <div className="border-2 border-green-500 rounded-xl p-3 sm:p-4 bg-green-50/50 relative">
+                    <div className="border-2 border-green-500 rounded-xl p-2 sm:p-3 bg-green-50/50 relative">
                       <span className="absolute -top-2 left-4 bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded">
                         BEST VALUE
                       </span>
                       <div className="flex items-start justify-between">
                         <div>
-                          <h3 className="font-bold text-gray-900 text-base sm:text-lg mb-1">
+                          <h3 className="font-bold text-gray-900 text-sm sm:text-base mb-1">
                             Secure Fiber
                           </h3>
-                          <p className="text-xs sm:text-sm text-gray-600 mb-2">
+                          <p className="text-[11px] sm:text-xs text-gray-600 mb-2">
                             Up to 1000 Mbps • Free Router • Free Installation
                           </p>
                           <div className="flex items-baseline">
-                            <span className="text-xs sm:text-sm text-gray-500 line-through mr-2">
+                            <span className="text-[11px] sm:text-xs text-gray-500 line-through mr-2">
                               KES 2,999
                             </span>
-                            <span className="text-xl sm:text-2xl font-bold text-green-600">
+                            <span className="text-lg sm:text-xl font-bold text-green-600">
                               KES 2,250
                             </span>
-                            <span className="text-xs sm:text-sm text-gray-500 ml-1">
+                            <span className="text-[11px] sm:text-xs text-gray-500 ml-1">
                               /month
                             </span>
                           </div>
@@ -155,8 +152,8 @@ export default function Popup() {
                   </div>
 
                   {/* Promo Banner */}
-                  <div className="bg-gradient-to-r from-orange-50 to-yellow-50 border border-orange-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6">
-                    <p className="text-sm text-gray-700">
+                  <div className="bg-gradient-to-r from-orange-50 to-yellow-50 border border-orange-200 rounded-lg p-2.5 sm:p-3 mb-3 sm:mb-4">
+                    <p className="text-xs sm:text-sm text-gray-700">
                       <span className="font-bold text-orange-600">
                         Limited Time:
                       </span>{" "}
@@ -169,7 +166,7 @@ export default function Popup() {
                     <Link
                       href="/internet-services"
                       onClick={handleClose}
-                      className="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 sm:px-6 rounded-lg flex items-center justify-center gap-2 transition-colors text-sm sm:text-base"
+                      className="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-2.5 px-4 sm:px-5 rounded-lg flex items-center justify-center gap-2 transition-colors text-sm"
                     >
                       View All Plans
                       <ArrowRight className="w-4 h-4" />
@@ -177,7 +174,7 @@ export default function Popup() {
                     <a
                       href="tel:0700776994"
                       onClick={handleClose}
-                      className="flex-1 border-2 border-gray-300 hover:border-green-600 hover:bg-green-50 text-gray-700 hover:text-green-700 font-semibold py-3 px-4 sm:px-6 rounded-lg flex items-center justify-center gap-2 transition-all text-sm sm:text-base"
+                      className="flex-1 border-2 border-gray-300 hover:border-green-600 hover:bg-green-50 text-gray-700 hover:text-green-700 font-semibold py-2.5 px-4 sm:px-5 rounded-lg flex items-center justify-center gap-2 transition-all text-sm"
                     >
                       <Phone className="w-4 h-4" />
                       Call Now
@@ -187,7 +184,7 @@ export default function Popup() {
                   {/* Dismiss Link */}
                   <button
                     onClick={handleRemindLater}
-                    className="w-full text-center text-xs sm:text-sm text-gray-500 hover:text-gray-700 mt-3 sm:mt-4 transition-colors"
+                    className="w-full text-center text-xs sm:text-sm text-gray-500 hover:text-gray-700 mt-3 sm:mt-3 transition-colors"
                   >
                     Maybe later
                   </button>

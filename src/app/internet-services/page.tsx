@@ -584,7 +584,7 @@ Please let me know how to proceed with the order. Thank you!`;
             </div>
 
             {/* Fiber Plans Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-12 mt-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-12">
               {fiberPlans.map((plan, index) => (
                 <motion.div
                   key={plan.id}
@@ -593,57 +593,58 @@ Please let me know how to proceed with the order. Thank you!`;
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   className={`relative ${plan.bgColor} border-2 ${
                     plan.borderColor
-                  } rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 ${
+                  } rounded-2xl p-5 hover:shadow-xl transition-all duration-300 ${
                     plan.popular ? "ring-2 ring-green-500 ring-opacity-50" : ""
                   }`}
                 >
                   {plan.popular && (
-                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-20">
-                      <span className="bg-green-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                    <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 z-10">
+                      <span className="bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
                         Most Popular
                       </span>
                     </div>
                   )}
 
-                  {/* Plan Header */}
-                  <div
-                    className={`${plan.headerBg} text-white p-4 text-center`}
-                  >
-                    <h3 className="text-lg font-bold uppercase">{plan.name}</h3>
-                    <div className="text-2xl font-black mt-2">{plan.speed}</div>
-                  </div>
+                  <div className="text-center">
+                    <div
+                      className={`w-14 h-14 bg-gradient-to-r ${plan.color} rounded-2xl flex items-center justify-center mx-auto mb-3`}
+                    >
+                      <Shield className="w-7 h-7 text-white" />
+                    </div>
 
-                  <div className="p-6">
-                    {/* Pricing */}
-                    <div className="text-center mb-6">
-                      {plan.originalPrice && (
-                        <div className="text-sm text-gray-500 line-through mb-1">
-                          KES {plan.originalPrice}
-                        </div>
-                      )}
-                      <div className="text-2xl font-bold text-gray-900">
+                    <h3 className="text-lg font-bold text-gray-900 mb-2">
+                      {plan.name}
+                    </h3>
+
+                    <div className="mb-4">
+                      <div className="text-2xl font-black text-gray-900 mb-1">
+                        {plan.speed}
+                      </div>
+                      <div className="text-lg font-bold text-gray-700">
+                        {plan.originalPrice && (
+                          <div className="text-xs text-gray-500 line-through mb-1">
+                            KES {plan.originalPrice}
+                          </div>
+                        )}
                         KES {plan.price}
-                        <span className="text-sm font-normal text-gray-500">
+                        <span className="text-xs font-normal text-gray-500">
                           /month
                         </span>
                       </div>
-                      <div className="text-xs text-gray-500 mt-1">
-                        Valid for 30 days
-                      </div>
                     </div>
 
-                    {/* Features */}
-                    <ul className="space-y-3 mb-6">
+                    {/* Features in single column for better fit */}
+                    <ul className="space-y-1.5 mb-5 text-left">
                       {plan.features.map((feature, idx) => (
                         <li
                           key={idx}
-                          className="flex items-start text-sm text-gray-600"
+                          className="flex items-start text-xs text-gray-600"
                         >
                           {plan.includedFeatures.includes(idx) ? (
-                            <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                            <CheckCircle className="w-3.5 h-3.5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
                           ) : (
-                            <div className="w-4 h-4 mr-2 flex-shrink-0 mt-0.5 flex items-center justify-center">
-                              <div className="w-3 h-0.5 bg-red-400 rounded"></div>
+                            <div className="w-3.5 h-3.5 mr-2 flex-shrink-0 mt-0.5 flex items-center justify-center">
+                              <div className="w-2.5 h-0.5 bg-red-400 rounded"></div>
                             </div>
                           )}
                           <span
@@ -661,7 +662,7 @@ Please let me know how to proceed with the order. Thank you!`;
 
                     <button
                       onClick={() => openWhatsApp(plan, "Secure Fiber")}
-                      className={`w-full px-4 py-3 bg-gradient-to-r ${plan.color} text-white font-bold rounded-lg hover:shadow-lg transition-all duration-300 text-sm`}
+                      className={`w-full px-4 py-2.5 bg-gradient-to-r ${plan.color} text-white font-bold rounded-lg hover:shadow-lg transition-all duration-300 text-sm`}
                     >
                       Get Connected
                     </button>
@@ -669,7 +670,6 @@ Please let me know how to proceed with the order. Thank you!`;
                 </motion.div>
               ))}
             </div>
-
             {/* Fiber Benefits */}
             <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-2xl p-8 border border-green-200">
               <div className="text-center mb-8">
