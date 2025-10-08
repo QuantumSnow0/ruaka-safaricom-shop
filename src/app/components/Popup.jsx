@@ -15,7 +15,11 @@ export default function Popup() {
     const now = Date.now();
     const oneDayInMs = 24 * 60 * 60 * 1000;
 
-    if (!popupClosed || (lastShown && now - parseInt(lastShown) > oneDayInMs)) {
+    // Show only if NOT permanently closed AND (never shown before OR shown > 1 day ago)
+    if (
+      popupClosed !== "true" &&
+      (!lastShown || now - parseInt(lastShown) > oneDayInMs)
+    ) {
       const timer = setTimeout(() => {
         setIsOpen(true);
         localStorage.setItem("internetOffersPopupLastShown", now.toString());
@@ -32,6 +36,8 @@ export default function Popup() {
 
   const handleRemindLater = () => {
     setIsOpen(false);
+    // Record the time so we don't reopen immediately on navigation
+    localStorage.setItem("internetOffersPopupLastShown", Date.now().toString());
   };
 
   return (
@@ -55,7 +61,7 @@ export default function Popup() {
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-[101] flex items-center justify-center p-4"
           >
-            <div className="relative bg-white rounded-2xl shadow-2xl max-w-5xl w-full overflow-hidden">
+            <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-4xl md:max-w-5xl max-h-[90vh] overflow-hidden">
               {/* Close Button */}
               <button
                 onClick={handleClose}

@@ -31,6 +31,62 @@ import Link from "next/link";
 export default function InternetServicesPage() {
   const [activeTab, setActiveTab] = useState("5g");
 
+  // FAQ structured data for Google (FAQPage)
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "How long does installation take?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Most 5G setups are same-day. Secure Fiber installations typically take 24–72 hours after order confirmation, depending on address and building approvals.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Do you cover my area?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "We serve Ruaka and the wider Nairobi area. 5G coverage depends on nearby cell sites; Secure Fiber depends on last‑mile availability. Contact us to check your exact address.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Is a router included?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes. 5G plans include a portable router. Secure Fiber plans include a Wi‑Fi router and professional installation.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What speeds can I expect?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "5G plans range from 10–250 Mbps depending on the plan and signal quality. Secure Fiber plans range from 15–1000 Mbps with consistent performance.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Is there a contract?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "No long‑term lock‑in. Plans are billed monthly. You can upgrade, downgrade, or cancel with notice at the end of your billing cycle.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How do I get support?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Call 0700 776 994, chat with us on the website, or visit the Customer Care page. We provide 24/7 technical support for active connections.",
+        },
+      },
+    ],
+  } as const;
+
   // Function to open WhatsApp with plan details
   const openWhatsApp = (plan: any, planType: string) => {
     const message = `Hello! I'm interested in ordering the ${plan.name} plan.
@@ -283,6 +339,11 @@ Please let me know how to proceed with the order. Thank you!`;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50">
+      {/* FAQ JSON-LD for rich results */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       {/* Header */}
       <div className="relative bg-gradient-to-r from-green-600 to-emerald-700 text-white py-20 overflow-hidden">
         {/* Background Image */}

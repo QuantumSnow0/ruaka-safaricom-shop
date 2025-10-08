@@ -42,6 +42,58 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100">
+      {/* FAQ JSON-LD covering Lipa Mdogo Mdogo, Internet, and Customer Care */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "What is Lipa Mdogo Mdogo?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Lipa Mdogo Mdogo is our flexible payment plan that lets you own a premium smartphone and pay in small, manageable installments.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "How do I qualify for Lipa Mdogo Mdogo?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Visit our Ruaka shop with your ID or contact Customer Care. We’ll check eligibility, help you pick a device, and set up a simple repayment plan.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Do you offer internet services?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes. We provide 5G portable internet and Secure Fiber (15–1000 Mbps). Installation times vary from same‑day (5G) to 24–72 hours (Fiber).",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "How can I reach Customer Care?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Call 0700 776 994, chat with us on the website, or visit the Customer Care page for 24/7 assistance.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Where are you located?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Safaricom Shop Ruaka, Sandton plaza, opposite Cleanshelf supermarket, Kiambu County.",
+                },
+              },
+            ],
+          }),
+        }}
+      />
       {/* Navigation */}
       <nav className="backdrop-blur-md bg-white/90 sm:border-b sm:border-green-200 sticky top-0 z-50 sm:shadow-lg">
         <div className="max-w-7xl mx-auto px-0 sm:px-6 lg:px-8">
