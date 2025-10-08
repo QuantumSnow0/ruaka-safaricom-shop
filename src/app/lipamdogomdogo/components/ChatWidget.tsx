@@ -165,331 +165,224 @@ export default function ChatWidget() {
 
   return (
     <>
-      {/* ===== FLOATING CHAT BUTTON ===== */}
-      {/* This is the green chat button that appears in the bottom right corner */}
-      {/* Live Chat Container */}
+      <style jsx>{`
+        .chat-scroll::-webkit-scrollbar {
+          width: 8px;
+          height: 8px;
+        }
+        .chat-scroll::-webkit-scrollbar-thumb {
+          background-color: rgba(0, 0, 0, 0.2);
+          border-radius: 9999px;
+        }
+        .chat-scroll::-webkit-scrollbar-track {
+          background: transparent;
+        }
+      `}</style>
+      {/* ===== FLOATING CHAT BUTTON (Modern pill) ===== */}
       <motion.div
-        className="fixed bottom-6 right-6 z-50 flex items-center space-x-3"
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        className={`fixed bottom-6 right-6 z-50 ${
+          isWidgetOpen ? "md:block hidden" : "block"
+        }`}
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ type: "spring", stiffness: 260, damping: 22 }}
       >
-        {/* Live Chat Text */}
-        <motion.div
-          className={`
-            bg-white shadow-lg rounded-lg px-3 py-2 text-sm font-medium
-            border border-gray-200
-            ${isWidgetOpen ? "opacity-0 scale-95" : "opacity-100 scale-100"}
-          `}
-          transition={{ duration: 0.2 }}
-        >
-          <span className="text-gray-700">Live Chat</span>
-        </motion.div>
-
-        {/* Chat Button */}
         <motion.button
+          onClick={() => {
+            if (typeof window !== "undefined" && window.innerWidth >= 768) {
+              toggleWidget();
+            } else {
+              window.open("/live-chat", "_blank");
+            }
+          }}
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.98 }}
+          aria-label="Open live chat"
           className={`
-            w-14 h-14 rounded-full shadow-lg
-            flex items-center justify-center
-            transition-all duration-300
+            group flex items-center gap-3 pl-4 pr-2 py-2 rounded-full shadow-xl
+            border border-white/30 backdrop-blur-md
             ${
               isOpen
-                ? "bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700"
-                : "bg-gray-400 hover:bg-gray-500"
+                ? "bg-white/80 hover:bg-white"
+                : "bg-gray-200/80 hover:bg-gray-200"
             }
-            ${isWidgetOpen ? "scale-90" : "scale-100 hover:scale-110"}
+            ring-1 ring-black/5
           `}
-          onClick={toggleWidget}
-          whileHover={{ scale: isWidgetOpen ? 0.9 : 1.1 }}
-          whileTap={{ scale: 0.95 }}
         >
-          {/* Chat icon or status indicator */}
-          {isWidgetOpen ? (
-            <X className="w-6 h-6 text-white" />
-          ) : (
-            <div className="relative">
-              <img
-                src="/live-chat.png"
-                alt="Live Chat"
-                className="w-10 h-10 object-contain"
-              />
-              {/* Online/offline indicator */}
-              <div
-                className={`
-              absolute -top-1 -right-1 w-3 h-3 rounded-full border-2 border-white
-              ${
-                agentsAvailable
-                  ? "bg-green-400"
-                  : anyAgentOnline
-                  ? "bg-yellow-400"
-                  : "bg-gray-400"
-              }
-            `}
-              />
-            </div>
-          )}
+          {/* Icon with status pulse */}
+          <div className="relative flex items-center justify-center w-11 h-11 rounded-full bg-white/90 border border-gray-200 shadow-sm backdrop-blur">
+            <img
+              src="/helpline.png"
+              alt="Live Chat"
+              className="w-7 h-7 object-contain"
+            />
+            {/* Status dot + pulse */}
+            <span className="absolute -right-0.5 -top-0.5 inline-flex items-center justify-center">
+              {agentsAvailable ? (
+                <>
+                  <span className="absolute inline-flex h-3 w-3 rounded-full bg-green-400 opacity-75 animate-ping" />
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500 border-2 border-white" />
+                </>
+              ) : anyAgentOnline ? (
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-yellow-400 border-2 border-white" />
+              ) : (
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-gray-400 border-2 border-white" />
+              )}
+            </span>
+          </div>
+
+          {/* Label */}
+          <div className="flex flex-col items-start pr-1 select-none">
+            <span className="text-sm font-semibold text-gray-800 leading-none">
+              Live Chat
+            </span>
+            <span className="text-[11px] mt-0.5 text-gray-500">
+              {agentsAvailable
+                ? "Online now"
+                : anyAgentOnline
+                ? "Agents available"
+                : "Offline"}
+            </span>
+          </div>
+
+          {/* Right CTA chip removed on all breakpoints per request */}
         </motion.button>
       </motion.div>
 
-      {/* ===== CHAT WINDOW ===== */}
-      {/* This is the expandable chat window that appears when the button is clicked */}
+      {/* ===== Desktop Inline Chat Panel ===== */}
       <AnimatePresence>
         {isWidgetOpen && (
           <motion.div
-            className="fixed bottom-24 right-6 z-40 w-80 sm:w-96 bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden"
-            initial={{ opacity: 0, scale: 0.8, y: 20 }}
-            animate={{
-              opacity: 1,
-              scale: isWidgetMinimized ? 0.95 : 1,
-              y: 0,
-              height: isWidgetMinimized ? 60 : 500,
-            }}
-            exit={{ opacity: 0, scale: 0.8, y: 20 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="fixed bottom-6 right-6 z-50 hidden md:flex md:flex-col w-[380px] max-h-[70vh] h-[560px] bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden"
           >
-            {/* ===== CHAT HEADER ===== */}
-            <div className="bg-gradient-to-r from-green-500 to-emerald-600 text-white p-4 flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
-                  <MessageCircle className="w-4 h-4" />
+            {/* Header */}
+            <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 bg-white/80 backdrop-blur">
+              <div className="flex items-center gap-2">
+                <div className="relative flex items-center justify-center w-9 h-9 rounded-full bg-white border border-gray-200">
+                  <img
+                    src="/helpline.png"
+                    alt="Live Chat"
+                    className="w-5 h-5 object-contain"
+                  />
+                  <span className="absolute -right-0.5 -top-0.5 inline-flex items-center justify-center">
+                    {agentsAvailable ? (
+                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500 border-2 border-white" />
+                    ) : anyAgentOnline ? (
+                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-yellow-400 border-2 border-white" />
+                    ) : (
+                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-gray-400 border-2 border-white" />
+                    )}
+                  </span>
                 </div>
-                <div>
-                  <h3 className="font-semibold text-sm">Safaricom Shop</h3>
-                  <p className="text-xs text-green-100">
+                <div className="leading-tight">
+                  <div className="text-sm font-semibold text-gray-900">
+                    Safaricom Shop
+                  </div>
+                  <div className="text-xs text-gray-500">
                     {agentsAvailable
                       ? "Online now"
                       : anyAgentOnline
                       ? "Agents available"
                       : "Offline"}
-                  </p>
+                  </div>
                 </div>
               </div>
-
-              <div className="flex items-center space-x-2">
-                {/* Minimize/Maximize button */}
-                <button
-                  onClick={isWidgetMinimized ? maximizeWidget : minimizeWidget}
-                  className="p-1 hover:bg-white/20 rounded-full transition-colors"
-                >
-                  {isWidgetMinimized ? (
-                    <Maximize2 className="w-4 h-4" />
-                  ) : (
-                    <Minimize2 className="w-4 h-4" />
-                  )}
-                </button>
-
-                {/* Close button */}
-                <button
-                  onClick={toggleWidget}
-                  className="p-1 hover:bg-white/20 rounded-full transition-colors"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              </div>
+              <button
+                onClick={toggleWidget}
+                className="p-2 rounded-full hover:bg-gray-100 transition"
+                aria-label="Close chat"
+              >
+                <X className="w-5 h-5 text-gray-600" />
+              </button>
             </div>
 
-            {/* ===== CHAT CONTENT ===== */}
-            {!isWidgetMinimized && (
-              <div className="flex flex-col h-96">
-                {/* ===== MESSAGES AREA ===== */}
-                <div className="flex-1 overflow-y-auto p-4 space-y-3">
-                  {/* Welcome message when no conversation */}
-                  {!currentConversation && (
-                    <div className="text-center py-8">
-                      <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <MessageCircle className="w-8 h-8 text-green-600" />
-                      </div>
-                      <h4 className="font-semibold text-gray-900 mb-2">
-                        {agentsAvailable
-                          ? "Start a conversation"
-                          : anyAgentOnline
-                          ? "Agents are available"
-                          : "We're offline"}
-                      </h4>
-                      <p className="text-sm text-gray-600 mb-4">
-                        {isOpen
-                          ? "How can we help you today?"
-                          : "Leave a message and we'll get back to you soon!"}
-                      </p>
-
-                      {/* Customer info form */}
-                      <div className="space-y-3">
-                        <input
-                          type="text"
-                          placeholder="Your name *"
-                          value={localCustomerInfo.name}
-                          onChange={(e) =>
-                            handleCustomerInfoChange("name", e.target.value)
-                          }
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-900 bg-white"
-                        />
-                        <input
-                          type="email"
-                          placeholder="Your email"
-                          value={localCustomerInfo.email}
-                          onChange={(e) =>
-                            handleCustomerInfoChange("email", e.target.value)
-                          }
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-900 bg-white"
-                        />
-                        <input
-                          type="tel"
-                          placeholder="Your phone"
-                          value={localCustomerInfo.phone}
-                          onChange={(e) =>
-                            handleCustomerInfoChange("phone", e.target.value)
-                          }
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-900 bg-white"
-                        />
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Error message */}
-                  {error && (
-                    <div className="bg-red-50 border border-red-200 rounded-lg p-3 flex items-center space-x-2">
-                      <AlertCircle className="w-4 h-4 text-red-600 flex-shrink-0" />
-                      <p className="text-sm text-red-700">{error}</p>
-                    </div>
-                  )}
-
-                  {/* Loading indicator */}
-                  {isLoading && (
-                    <div className="flex items-center justify-center py-4">
-                      <Loader2 className="w-5 h-5 text-green-600 animate-spin" />
-                      <span className="ml-2 text-sm text-gray-600">
-                        Loading...
-                      </span>
-                    </div>
-                  )}
-
-                  {/* Messages */}
-                  {messages.map((message, index) => (
+            {/* Messages */}
+            <div className="chat-scroll flex-1 overflow-y-auto px-3 py-3 space-y-2 bg-gray-50">
+              {messages.length === 0 ? (
+                <div className="h-full flex items-center justify-center text-gray-500 text-sm select-none">
+                  Start chatting with us!
+                </div>
+              ) : (
+                messages.map((message, index) => (
+                  <div
+                    key={`${message.id}-${index}`}
+                    className={`flex ${
+                      message.sender_type === "customer"
+                        ? "justify-end"
+                        : "justify-start"
+                    }`}
+                  >
                     <div
-                      key={`${message.id}-${index}`}
-                      className={`flex ${
+                      className={`max-w-[80%] rounded-2xl px-3 py-2 text-sm shadow ${
                         message.sender_type === "customer"
-                          ? "justify-end"
-                          : "justify-start"
+                          ? "bg-emerald-500 text-white rounded-tr-sm"
+                          : message.sender_type === "system"
+                          ? "bg-gray-200 text-gray-700"
+                          : "bg-white text-gray-900 rounded-tl-sm"
                       }`}
                     >
-                      <div
-                        className={`
-                          max-w-xs px-3 py-2 rounded-2xl text-sm
-                          ${
-                            message.sender_type === "customer"
-                              ? "bg-green-500 text-white"
-                              : message.sender_type === "system"
-                              ? "bg-gray-100 text-gray-700 text-center"
-                              : "bg-gray-100 text-gray-900"
-                          }
-                        `}
-                      >
-                        {/* Message content */}
-                        <p>{message.content}</p>
-
-                        {/* Message metadata */}
-                        <div
-                          className={`
-                          text-xs mt-1 opacity-70
-                          ${
-                            message.sender_type === "customer"
-                              ? "text-green-100"
-                              : "text-gray-500"
-                          }
-                        `}
-                        >
-                          {new Date(message.created_at).toLocaleTimeString([], {
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          })}
-                          {message.is_read &&
-                            message.sender_type === "customer" && (
-                              <CheckCircle className="w-3 h-3 inline ml-1" />
-                            )}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-
-                  {/* Typing indicator placeholder */}
-                  {currentConversation?.status === "active" && (
-                    <div className="flex justify-start">
-                      <div className="bg-gray-100 px-3 py-2 rounded-2xl text-sm text-gray-600">
-                        <div className="flex space-x-1">
-                          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
-                          <div
-                            className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                            style={{ animationDelay: "0.1s" }}
-                          />
-                          <div
-                            className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                            style={{ animationDelay: "0.2s" }}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Scroll anchor */}
-                  <div ref={messagesEndRef} />
-                </div>
-
-                {/* ===== MESSAGE INPUT ===== */}
-                <div className="border-t border-gray-200 p-4">
-                  {!currentConversation ? (
-                    // Start conversation button
-                    <button
-                      onClick={handleStartConversation}
-                      disabled={!localCustomerInfo.name.trim() || isLoading}
-                      className="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white py-2 px-4 rounded-lg font-medium hover:from-green-600 hover:to-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
-                    >
-                      {isLoading ? (
-                        <div className="flex items-center justify-center">
-                          <Loader2 className="w-4 h-4 animate-spin mr-2" />
-                          Starting chat...
-                        </div>
-                      ) : (
-                        "Start Chat"
-                      )}
-                    </button>
-                  ) : (
-                    // Message input form
-                    <form
-                      onSubmit={handleSendMessage}
-                      className="flex space-x-2"
-                    >
-                      <input
-                        ref={messageInputRef}
-                        type="text"
-                        value={messageInput}
-                        onChange={(e) => setMessageInput(e.target.value)}
-                        placeholder={
-                          isOpen
-                            ? "Type your message..."
-                            : "We're offline, but you can leave a message"
-                        }
-                        disabled={isLoading || !agentsAvailable}
-                        className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500 disabled:bg-gray-100 disabled:cursor-not-allowed text-gray-900 bg-white"
-                      />
-                      <button
-                        type="submit"
-                        disabled={
-                          !messageInput.trim() || isLoading || !agentsAvailable
-                        }
-                        className="bg-gradient-to-r from-green-500 to-emerald-600 text-white p-2 rounded-lg hover:from-green-600 hover:to-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
-                      >
-                        {isLoading ? (
-                          <Loader2 className="w-4 h-4 animate-spin" />
-                        ) : (
-                          <Send className="w-4 h-4" />
+                      {message.sender_type !== "customer" &&
+                        message.sender_type !== "system" && (
+                          <div className="text-[10px] font-semibold mb-0.5 text-emerald-600">
+                            {message.sender_name}
+                          </div>
                         )}
-                      </button>
-                    </form>
-                  )}
-                </div>
-              </div>
-            )}
+                      <div className="whitespace-pre-wrap break-words">
+                        {message.content}
+                      </div>
+                      <div
+                        className={`mt-1 text-[10px] opacity-75 text-right ${
+                          message.sender_type === "customer"
+                            ? "text-white"
+                            : "text-gray-500"
+                        }`}
+                      >
+                        {new Date(message.created_at).toLocaleTimeString([], {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                ))
+              )}
+              <div ref={messagesEndRef} />
+            </div>
+
+            {/* Input */}
+            <form
+              onSubmit={handleSendMessage}
+              className="flex items-center gap-2 p-3 border-t border-gray-200 bg-white"
+            >
+              <input
+                ref={messageInputRef}
+                type="text"
+                value={messageInput}
+                onChange={(e) => setMessageInput(e.target.value)}
+                placeholder={
+                  agentsAvailable
+                    ? "Type your message..."
+                    : "Agents are offline. Leave a message..."
+                }
+                className="flex-1 bg-white border border-gray-300 focus:ring-2 focus:ring-emerald-500 rounded-full px-4 py-2 text-sm outline-none text-gray-900 placeholder-gray-500"
+              />
+              <button
+                type="submit"
+                disabled={!messageInput.trim()}
+                className={`w-10 h-10 rounded-full flex items-center justify-center text-white ${
+                  messageInput.trim()
+                    ? "bg-emerald-600 hover:bg-emerald-700"
+                    : "bg-gray-300"
+                }`}
+                aria-label="Send message"
+              >
+                <Send className="w-5 h-5" />
+              </button>
+            </form>
           </motion.div>
         )}
       </AnimatePresence>

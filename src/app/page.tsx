@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { MapPin, ExternalLink } from "lucide-react";
+import Popup from "./components/Popup";
 
 export default function Home() {
   // Function to open maps with directions to the shop
@@ -41,7 +42,6 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100">
-
       {/* Navigation */}
       <nav className="backdrop-blur-md bg-white/90 sm:border-b sm:border-green-200 sticky top-0 z-50 sm:shadow-lg">
         <div className="max-w-7xl mx-auto px-0 sm:px-6 lg:px-8">
@@ -1143,6 +1143,9 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Internet Services Offer Popup */}
+      <Popup />
     </div>
   );
 }

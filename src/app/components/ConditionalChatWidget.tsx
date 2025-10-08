@@ -10,11 +10,10 @@ import ChatWidget from "../lipamdogomdogo/components/ChatWidget";
 export default function ConditionalChatWidget() {
   const pathname = usePathname();
 
-  // Don't render chat widget on agent pages
-  if (pathname?.startsWith("/agent-")) {
+  // Don't render chat widget on agent pages or live chat page
+  if (pathname?.startsWith("/agent-") || pathname === "/live-chat") {
     return null;
   }
 
   return <ChatWidget />;
 }
-
