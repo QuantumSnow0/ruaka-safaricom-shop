@@ -662,9 +662,18 @@ Please let me know how to proceed with the order. Thank you!`;
 
                     <button
                       onClick={() => openWhatsApp(plan, "Secure Fiber")}
-                      className={`w-full px-4 py-2.5 bg-gradient-to-r ${plan.color} text-white font-bold rounded-lg hover:shadow-lg transition-all duration-300 text-sm`}
+                      disabled={
+                        plan.features.length !== plan.includedFeatures.length
+                      }
+                      className={`w-full px-4 py-2.5 font-bold rounded-lg transition-all duration-300 text-sm ${
+                        plan.features.length === plan.includedFeatures.length
+                          ? `bg-gradient-to-r ${plan.color} text-white hover:shadow-lg cursor-pointer`
+                          : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                      }`}
                     >
-                      Get Connected
+                      {plan.features.length === plan.includedFeatures.length
+                        ? "Get Connected"
+                        : "Upgrade Required"}
                     </button>
                   </div>
                 </motion.div>

@@ -346,6 +346,12 @@ const Header: React.FC = () => {
                 About
               </Link>
               <Link
+                href="/blog"
+                className="text-gray-700 hover:text-blue-600 transition-colors"
+              >
+                Blog
+              </Link>
+              <Link
                 href="/lipamdogomdogo/contact"
                 className="text-gray-700 hover:text-blue-600 transition-colors"
               >
@@ -639,6 +645,13 @@ const Header: React.FC = () => {
                             onClick={() => setIsMenuOpen(false)}
                           >
                             <span className="text-base font-medium">About</span>
+                          </Link>
+                          <Link
+                            href="/blog"
+                            className="flex items-center px-4 py-3 text-gray-700 hover:text-orange-600 hover:bg-orange-50 transition-colors rounded-lg"
+                            onClick={() => setIsMenuOpen(false)}
+                          >
+                            <span className="text-base font-medium">Blog</span>
                           </Link>
                           <Link
                             href="/lipamdogomdogo/contact"
