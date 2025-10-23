@@ -62,6 +62,18 @@ const nextConfig = {
   // Redirects
   async redirects() {
     return [
+      // Redirect non-www to www
+      {
+        source: "/(.*)",
+        has: [
+          {
+            type: "host",
+            value: "safaricomshopruaka.co.ke",
+          },
+        ],
+        destination: "https://www.safaricomshopruaka.co.ke/:path*",
+        permanent: true,
+      },
       {
         source: "/home",
         destination: "/",

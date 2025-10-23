@@ -1,0 +1,11 @@
+User-Agent: *
+Allow: /
+Disallow: /api/
+Disallow: /lipamdogomdogo/admin
+Disallow: /lipamdogomdogo/debug-admin
+Disallow: /lipamdogomdogo/test-
+Disallow: /lipamdogomdogo/console-debug
+Disallow: /lipamdogomdogo/simple-debug
+
+Host: https://www.safaricomshopruaka.co.ke
+Sitemap: https://www.safaricomshopruaka.co.ke/sitemap.xml
