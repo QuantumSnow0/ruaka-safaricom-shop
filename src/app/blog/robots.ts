@@ -7,7 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/blog/",
       disallow: ["/blog/admin/", "/blog/draft/"],
     },
-    sitemap: "https://safaricomshopruaka.com/blog/sitemap.xml",
+    sitemap: "https://www.safaricomshopruaka.co.ke/blog/sitemap.xml",
   };
 }
-

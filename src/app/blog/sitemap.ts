@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://safaricomshopruaka.com";
+  const baseUrl = "https://www.safaricomshopruaka.co.ke";
 
   // Sample blog posts - in a real app, this would come from your CMS or database
   const blogPosts = [
@@ -79,4 +79,3 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...categoryEntries,
   ];
 }
-

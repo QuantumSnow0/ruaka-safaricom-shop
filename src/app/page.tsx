@@ -576,20 +576,25 @@ export default function Home() {
             </div>
 
             {/* Service 3 - Mobile Phones */}
-            <Link href="/lipamdogomdogo/products" className="relative group">
+            <a
+              href="https://www.phoneupkenya.co.ke/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative group"
+            >
               <div className="absolute inset-0  blur-xl group-hover:blur-2xl transition-all duration-500"></div>
               <div className="relative bg-white/90 backdrop-blur-md border border-green-200 rounded-2xl p-6 hover:bg-green-50 transition-all duration-500 shadow-lg">
                 <div className="flex items-center mb-4">
                   <div className="w-12 h-12  flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
                     <img
-                      src="/assets/icons/app.png"
-                      alt="App Icon"
-                      className="w-10 h-10 sm:w-12 sm:h-12 lg:w-12 lg:h-12"
+                      src="/logo.jpeg"
+                      alt="PhoneUp Kenya Logo"
+                      className="w-10 h-10 sm:w-12 sm:h-12 lg:w-12 lg:h-12 object-contain"
                     />
                   </div>
                   <div className="flex-1">
                     <h3 className="text-xl font-bold text-gray-900 mb-1">
-                      Latest Smartphones
+                      Shop Latest Smartphones
                     </h3>
                   </div>
                 </div>
@@ -599,7 +604,7 @@ export default function Home() {
                   assistance.
                 </p>
                 <div className="flex items-center text-blue-600 font-semibold group-hover:translate-x-2 transition-transform duration-300">
-                  View Phones
+                  Shop at PhoneUp Kenya
                   <svg
                     className="w-4 h-4 ml-2"
                     fill="none"
@@ -615,7 +620,7 @@ export default function Home() {
                   </svg>
                 </div>
               </div>
-            </Link>
+            </a>
 
             {/* Service 4 - Customer Care */}
             <Link

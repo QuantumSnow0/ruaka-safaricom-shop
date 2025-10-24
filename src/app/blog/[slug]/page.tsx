@@ -45,7 +45,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             dateModified: sampleBlogPost.publishedAt,
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": `https://safaricomshopruaka.com/blog/${sampleBlogPost.slug}`,
+              "@id": `https://www.safaricomshopruaka.co.ke/blog/${sampleBlogPost.slug}`,
             },
             keywords: sampleBlogPost.tags.join(", "),
             articleSection: sampleBlogPost.category,

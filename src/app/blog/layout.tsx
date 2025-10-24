@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     images: ["/assets/blog/blog-og.jpg"],
   },
   alternates: {
-    canonical: "https://safaricomshopruaka.com/blog",
+    canonical: "https://www.safaricomshopruaka.co.ke/blog",
   },
   robots: {
     index: true,
@@ -71,18 +71,18 @@ export default function BlogLayout({
             name: "Safaricom Shop Ruaka Blog",
             description:
               "Your ultimate source for Safaricom deals, tech tips, and local insights in Ruaka",
-            url: "https://safaricomshopruaka.com/blog",
+            url: "https://www.safaricomshopruaka.co.ke/blog",
             publisher: {
               "@type": "Organization",
               name: "Safaricom Shop Ruaka",
               logo: {
                 "@type": "ImageObject",
-                url: "https://safaricomshopruaka.com/logo.png",
+                url: "https://www.safaricomshopruaka.co.ke/logo.png",
               },
             },
             mainEntityOfPage: {
               "@type": "WebPage",
-              "@id": "https://safaricomshopruaka.com/blog",
+              "@id": "https://www.safaricomshopruaka.co.ke/blog",
             },
             inLanguage: "en-KE",
             about: {
