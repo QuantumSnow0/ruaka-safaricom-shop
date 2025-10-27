@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { MapPin, ExternalLink } from "lucide-react";
 import { useState } from "react";
 import Popup from "./components/Popup";
@@ -339,11 +340,14 @@ export default function Home() {
               <div className="md:absolute md:inset-0 md:bg-gradient-to-r md:from-yellow-500/20 md:to-orange-500/20 md:rounded-2xl md:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
               <div className="relative bg-white border-l-4 md:border-l-0 border-yellow-500 md:border-yellow-500/30 rounded-none rounded-r-lg md:rounded-2xl hover:bg-gray-50 md:hover:bg-yellow-50 transition-all duration-500 md:ring-2 md:ring-yellow-500/20 shadow-sm md:shadow-lg overflow-hidden">
                 {/* Mobile Image at Top */}
-                <div className="md:hidden h-48 w-full overflow-hidden bg-gradient-to-br from-yellow-50 to-orange-50 flex items-center justify-center">
-                  <img
+                <div className="md:hidden h-48 w-full overflow-hidden bg-gradient-to-br from-yellow-50 to-orange-50 flex items-center justify-center relative">
+                  <Image
                     src="/smartphones.webp"
                     alt="Premium Phones"
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 0vw"
+                    loading="lazy"
                   />
                 </div>
                 <div className="p-4 md:p-6">
@@ -400,11 +404,14 @@ export default function Home() {
               <div className="md:absolute md:inset-0 md:bg-gradient-to-r md:from-red-500/20 md:to-pink-500/20 md:rounded-2xl md:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
               <div className="relative bg-white border-l-4 md:border-l-0 border-red-500 md:border-green-200 rounded-none rounded-r-lg md:rounded-2xl hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-sm overflow-hidden">
                 {/* Mobile Image at Top */}
-                <div className="md:hidden h-48 w-full overflow-hidden bg-gradient-to-br from-red-50 to-pink-50 flex items-center justify-center">
-                  <img
+                <div className="md:hidden h-48 w-full overflow-hidden bg-gradient-to-br from-red-50 to-pink-50 flex items-center justify-center relative">
+                  <Image
                     src="/phone-mobile.jpg"
                     alt="Mobile Accessories"
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 0vw"
+                    loading="lazy"
                   />
                 </div>
                 <div className="p-4 md:p-6">
@@ -463,11 +470,14 @@ export default function Home() {
               <div className="md:absolute md:inset-0 md:bg-gradient-to-r md:from-blue-500/20 md:to-cyan-500/20 md:rounded-2xl md:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
               <div className="relative bg-white border-l-4 md:border-l-0 border-blue-500 md:border-green-200 rounded-none rounded-r-lg md:rounded-2xl hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-sm overflow-hidden">
                 {/* Mobile Image at Top */}
-                <div className="md:hidden h-48 w-full overflow-hidden bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center">
-                  <img
+                <div className="md:hidden h-48 w-full overflow-hidden bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center relative">
+                  <Image
                     src="/latest-phones.webp"
                     alt="Latest Smartphones"
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 0vw"
+                    loading="lazy"
                   />
                 </div>
                 <div className="p-4 md:p-6">
@@ -524,11 +534,14 @@ export default function Home() {
               <div className="md:absolute md:inset-0 md:bg-gradient-to-r md:from-green-500/20 md:to-emerald-500/20 md:rounded-2xl md:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
               <div className="relative bg-white border-l-4 md:border-l-0 border-green-500 md:border-green-200 rounded-none rounded-r-lg md:rounded-2xl hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-sm overflow-hidden">
                 {/* Mobile Image at Top */}
-                <div className="md:hidden h-48 w-full overflow-hidden bg-gradient-to-br from-green-50 to-emerald-50 flex items-center justify-center">
-                  <img
+                <div className="md:hidden h-48 w-full overflow-hidden bg-gradient-to-br from-green-50 to-emerald-50 flex items-center justify-center relative">
+                  <Image
                     src="/customer-care.jpg"
                     alt="Customer Care"
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 0vw"
+                    loading="lazy"
                   />
                 </div>
                 <div className="p-4 md:p-6">
@@ -585,11 +598,14 @@ export default function Home() {
               <div className="md:absolute md:inset-0 md:bg-gradient-to-r md:from-purple-500/20 md:to-indigo-500/20 md:rounded-2xl md:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
               <div className="relative bg-white border-l-4 md:border-l-0 border-purple-500 md:border-green-200 rounded-none rounded-r-lg md:rounded-2xl hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-sm overflow-hidden">
                 {/* Mobile Image at Top */}
-                <div className="md:hidden h-48 w-full overflow-hidden bg-gradient-to-br from-purple-50 to-indigo-50 flex items-center justify-center">
-                  <img
+                <div className="md:hidden h-48 w-full overflow-hidden bg-gradient-to-br from-purple-50 to-indigo-50 flex items-center justify-center relative">
+                  <Image
                     src="/fiber.jpg"
                     alt="Internet Services"
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 0vw"
+                    loading="lazy"
                   />
                 </div>
                 <div className="p-4 md:p-6">
