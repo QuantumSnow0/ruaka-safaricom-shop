@@ -256,7 +256,7 @@ export default function Home() {
         <div className="relative z-10 max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-12 items-center">
             {/* Left Content */}
-            <div className="text-start lg:text-left order-1 lg:order-1">
+            <div className="text-center lg:text-left order-1 lg:order-1">
               <h1
                 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-2 leading-tight"
                 style={{ fontFamily: "var(--font-saira), sans-serif" }}
@@ -270,7 +270,7 @@ export default function Home() {
               </h1>
 
               <p
-                className="text-base sm:text-lg text-gray-700 mb-1 md:mb-6 leading-relaxed"
+                className="text-start text-base sm:text-lg text-gray-700 mb-1 md:mb-6 leading-relaxed"
                 style={{ fontFamily: "var(--font-saira), sans-serif" }}
               >
                 Experience cutting-edge mobile technology with our premium
@@ -303,7 +303,10 @@ export default function Home() {
         className="py-2 md:py-16 bg-white md:bg-gradient-to-b md:from-green-100 md:to-white relative overflow-hidden"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-start md:text-center mb-8 md:mb-16">
+          <div
+            className="text-start md:text-center mb-8 md:mb-16"
+            style={{ fontFamily: "var(--font-saira), sans-serif" }}
+          >
             <span className="hidden md:inline-block px-4 py-2 bg-green-500/20 text-green-600 text-sm font-semibold rounded-full mb-4">
               OUR SERVICES
             </span>
@@ -321,7 +324,7 @@ export default function Home() {
 
           {/* Mobile-First Grid */}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
             {/* Service 1 - Lipa Mdogo Mdogo */}
             <a
               href="https://lipapolepole.net/"
@@ -329,31 +332,37 @@ export default function Home() {
               rel="noopener noreferrer"
               className="relative group"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-              <div className="relative bg-white/90 backdrop-blur-md border border-yellow-500/30 rounded-2xl p-6 hover:bg-yellow-50 transition-all duration-500 ring-2 ring-yellow-500/20 shadow-lg">
-                <div className="flex items-center mb-4">
-                  <div className="w-15 h-15 flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+              <div className="md:absolute md:inset-0 md:bg-gradient-to-r md:from-yellow-500/20 md:to-orange-500/20 md:rounded-2xl md:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+              <div className="relative bg-white border-l-4 md:border-l-0 border-yellow-500 md:border-yellow-500/30 rounded-none rounded-r-lg md:rounded-2xl p-4 md:p-6 hover:bg-gray-50 md:hover:bg-yellow-50 transition-all duration-500 md:ring-2 md:ring-yellow-500/20 shadow-sm md:shadow-lg">
+                <div className="flex md:flex-row items-center gap-3 mb-3">
+                  <div className="w-12 h-12 md:w-15 md:h-15 flex items-center justify-center flex-shrink-0 p-2.5 md:bg-transparent md:p-0">
                     <img
                       src="/assets/icons/logo.png"
                       alt="App Icon"
-                      className="w-10 h-10 sm:w-12 sm:h-12 lg:w-12 lg:h-12"
+                      className="w-7 h-7 md:w-12 md:h-12 object-contain"
                     />
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold text-gray-900 mb-1">
+                  <div
+                    className="flex-1 min-w-0"
+                    style={{ fontFamily: "var(--font-saira), sans-serif" }}
+                  >
+                    <h3 className="text-base md:text-xl font-bold text-gray-900 mb-1">
                       Lipa Mdogo Mdogo
                     </h3>
-                    <div className="inline-block bg-yellow-500 text-black px-2 py-1 rounded-full text-xs font-bold">
+                    <div className="inline-block bg-yellow-500 text-black px-2 py-0.5 rounded-full text-xs font-bold">
                       FEATURED
                     </div>
                   </div>
                 </div>
-                <p className="text-gray-700 text-sm leading-relaxed mb-4">
+                <p
+                  className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-3"
+                  style={{ fontFamily: "var(--font-saira), sans-serif" }}
+                >
                   Our revolutionary flexible payment solution that makes premium
                   mobile devices accessible to everyone. Pay mdogo mdogo and own
                   your dream phone today!
                 </p>
-                <div className="flex items-center text-yellow-600 font-semibold group-hover:translate-x-2 transition-transform duration-300">
+                <div className="flex items-center text-yellow-600 font-semibold text-sm">
                   Start Paying mdogo mdogo
                   <svg
                     className="w-4 h-4 ml-2"
@@ -374,28 +383,34 @@ export default function Home() {
 
             {/* Service 2 - Mobile Accessories */}
             <div className="relative group">
-              <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 to-pink-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-              <div className="relative bg-white/90 backdrop-blur-md border border-green-200 rounded-2xl p-6 hover:bg-green-50 transition-all duration-500 shadow-lg">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+              <div className="md:absolute md:inset-0 md:bg-gradient-to-r md:from-red-500/20 md:to-pink-500/20 md:rounded-2xl md:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+              <div className="relative bg-white border-l-4 md:border-l-0 border-red-500 md:border-green-200 rounded-none rounded-r-lg md:rounded-2xl p-4 md:p-6 hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-sm">
+                <div className="flex md:flex-row items-center gap-3 mb-3">
+                  <div className="w-12 h-12 flex items-center justify-center flex-shrink-0 p-2.5 md:bg-transparent md:p-0">
                     <img
                       src="/assets/icons/battery.png"
                       alt="App Icon"
-                      className="w-10 h-10 sm:w-12 sm:h-12 lg:w-12 lg:h-12"
+                      className="w-7 h-7 md:w-12 md:h-12 object-contain"
                     />
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold text-gray-900 mb-1">
+                  <div
+                    className="flex-1 min-w-0"
+                    style={{ fontFamily: "var(--font-saira), sans-serif" }}
+                  >
+                    <h3 className="text-base md:text-xl font-bold text-gray-900 mb-1">
                       Premium Accessories
                     </h3>
                   </div>
                 </div>
-                <p className="text-gray-700 text-sm leading-relaxed mb-4">
+                <p
+                  className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-3"
+                  style={{ fontFamily: "var(--font-saira), sans-serif" }}
+                >
                   Discover our curated collection of premium mobile accessories.
                   From protective cases to high-quality headphones, we have
                   everything you need.
                 </p>
-                <div className="flex items-center text-red-600 font-semibold group-hover:translate-x-2 transition-transform duration-300">
+                <div className="flex items-center text-red-600 font-semibold text-sm">
                   Explore Collection
                   <svg
                     className="w-4 h-4 ml-2"
@@ -421,28 +436,34 @@ export default function Home() {
               rel="noopener noreferrer"
               className="relative group"
             >
-              <div className="absolute inset-0  blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-              <div className="relative bg-white/90 backdrop-blur-md border border-green-200 rounded-2xl p-6 hover:bg-green-50 transition-all duration-500 shadow-lg">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12  flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+              <div className="md:absolute md:inset-0 md:bg-gradient-to-r md:from-blue-500/20 md:to-cyan-500/20 md:rounded-2xl md:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+              <div className="relative bg-white border-l-4 md:border-l-0 border-blue-500 md:border-green-200 rounded-none rounded-r-lg md:rounded-2xl p-4 md:p-6 hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-sm">
+                <div className="flex md:flex-row items-center gap-3 mb-3">
+                  <div className="w-12 h-12 flex items-center justify-center flex-shrink-0 p-2.5 md:bg-transparent md:p-0">
                     <img
                       src="/logo.jpeg"
                       alt="PhoneUp Kenya Logo"
-                      className="w-10 h-10 sm:w-12 sm:h-12 lg:w-12 lg:h-12 object-contain"
+                      className="w-7 h-7 md:w-12 md:h-12 object-contain"
                     />
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold text-gray-900 mb-1">
+                  <div
+                    className="flex-1 min-w-0"
+                    style={{ fontFamily: "var(--font-saira), sans-serif" }}
+                  >
+                    <h3 className="text-base md:text-xl font-bold text-gray-900 mb-1">
                       Shop Latest Smartphones
                     </h3>
                   </div>
                 </div>
-                <p className="text-gray-700 text-sm leading-relaxed mb-4">
+                <p
+                  className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-3"
+                  style={{ fontFamily: "var(--font-saira), sans-serif" }}
+                >
                   Get your hands on the latest smartphones from top brands with
                   competitive prices, comprehensive warranty, and expert setup
                   assistance.
                 </p>
-                <div className="flex items-center text-blue-600 font-semibold group-hover:translate-x-2 transition-transform duration-300">
+                <div className="flex items-center text-blue-600 font-semibold text-sm">
                   Shop at PhoneUp Kenya
                   <svg
                     className="w-4 h-4 ml-2"
@@ -466,28 +487,34 @@ export default function Home() {
               href="/customer-care"
               className="relative group hover:cursor-pointer"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-              <div className="relative bg-white/90 backdrop-blur-md border border-green-200 rounded-2xl p-6 hover:bg-green-50 transition-all duration-500 shadow-lg">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+              <div className="md:absolute md:inset-0 md:bg-gradient-to-r md:from-green-500/20 md:to-emerald-500/20 md:rounded-2xl md:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+              <div className="relative bg-white border-l-4 md:border-l-0 border-green-500 md:border-green-200 rounded-none rounded-r-lg md:rounded-2xl p-4 md:p-6 hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-sm">
+                <div className="flex md:flex-row items-center gap-3 mb-3">
+                  <div className="w-12 h-12 flex items-center justify-center flex-shrink-0 p-2.5 md:bg-transparent md:p-0">
                     <img
                       src="/assets/icons/support.png"
                       alt="App Icon"
-                      className="w-10 h-10 sm:w-12 sm:h-12 lg:w-12 lg:h-12"
+                      className="w-7 h-7 md:w-12 md:h-12 object-contain"
                     />
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold text-gray-900 mb-1">
+                  <div
+                    className="flex-1 min-w-0"
+                    style={{ fontFamily: "var(--font-saira), sans-serif" }}
+                  >
+                    <h3 className="text-base md:text-xl font-bold text-gray-900 mb-1">
                       Customer Care Excellence
                     </h3>
                   </div>
                 </div>
-                <p className="text-gray-700 text-sm leading-relaxed mb-4">
+                <p
+                  className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-3"
+                  style={{ fontFamily: "var(--font-saira), sans-serif" }}
+                >
                   Professional customer support with expert assistance for all
                   your Safaricom needs. Our dedicated team ensures you get the
                   best service experience.
                 </p>
-                <div className="flex items-center text-green-600 font-semibold group-hover:translate-x-2 transition-transform duration-300">
+                <div className="flex items-center text-green-600 font-semibold text-sm">
                   Get Support
                   <svg
                     className="w-4 h-4 ml-2"
@@ -511,28 +538,34 @@ export default function Home() {
               href="/internet-services"
               className="relative group hover:cursor-pointer"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-indigo-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-              <div className="relative bg-white/90 backdrop-blur-md border border-green-200 rounded-2xl p-6 hover:bg-green-50 transition-all duration-500 shadow-lg">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 flex items-center justify-center mr-4 group-hover:scale-110 transition-transform duration-300">
+              <div className="md:absolute md:inset-0 md:bg-gradient-to-r md:from-purple-500/20 md:to-indigo-500/20 md:rounded-2xl md:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+              <div className="relative bg-white border-l-4 md:border-l-0 border-purple-500 md:border-green-200 rounded-none rounded-r-lg md:rounded-2xl p-4 md:p-6 hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-sm">
+                <div className="flex md:flex-row items-center gap-3 mb-3">
+                  <div className="w-12 h-12 flex items-center justify-center flex-shrink-0 p-2.5 md:bg-transparent md:p-0">
                     <img
                       src="/assets/icons/wifi.png"
                       alt="App Icon"
-                      className="w-10 h-10 sm:w-12 sm:h-12 lg:w-12 lg:h-12"
+                      className="w-7 h-7 md:w-12 md:h-12 object-contain"
                     />
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold text-gray-900 mb-1">
+                  <div
+                    className="flex-1 min-w-0"
+                    style={{ fontFamily: "var(--font-saira), sans-serif" }}
+                  >
+                    <h3 className="text-base md:text-xl font-bold text-gray-900 mb-1">
                       Internet Services
                     </h3>
                   </div>
                 </div>
-                <p className="text-gray-700 text-sm leading-relaxed mb-4">
+                <p
+                  className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-3"
+                  style={{ fontFamily: "var(--font-saira), sans-serif" }}
+                >
                   Experience blazing-fast internet with our 5G and secure fiber
                   packages. Choose from flexible plans perfect for your home or
                   business needs.
                 </p>
-                <div className="flex items-center text-purple-600 font-semibold group-hover:translate-x-2 transition-transform duration-300">
+                <div className="flex items-center text-purple-600 font-semibold text-sm">
                   View Plans
                   <svg
                     className="w-4 h-4 ml-2"
@@ -561,7 +594,7 @@ export default function Home() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
+            <div style={{ fontFamily: "var(--font-saira), sans-serif" }}>
               <span className="inline-block px-4 py-2 bg-green-500/20 text-green-600 text-sm font-semibold rounded-full mb-6">
                 ABOUT US
               </span>
@@ -602,7 +635,10 @@ export default function Home() {
 
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-3xl blur-2xl"></div>
-              <div className="relative bg-white/90 backdrop-blur-md border border-green-200 rounded-3xl p-12 shadow-lg">
+              <div
+                className="relative bg-white/90 backdrop-blur-md border border-green-200 rounded-3xl p-12 shadow-lg"
+                style={{ fontFamily: "var(--font-saira), sans-serif" }}
+              >
                 <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center">
                   Why Choose Us?
                 </h3>
@@ -792,7 +828,10 @@ export default function Home() {
         className="py-20 bg-white md:bg-gradient-to-b md:from-green-50 md:to-white relative overflow-hidden"
       >
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div
+            className="text-center mb-16"
+            style={{ fontFamily: "var(--font-saira), sans-serif" }}
+          >
             <span className="inline-block px-4 py-2 bg-green-500/20 text-green-600 text-sm font-semibold rounded-full mb-4">
               GET IN TOUCH
             </span>
