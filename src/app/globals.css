@@ -25,6 +25,57 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Thin glowing scrollbar for mobile */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 10px !important;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+    -webkit-border-radius: 20px;
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #10b981 0%, #059669 50%, #047857 100%);
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.5),
+      0 0 20px rgba(16, 185, 129, 0.3);
+    border: 5px solid transparent;
+    background-clip: content-box;
+    min-height: 50px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #059669 0%, #047857 50%, #065f46 100%);
+    background-clip: content-box;
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.7),
+      0 0 30px rgba(16, 185, 129, 0.4);
+  }
+
+  /* For Firefox */
+  * {
+    scrollbar-width: thick;
+    scrollbar-color: #10b981 transparent;
+  }
+}
+
+/* Additional mobile-specific scrollbar styling */
+@media (max-width: 768px) {
+  html {
+    overflow-y: scroll;
+  }
+
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
 @keyframes counter-rotate {
   from {
     transform: rotate(0deg);
