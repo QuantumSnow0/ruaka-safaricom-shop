@@ -333,50 +333,60 @@ export default function Home() {
               className="relative group"
             >
               <div className="md:absolute md:inset-0 md:bg-gradient-to-r md:from-yellow-500/20 md:to-orange-500/20 md:rounded-2xl md:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-              <div className="relative bg-white border-l-4 md:border-l-0 border-yellow-500 md:border-yellow-500/30 rounded-none rounded-r-lg md:rounded-2xl p-4 md:p-6 hover:bg-gray-50 md:hover:bg-yellow-50 transition-all duration-500 md:ring-2 md:ring-yellow-500/20 shadow-sm md:shadow-lg">
-                <div className="flex md:flex-row items-center gap-3 mb-3">
-                  <div className="w-12 h-12 md:w-15 md:h-15 flex items-center justify-center flex-shrink-0 p-2.5 md:bg-transparent md:p-0">
-                    <img
-                      src="/assets/icons/logo.png"
-                      alt="App Icon"
-                      className="w-7 h-7 md:w-12 md:h-12 object-contain"
-                    />
-                  </div>
-                  <div
-                    className="flex-1 min-w-0"
-                    style={{ fontFamily: "var(--font-saira), sans-serif" }}
-                  >
-                    <h3 className="text-base md:text-xl font-bold text-gray-900 mb-1">
-                      Lipa Mdogo Mdogo
-                    </h3>
-                    <div className="inline-block bg-yellow-500 text-black px-2 py-0.5 rounded-full text-xs font-bold">
-                      FEATURED
+              <div className="relative bg-white border-l-4 md:border-l-0 border-yellow-500 md:border-yellow-500/30 rounded-none rounded-r-lg md:rounded-2xl hover:bg-gray-50 md:hover:bg-yellow-50 transition-all duration-500 md:ring-2 md:ring-yellow-500/20 shadow-sm md:shadow-lg overflow-hidden">
+                {/* Mobile Image at Top */}
+                <div className="md:hidden h-48 w-full overflow-hidden bg-gradient-to-br from-yellow-50 to-orange-50 flex items-center justify-center">
+                  <img
+                    src="/smartphones.webp"
+                    alt="Premium Phones"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-4 md:p-6">
+                  <div className="flex md:flex-row items-center gap-3 mb-3">
+                    <div className="w-12 h-12 md:w-15 md:h-15 flex items-center justify-center flex-shrink-0 p-2.5 md:bg-transparent md:p-0">
+                      <img
+                        src="/assets/icons/logo.png"
+                        alt="App Icon"
+                        className="w-7 h-7 md:w-12 md:h-12 object-contain"
+                      />
+                    </div>
+                    <div
+                      className="flex-1 min-w-0"
+                      style={{ fontFamily: "var(--font-saira), sans-serif" }}
+                    >
+                      <h3 className="text-base md:text-xl font-bold text-gray-900 mb-1">
+                        Lipa Mdogo Mdogo
+                      </h3>
+                      <div className="inline-block bg-yellow-500 text-black px-2 py-0.5 rounded-full text-xs font-bold">
+                        FEATURED
+                      </div>
                     </div>
                   </div>
-                </div>
-                <p
-                  className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-3"
-                  style={{ fontFamily: "var(--font-saira), sans-serif" }}
-                >
-                  Our revolutionary flexible payment solution that makes premium
-                  mobile devices accessible to everyone. Pay mdogo mdogo and own
-                  your dream phone today!
-                </p>
-                <div className="flex items-center text-yellow-600 font-semibold text-sm">
-                  Start Paying mdogo mdogo
-                  <svg
-                    className="w-4 h-4 ml-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+                  <p
+                    className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-3"
+                    style={{ fontFamily: "var(--font-saira), sans-serif" }}
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
+                    Our revolutionary flexible payment solution that makes
+                    premium mobile devices accessible to everyone. Pay mdogo
+                    mdogo and own your dream phone today!
+                  </p>
+                  <div className="flex items-center text-yellow-600 font-semibold text-sm">
+                    Start Paying mdogo mdogo
+                    <svg
+                      className="w-4 h-4 ml-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </div>
                 </div>
               </div>
             </a>
@@ -384,47 +394,57 @@ export default function Home() {
             {/* Service 2 - Mobile Accessories */}
             <div className="relative group">
               <div className="md:absolute md:inset-0 md:bg-gradient-to-r md:from-red-500/20 md:to-pink-500/20 md:rounded-2xl md:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-              <div className="relative bg-white border-l-4 md:border-l-0 border-red-500 md:border-green-200 rounded-none rounded-r-lg md:rounded-2xl p-4 md:p-6 hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-sm">
-                <div className="flex md:flex-row items-center gap-3 mb-3">
-                  <div className="w-12 h-12 flex items-center justify-center flex-shrink-0 p-2.5 md:bg-transparent md:p-0">
-                    <img
-                      src="/assets/icons/battery.png"
-                      alt="App Icon"
-                      className="w-7 h-7 md:w-12 md:h-12 object-contain"
-                    />
+              <div className="relative bg-white border-l-4 md:border-l-0 border-red-500 md:border-green-200 rounded-none rounded-r-lg md:rounded-2xl hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-sm overflow-hidden">
+                {/* Mobile Image at Top */}
+                <div className="md:hidden h-48 w-full overflow-hidden bg-gradient-to-br from-red-50 to-pink-50 flex items-center justify-center">
+                  <img
+                    src="/phone-mobile.jpg"
+                    alt="Mobile Accessories"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-4 md:p-6">
+                  <div className="flex md:flex-row items-center gap-3 mb-3">
+                    <div className="w-12 h-12 flex items-center justify-center flex-shrink-0 p-2.5 md:bg-transparent md:p-0">
+                      <img
+                        src="/assets/icons/battery.png"
+                        alt="App Icon"
+                        className="w-7 h-7 md:w-12 md:h-12 object-contain"
+                      />
+                    </div>
+                    <div
+                      className="flex-1 min-w-0"
+                      style={{ fontFamily: "var(--font-saira), sans-serif" }}
+                    >
+                      <h3 className="text-base md:text-xl font-bold text-gray-900 mb-1">
+                        Premium Accessories
+                      </h3>
+                    </div>
                   </div>
-                  <div
-                    className="flex-1 min-w-0"
+                  <p
+                    className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-3"
                     style={{ fontFamily: "var(--font-saira), sans-serif" }}
                   >
-                    <h3 className="text-base md:text-xl font-bold text-gray-900 mb-1">
-                      Premium Accessories
-                    </h3>
+                    Discover our curated collection of premium mobile
+                    accessories. From protective cases to high-quality
+                    headphones, we have everything you need.
+                  </p>
+                  <div className="flex items-center text-red-600 font-semibold text-sm">
+                    Explore Collection
+                    <svg
+                      className="w-4 h-4 ml-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
                   </div>
-                </div>
-                <p
-                  className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-3"
-                  style={{ fontFamily: "var(--font-saira), sans-serif" }}
-                >
-                  Discover our curated collection of premium mobile accessories.
-                  From protective cases to high-quality headphones, we have
-                  everything you need.
-                </p>
-                <div className="flex items-center text-red-600 font-semibold text-sm">
-                  Explore Collection
-                  <svg
-                    className="w-4 h-4 ml-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
                 </div>
               </div>
             </div>
@@ -437,47 +457,57 @@ export default function Home() {
               className="relative group"
             >
               <div className="md:absolute md:inset-0 md:bg-gradient-to-r md:from-blue-500/20 md:to-cyan-500/20 md:rounded-2xl md:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-              <div className="relative bg-white border-l-4 md:border-l-0 border-blue-500 md:border-green-200 rounded-none rounded-r-lg md:rounded-2xl p-4 md:p-6 hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-sm">
-                <div className="flex md:flex-row items-center gap-3 mb-3">
-                  <div className="w-12 h-12 flex items-center justify-center flex-shrink-0 p-2.5 md:bg-transparent md:p-0">
-                    <img
-                      src="/logo.jpeg"
-                      alt="PhoneUp Kenya Logo"
-                      className="w-7 h-7 md:w-12 md:h-12 object-contain"
-                    />
+              <div className="relative bg-white border-l-4 md:border-l-0 border-blue-500 md:border-green-200 rounded-none rounded-r-lg md:rounded-2xl hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-sm overflow-hidden">
+                {/* Mobile Image at Top */}
+                <div className="md:hidden h-48 w-full overflow-hidden bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center">
+                  <img
+                    src="/latest-phones.webp"
+                    alt="Latest Smartphones"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-4 md:p-6">
+                  <div className="flex md:flex-row items-center gap-3 mb-3">
+                    <div className="w-12 h-12 flex items-center justify-center flex-shrink-0 p-2.5 md:bg-transparent md:p-0">
+                      <img
+                        src="/logo.jpeg"
+                        alt="PhoneUp Kenya Logo"
+                        className="w-7 h-7 md:w-12 md:h-12 object-contain"
+                      />
+                    </div>
+                    <div
+                      className="flex-1 min-w-0"
+                      style={{ fontFamily: "var(--font-saira), sans-serif" }}
+                    >
+                      <h3 className="text-base md:text-xl font-bold text-gray-900 mb-1">
+                        Shop Latest Smartphones
+                      </h3>
+                    </div>
                   </div>
-                  <div
-                    className="flex-1 min-w-0"
+                  <p
+                    className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-3"
                     style={{ fontFamily: "var(--font-saira), sans-serif" }}
                   >
-                    <h3 className="text-base md:text-xl font-bold text-gray-900 mb-1">
-                      Shop Latest Smartphones
-                    </h3>
+                    Get your hands on the latest smartphones from top brands
+                    with competitive prices, comprehensive warranty, and expert
+                    setup assistance.
+                  </p>
+                  <div className="flex items-center text-blue-600 font-semibold text-sm">
+                    Shop at PhoneUp Kenya
+                    <svg
+                      className="w-4 h-4 ml-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
                   </div>
-                </div>
-                <p
-                  className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-3"
-                  style={{ fontFamily: "var(--font-saira), sans-serif" }}
-                >
-                  Get your hands on the latest smartphones from top brands with
-                  competitive prices, comprehensive warranty, and expert setup
-                  assistance.
-                </p>
-                <div className="flex items-center text-blue-600 font-semibold text-sm">
-                  Shop at PhoneUp Kenya
-                  <svg
-                    className="w-4 h-4 ml-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
                 </div>
               </div>
             </a>
@@ -488,47 +518,57 @@ export default function Home() {
               className="relative group hover:cursor-pointer"
             >
               <div className="md:absolute md:inset-0 md:bg-gradient-to-r md:from-green-500/20 md:to-emerald-500/20 md:rounded-2xl md:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-              <div className="relative bg-white border-l-4 md:border-l-0 border-green-500 md:border-green-200 rounded-none rounded-r-lg md:rounded-2xl p-4 md:p-6 hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-sm">
-                <div className="flex md:flex-row items-center gap-3 mb-3">
-                  <div className="w-12 h-12 flex items-center justify-center flex-shrink-0 p-2.5 md:bg-transparent md:p-0">
-                    <img
-                      src="/assets/icons/support.png"
-                      alt="App Icon"
-                      className="w-7 h-7 md:w-12 md:h-12 object-contain"
-                    />
+              <div className="relative bg-white border-l-4 md:border-l-0 border-green-500 md:border-green-200 rounded-none rounded-r-lg md:rounded-2xl hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-sm overflow-hidden">
+                {/* Mobile Image at Top */}
+                <div className="md:hidden h-48 w-full overflow-hidden bg-gradient-to-br from-green-50 to-emerald-50 flex items-center justify-center">
+                  <img
+                    src="/customer-care.jpg"
+                    alt="Customer Care"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-4 md:p-6">
+                  <div className="flex md:flex-row items-center gap-3 mb-3">
+                    <div className="w-12 h-12 flex items-center justify-center flex-shrink-0 p-2.5 md:bg-transparent md:p-0">
+                      <img
+                        src="/assets/icons/support.png"
+                        alt="App Icon"
+                        className="w-7 h-7 md:w-12 md:h-12 object-contain"
+                      />
+                    </div>
+                    <div
+                      className="flex-1 min-w-0"
+                      style={{ fontFamily: "var(--font-saira), sans-serif" }}
+                    >
+                      <h3 className="text-base md:text-xl font-bold text-gray-900 mb-1">
+                        Customer Care Excellence
+                      </h3>
+                    </div>
                   </div>
-                  <div
-                    className="flex-1 min-w-0"
+                  <p
+                    className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-3"
                     style={{ fontFamily: "var(--font-saira), sans-serif" }}
                   >
-                    <h3 className="text-base md:text-xl font-bold text-gray-900 mb-1">
-                      Customer Care Excellence
-                    </h3>
+                    Professional customer support with expert assistance for all
+                    your Safaricom needs. Our dedicated team ensures you get the
+                    best service experience.
+                  </p>
+                  <div className="flex items-center text-green-600 font-semibold text-sm">
+                    Get Support
+                    <svg
+                      className="w-4 h-4 ml-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
                   </div>
-                </div>
-                <p
-                  className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-3"
-                  style={{ fontFamily: "var(--font-saira), sans-serif" }}
-                >
-                  Professional customer support with expert assistance for all
-                  your Safaricom needs. Our dedicated team ensures you get the
-                  best service experience.
-                </p>
-                <div className="flex items-center text-green-600 font-semibold text-sm">
-                  Get Support
-                  <svg
-                    className="w-4 h-4 ml-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
                 </div>
               </div>
             </Link>
@@ -539,47 +579,57 @@ export default function Home() {
               className="relative group hover:cursor-pointer"
             >
               <div className="md:absolute md:inset-0 md:bg-gradient-to-r md:from-purple-500/20 md:to-indigo-500/20 md:rounded-2xl md:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-              <div className="relative bg-white border-l-4 md:border-l-0 border-purple-500 md:border-green-200 rounded-none rounded-r-lg md:rounded-2xl p-4 md:p-6 hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-sm">
-                <div className="flex md:flex-row items-center gap-3 mb-3">
-                  <div className="w-12 h-12 flex items-center justify-center flex-shrink-0 p-2.5 md:bg-transparent md:p-0">
-                    <img
-                      src="/assets/icons/wifi.png"
-                      alt="App Icon"
-                      className="w-7 h-7 md:w-12 md:h-12 object-contain"
-                    />
+              <div className="relative bg-white border-l-4 md:border-l-0 border-purple-500 md:border-green-200 rounded-none rounded-r-lg md:rounded-2xl hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-sm overflow-hidden">
+                {/* Mobile Image at Top */}
+                <div className="md:hidden h-48 w-full overflow-hidden bg-gradient-to-br from-purple-50 to-indigo-50 flex items-center justify-center">
+                  <img
+                    src="/fiber.jpg"
+                    alt="Internet Services"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-4 md:p-6">
+                  <div className="flex md:flex-row items-center gap-3 mb-3">
+                    <div className="w-12 h-12 flex items-center justify-center flex-shrink-0 p-2.5 md:bg-transparent md:p-0">
+                      <img
+                        src="/assets/icons/wifi.png"
+                        alt="App Icon"
+                        className="w-7 h-7 md:w-12 md:h-12 object-contain"
+                      />
+                    </div>
+                    <div
+                      className="flex-1 min-w-0"
+                      style={{ fontFamily: "var(--font-saira), sans-serif" }}
+                    >
+                      <h3 className="text-base md:text-xl font-bold text-gray-900 mb-1">
+                        Internet Services
+                      </h3>
+                    </div>
                   </div>
-                  <div
-                    className="flex-1 min-w-0"
+                  <p
+                    className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-3"
                     style={{ fontFamily: "var(--font-saira), sans-serif" }}
                   >
-                    <h3 className="text-base md:text-xl font-bold text-gray-900 mb-1">
-                      Internet Services
-                    </h3>
+                    Experience blazing-fast internet with our 5G and secure
+                    fiber packages. Choose from flexible plans perfect for your
+                    home or business needs.
+                  </p>
+                  <div className="flex items-center text-purple-600 font-semibold text-sm">
+                    View Plans
+                    <svg
+                      className="w-4 h-4 ml-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
                   </div>
-                </div>
-                <p
-                  className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-3"
-                  style={{ fontFamily: "var(--font-saira), sans-serif" }}
-                >
-                  Experience blazing-fast internet with our 5G and secure fiber
-                  packages. Choose from flexible plans perfect for your home or
-                  business needs.
-                </p>
-                <div className="flex items-center text-purple-600 font-semibold text-sm">
-                  View Plans
-                  <svg
-                    className="w-4 h-4 ml-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
                 </div>
               </div>
             </Link>
