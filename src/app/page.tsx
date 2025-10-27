@@ -9,8 +9,8 @@ export default function Home() {
   // Function to open maps with directions to the shop
   const openMaps = () => {
     // Shop location coordinates (you can update these with the actual shop location)
-    const shopLatitude = -1.205584; // Example coordinates for Ruaka area
-    const shopLongitude = 36.779357;
+    const shopLatitude = -1.2066519; // Safaricom Shop Ruaka - Sandton Plaza
+    const shopLongitude = 36.7847042;
     const shopName = "Safaricom Shop Ruaka";
 
     // Detect if user is on mobile device
@@ -87,7 +87,7 @@ export default function Home() {
                 name: "Where are you located?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Safaricom Shop Ruaka, Sandton plaza, opposite Cleanshelf supermarket, Kiambu County.",
+                  text: "Safaricom Shop Ruaka, Sandton Plaza (opposite Cleanshelf supermarket), Ruaka, Kiambu County.",
                 },
               },
             ],
@@ -912,12 +912,12 @@ export default function Home() {
                     <p className="text-gray-700 mb-2">
                       Safaricom Shop Ruaka
                       <br />
-                      Ruaka Town Center
+                      Sandton Plaza
                       <br />
-                      Kiambu County, Kenya
+                      Ruaka, Kiambu County, Kenya
                     </p>
                     <p className="text-sm text-gray-500">
-                      Sandton plaza, opposite Cleanshelf supermarket
+                      Opposite Cleanshelf supermarket
                     </p>
                   </div>
                 </div>

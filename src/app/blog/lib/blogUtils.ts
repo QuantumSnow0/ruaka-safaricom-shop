@@ -372,7 +372,7 @@ export function generateStructuredData(post: BlogPost) {
     dateModified: post.updatedAt || post.publishedAt,
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://safaricomshopruaka.com/blog/${post.slug}`,
+      "@id": `https://www.safaricomshopruaka.co.ke/blog/${post.slug}`,
     },
     keywords: post.tags.join(", "),
     articleSection: post.category,

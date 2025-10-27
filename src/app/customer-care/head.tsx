@@ -3,7 +3,7 @@ export default function Head() {
     <>
       <link
         rel="canonical"
-        href="https://safaricomshopruaka.co.ke/customer-care"
+        href="https://www.safaricomshopruaka.co.ke/customer-care"
       />
     </>
   );
