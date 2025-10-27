@@ -102,19 +102,23 @@ export default function Home() {
           <div className="flex justify-between items-center h-16 md:h-20">
             {/* Logo and Title */}
             <Link href="/" className="flex items-center gap-2 md:gap-3">
-              <img
-                src="/android-chrome-512x512.png"
-                alt="Safaricom Logo"
-                className="w-8 h-8 md:w-10 md:h-10 object-contain"
-              />
+              <div className="relative">
+                <img
+                  src="/android-chrome-512x512.png"
+                  alt="Safaricom Logo"
+                  className="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-sm"
+                />
+                <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white shadow-sm"></div>
+              </div>
               <div>
-                <h1 className="text-base md:text-lg font-bold">
-                  <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-                    Safaricom
+                <h1 className="text-base md:text-xl font-black tracking-tight">
+                  <span className="bg-gradient-to-r from-green-700 via-emerald-600 to-green-500 bg-clip-text text-transparent">
+                    Safaricom Shop
                   </span>
-                  <span className="text-gray-800">Shop</span>
                 </h1>
-                <p className="text-xs text-gray-500">Ruaka</p>
+                <p className="text-xs text-emerald-600 font-semibold">
+                  Ruaka • Official Dealer
+                </p>
               </div>
             </Link>
 
