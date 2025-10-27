@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Saira } from "next/font/google";
 import "./globals.css";
 import { ChatProvider } from "./lipamdogomdogo/contexts/ChatContext";
 import ConditionalChatWidget from "./components/ConditionalChatWidget";
 
 const inter = Inter({ subsets: ["latin"] });
+const saira = Saira({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-saira",
+});
 
 export const metadata: Metadata = {
   title: "Safaricom Shop Ruaka - Your Trusted Mobile Partner",
@@ -79,7 +84,7 @@ export default function RootLayout({
           sizes="180x180"
         />
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.className} ${saira.variable}`}>
         <ChatProvider>
           {children}
           <ConditionalChatWidget />

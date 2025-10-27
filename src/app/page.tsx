@@ -3,9 +3,11 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { MapPin, ExternalLink } from "lucide-react";
+import { useState } from "react";
 import Popup from "./components/Popup";
 
 export default function Home() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   // Function to open maps with directions to the shop
   const openMaps = () => {
     // Shop location coordinates (you can update these with the actual shop location)
@@ -41,7 +43,7 @@ export default function Home() {
   };
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-green-50 via-white to-green-100">
+    <div className="relative min-h-screen bg-white">
       {/* FAQ JSON-LD covering Lipa Mdogo Mdogo, Internet, and Customer Care */}
       <script
         type="application/ld+json"
@@ -96,76 +98,169 @@ export default function Home() {
       />
       {/* Navigation */}
       <nav className="backdrop-blur-md bg-white/90 sm:border-b sm:border-green-200 sticky top-0 z-50 sm:shadow-lg">
-        <div className="max-w-7xl mx-auto px-0 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            <div className="flex items-center">
-              <div className="relative flex-shrink-0">
-                <img
-                  src="/mobile-logo.svg"
-                  alt="Safaricom Logo"
-                  className="absolute left-[30px] top-[-18px] lg:top-[-20px] lg:left-[27px] z-[-100]  w-17 h-17 sm:w-20 sm:h-20 lg:w-18 lg:h-18 object-contain"
-                />
-                <h1 className="ml-16 text-3xl font-black bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent">
-                  Safaricom Shop
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 relative">
+          <div className="flex justify-between items-center h-16 md:h-20">
+            {/* Logo and Title */}
+            <Link href="/" className="flex items-center gap-2 md:gap-3">
+              <img
+                src="/android-chrome-512x512.png"
+                alt="Safaricom Logo"
+                className="w-8 h-8 md:w-10 md:h-10 object-contain"
+              />
+              <div>
+                <h1 className="text-base md:text-lg font-bold">
+                  <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+                    Safaricom
+                  </span>
+                  <span className="text-gray-800">Shop</span>
                 </h1>
-                <p className="ml-16 text-sm text-gray-600 font-medium">Ruaka</p>
+                <p className="text-xs text-gray-500">Ruaka</p>
               </div>
-            </div>
+            </Link>
+
+            {/* Desktop Navigation */}
             <div className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-8">
+              <div className="flex items-baseline space-x-6">
                 <a
                   href="#home"
-                  className="text-gray-700 hover:text-green-600 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-green-50"
+                  className="text-gray-700 hover:text-green-600 text-sm font-medium transition-colors"
                 >
                   Home
                 </a>
                 <a
                   href="#services"
-                  className="text-gray-700 hover:text-green-600 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-green-50"
+                  className="text-gray-700 hover:text-green-600 text-sm font-medium transition-colors"
                 >
                   Services
                 </a>
                 <a
                   href="#about"
-                  className="text-gray-700 hover:text-green-600 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-green-50"
+                  className="text-gray-700 hover:text-green-600 text-sm font-medium transition-colors"
                 >
                   About
                 </a>
                 <Link
                   href="/customer-care"
-                  className="text-gray-700 hover:text-green-600 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-green-50"
+                  className="text-gray-700 hover:text-green-600 text-sm font-medium transition-colors"
                 >
                   Support
                 </Link>
                 <a
                   href="#contact"
-                  className="text-gray-700 hover:text-green-600 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-green-50"
+                  className="text-gray-700 hover:text-green-600 text-sm font-medium transition-colors"
                 >
                   Contact
                 </a>
               </div>
             </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            >
+              <div className="relative w-7 h-7 flex flex-col justify-center gap-1.5">
+                <motion.span
+                  className="block w-full h-0.5 bg-gray-800 rounded-full origin-center"
+                  animate={{
+                    y: mobileMenuOpen ? 7 : 0,
+                    rotate: mobileMenuOpen ? 45 : 0,
+                  }}
+                  transition={{ duration: 0.3 }}
+                />
+                <motion.span
+                  className="block w-full h-0.5 bg-gray-800 rounded-full"
+                  animate={{
+                    opacity: mobileMenuOpen ? 0 : 1,
+                    width: mobileMenuOpen ? "0%" : "100%",
+                  }}
+                  transition={{ duration: 0.25 }}
+                />
+                <motion.span
+                  className="block w-full h-0.5 bg-gray-800 rounded-full origin-center"
+                  animate={{
+                    y: mobileMenuOpen ? -7 : 0,
+                    rotate: mobileMenuOpen ? -45 : 0,
+                  }}
+                  transition={{ duration: 0.3 }}
+                />
+              </div>
+            </button>
           </div>
+
+          {/* Mobile Menu Dropdown */}
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="md:hidden absolute top-full left-0 right-0 bg-white shadow-xl border-b border-gray-200 z-40"
+            >
+              <nav className="flex flex-col gap-0 pt-4 pb-3">
+                <a
+                  href="#home"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-gray-700 hover:text-green-600 text-sm font-medium transition-colors py-2.5 px-3 border-b border-gray-200"
+                >
+                  Home
+                </a>
+                <a
+                  href="#services"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-gray-700 hover:text-green-600 text-sm font-medium transition-colors py-2.5 px-3 border-b border-gray-200"
+                >
+                  Services
+                </a>
+                <a
+                  href="#about"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-gray-700 hover:text-green-600 text-sm font-medium transition-colors py-2.5 px-3 border-b border-gray-200"
+                >
+                  About
+                </a>
+                <Link
+                  href="/customer-care"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-gray-700 hover:text-green-600 text-sm font-medium transition-colors py-2.5 px-3 border-b border-gray-200"
+                >
+                  Support
+                </Link>
+                <a
+                  href="#contact"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-gray-700 hover:text-green-600 text-sm font-medium transition-colors py-2.5 px-3 border-b border-gray-200"
+                >
+                  Contact
+                </a>
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    openMaps();
+                  }}
+                  className="mt-4 mx-3 px-4 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
+                >
+                  <MapPin className="w-4 h-4" />
+                  Visit Our Shop
+                  <ExternalLink className="w-3 h-3" />
+                </button>
+              </nav>
+            </motion.div>
+          )}
         </div>
       </nav>
 
       {/* Hero Section */}
       <section
         id="home"
-        className="relative py-5 px-4 sm:px-6 lg:px-8 overflow-hidden"
+        className="relative py-2 md:py-12 px-4 sm:px-6 lg:px-8 overflow-hidden bg-white"
       >
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute top-10 left-10 w-32 h-32 bg-green-500/20 rounded-full blur-2xl animate-pulse"></div>
-          <div className="absolute bottom-10 right-10 w-40 h-40 bg-red-500/20 rounded-full blur-2xl animate-pulse delay-1000"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-blue-500/20 rounded-full blur-2xl animate-pulse delay-500"></div>
-        </div>
-
         <div className="relative z-10 max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-12 items-center">
             {/* Left Content */}
-            <div className="text-center lg:text-left order-1 lg:order-1">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-6 leading-tight">
+            <div className="text-start lg:text-left order-1 lg:order-1">
+              <h1
+                className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-2 leading-tight"
+                style={{ fontFamily: "var(--font-saira), sans-serif" }}
+              >
                 Welcome to{" "}
                 <div>
                   <span className="bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent">
@@ -174,7 +269,10 @@ export default function Home() {
                 </div>
               </h1>
 
-              <p className="text-base sm:text-lg text-gray-700 mb-8 leading-relaxed">
+              <p
+                className="text-base sm:text-lg text-gray-700 mb-1 md:mb-6 leading-relaxed"
+                style={{ fontFamily: "var(--font-saira), sans-serif" }}
+              >
                 Experience cutting-edge mobile technology with our premium
                 services and revolutionary{" "}
                 <span className="text-green-600 font-bold">
@@ -183,276 +281,17 @@ export default function Home() {
                 payment solutions
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <div className="hidden md:flex justify-center lg:justify-start">
                 <button
                   onClick={openMaps}
-                  className="group relative px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-green-500/25 text-sm sm:text-base flex items-center justify-center gap-2"
+                  className="group relative px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-green-500/25 text-base flex items-center justify-center gap-2"
                 >
                   <MapPin className="w-4 h-4" />
                   <span className="relative z-10">Visit Our Shop</span>
                   <ExternalLink className="w-3 h-3" />
                   <div className="absolute inset-0 bg-gradient-to-r from-green-600 to-emerald-700 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </button>
-                <Link
-                  href="#services"
-                  className="px-4 sm:px-6 py-2 sm:py-3 backdrop-blur-md bg-white/80 border border-green-300 text-gray-700 font-bold rounded-xl transition-all duration-300 hover:bg-green-50 hover:border-green-400 text-sm sm:text-base"
-                >
-                  Explore Services
-                </Link>
               </div>
-            </div>
-
-            {/* Right Visual - Circular Layout */}
-            <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 mx-auto order-2 lg:order-2">
-              {/* Center Card - Lipa Mdogo Mdogo (The Sun) */}
-              <motion.div
-                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.8, type: "spring" }}
-              >
-                <a
-                  href="https://lipapolepole.net/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="relative group"
-                >
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-yellow-500/40 to-orange-500/40 rounded-full blur-xl"
-                    animate={{
-                      scale: [1, 1.2, 1],
-                      opacity: [0.3, 0.6, 0.3],
-                    }}
-                    transition={{
-                      duration: 3,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  ></motion.div>
-                  <motion.div
-                    className="relative w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 bg-white rounded-full flex items-center justify-center shadow-2xl ring-4 ring-green-500/40"
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    <img
-                      src="/assets/icons/logo.png"
-                      alt="Safaricom Logo"
-                      className="w-16 h-16 sm:w-20 sm:h-20 lg:w-18 lg:h-18 object-cover"
-                    />
-                  </motion.div>
-                </a>
-              </motion.div>
-
-              {/* Revolving Container */}
-              <motion.div
-                className="absolute inset-0"
-                animate={{ rotate: 360 }}
-                transition={{
-                  duration: 20,
-                  repeat: Infinity,
-                  ease: "linear",
-                  repeatType: "loop",
-                }}
-              >
-                {/* Top Card - Phones */}
-                <motion.div
-                  className="absolute top-[-15] left-1/2 transform -translate-x-1/2 group"
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ delay: 0.2, duration: 0.6 }}
-                >
-                  <motion.div
-                    className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 rounded-full flex items-center justify-center  m-2 sm:m-4 group-hover:scale-110"
-                    whileHover={{
-                      scale: 1.1,
-                      boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-                    }}
-                    animate={{ rotate: [0, -360] }}
-                    transition={{
-                      rotate: {
-                        duration: 20,
-                        repeat: Infinity,
-                        ease: "linear",
-                        repeatType: "loop",
-                      },
-                      scale: {
-                        type: "spring",
-                        stiffness: 300,
-                      },
-                    }}
-                    style={{
-                      transformOrigin: "center",
-                    }}
-                  >
-                    <div className="flex items-center flex-col gap-1 p-10">
-                      <img
-                        src="/assets/icons/app.png"
-                        alt="App Icon"
-                        className="w-10 h-10 sm:w-12 sm:h-12 lg:w-12 lg:h-12"
-                      />
-                      <h6 className="text-sm text-green-600 font-semibold">
-                        Smartphones
-                      </h6>
-                    </div>
-                  </motion.div>
-                </motion.div>
-
-                {/* Right Card - Accessories */}
-                <motion.div
-                  className="absolute top-1/2 right-[-15] transform -translate-y-1/2 group"
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ delay: 0.4, duration: 0.6 }}
-                >
-                  <motion.div
-                    className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 flex items-center justify-center  m-2 sm:m-4 group-hover:scale-110"
-                    whileHover={{
-                      scale: 1.1,
-                      boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-                    }}
-                    animate={{ rotate: [0, -360] }}
-                    transition={{
-                      rotate: {
-                        duration: 20,
-                        repeat: Infinity,
-                        ease: "linear",
-                        repeatType: "loop",
-                      },
-                      scale: {
-                        type: "spring",
-                        stiffness: 300,
-                      },
-                    }}
-                    style={{
-                      transformOrigin: "center",
-                    }}
-                  >
-                    <div className="flex items-center flex-col gap-1 p-10">
-                      <img
-                        src="/assets/icons/battery.png"
-                        alt="battery Icon"
-                        className="w-10 h-10 sm:w-12 sm:h-12 lg:w-12 lg:h-12"
-                      />
-                      <h6 className="text-sm text-green-600 font-semibold">
-                        accessories
-                      </h6>
-                    </div>
-                  </motion.div>
-                </motion.div>
-
-                {/* Bottom Card - Support */}
-                <motion.div
-                  className="absolute bottom-[-15] left-1/2 transform -translate-x-1/2 group"
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ delay: 0.6, duration: 0.6 }}
-                >
-                  <motion.div
-                    className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24  flex items-center justify-center  sm:m-4 group-hover:scale-110"
-                    whileHover={{
-                      scale: 1.1,
-                      boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-                    }}
-                    animate={{ rotate: [0, -360] }}
-                    transition={{
-                      rotate: {
-                        duration: 20,
-                        repeat: Infinity,
-                        ease: "linear",
-                        repeatType: "loop",
-                      },
-                      scale: {
-                        type: "spring",
-                        stiffness: 300,
-                      },
-                    }}
-                    style={{
-                      transformOrigin: "center",
-                    }}
-                  >
-                    <div className="flex items-center flex-col gap-1 p-10">
-                      <img
-                        src="/assets/icons/support.png"
-                        alt="App Icon"
-                        className="w-10 h-10 sm:w-12 sm:h-12 lg:w-12 lg:h-12"
-                      />
-                      <h6 className="text-sm text-green-600 font-semibold">
-                        support
-                      </h6>
-                    </div>
-                  </motion.div>
-                </motion.div>
-
-                {/* Left Card - Internet */}
-                <motion.div
-                  className="absolute top-1/2 left-[-15] transform -translate-y-1/2 group"
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ delay: 0.8, duration: 0.6 }}
-                >
-                  <motion.div
-                    className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 flex items-center justify-center sm:m-4 group-hover:scale-110"
-                    whileHover={{
-                      scale: 1.1,
-                      boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
-                    }}
-                    animate={{ rotate: [0, -360] }}
-                    transition={{
-                      rotate: {
-                        duration: 20,
-                        repeat: Infinity,
-                        ease: "linear",
-                        repeatType: "loop",
-                      },
-                      scale: {
-                        type: "spring",
-                        stiffness: 300,
-                      },
-                    }}
-                    style={{
-                      transformOrigin: "center",
-                    }}
-                  >
-                    <div className="flex items-center flex-col gap-1 p-10">
-                      <img
-                        src="/assets/icons/wifi.png"
-                        alt="App Icon"
-                        className="w-10 h-10 sm:w-12 sm:h-12 lg:w-12 lg:h-12"
-                      />
-                      <h6 className="text-sm text-green-600 font-semibold">
-                        internet
-                      </h6>
-                    </div>
-                  </motion.div>
-                </motion.div>
-              </motion.div>
-
-              {/* Decorative Rings */}
-              <motion.div
-                className="absolute inset-0 border-2 border-green-200/30 rounded-full"
-                animate={{
-                  scale: [1, 1.05, 1],
-                  opacity: [0.3, 0.6, 0.3],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              ></motion.div>
-              <motion.div
-                className="absolute inset-8 border border-green-300/20 rounded-full"
-                animate={{
-                  scale: [1, 1.1, 1],
-                  opacity: [0.2, 0.4, 0.2],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 1,
-                }}
-              ></motion.div>
             </div>
           </div>
         </div>
@@ -461,20 +300,20 @@ export default function Home() {
       {/* Services Section - Zigzag Layout */}
       <section
         id="services"
-        className="py-10 bg-gradient-to-b from-green-100 to-white relative overflow-hidden"
+        className="py-2 md:py-16 bg-white md:bg-gradient-to-b md:from-green-100 md:to-white relative overflow-hidden"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <span className="inline-block px-4 py-2 bg-green-500/20 text-green-600 text-sm font-semibold rounded-full mb-4">
+          <div className="text-start md:text-center mb-8 md:mb-16">
+            <span className="hidden md:inline-block px-4 py-2 bg-green-500/20 text-green-600 text-sm font-semibold rounded-full mb-4">
               OUR SERVICES
             </span>
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
+            <h2 className="text-2xl md:text-5xl font-black text-gray-900 mb-4">
               What We{" "}
               <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
                 Offer
               </span>
             </h2>
-            <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+            <p className="text-base md:text-lg text-gray-700 max-w-2xl mx-auto">
               Cutting-edge mobile solutions designed to elevate your digital
               experience
             </p>
@@ -482,7 +321,7 @@ export default function Home() {
 
           {/* Mobile-First Grid */}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {/* Service 1 - Lipa Mdogo Mdogo */}
             <a
               href="https://lipapolepole.net/"
@@ -718,7 +557,7 @@ export default function Home() {
       {/* About Section */}
       <section
         id="about"
-        className="py-20 bg-gradient-to-b from-white to-green-50 relative"
+        className="py-20 bg-white md:bg-gradient-to-b md:from-white md:to-green-50 relative"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -871,166 +710,75 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Visit Our Shop Section */}
-      <section className="py-20 bg-gradient-to-br from-orange-50 via-white to-red-50 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-10 left-10 w-32 h-32 bg-orange-500/20 rounded-full blur-2xl animate-pulse"></div>
-          <div className="absolute bottom-10 right-10 w-40 h-40 bg-red-500/20 rounded-full blur-2xl animate-pulse delay-1000"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-yellow-500/20 rounded-full blur-2xl animate-pulse delay-500"></div>
-        </div>
-
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <span className="inline-block px-4 py-2 bg-orange-500/20 text-orange-600 text-sm font-semibold rounded-full mb-4">
-              PHYSICAL LOCATION
-            </span>
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
-              Visit Our{" "}
-              <span className="bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
-                Physical Shop
-              </span>
-            </h2>
-            <p className="text-lg text-gray-700 max-w-2xl mx-auto">
-              Experience our products in person at our conveniently located shop
-              in Ruaka. Get hands-on with the latest devices and speak directly
-              with our experts.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left Side - Shop Info */}
-            <div className="space-y-8">
-              <div className="bg-white/90 backdrop-blur-md border border-orange-200 rounded-2xl p-6 shadow-lg">
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-600 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">
-                      Location
-                    </h3>
-                    <p className="text-gray-700 mb-2">
-                      Safaricom Shop Ruaka
-                      <br />
-                      Sandton Plaza
-                      <br />
-                      Ruaka, Kiambu County, Kenya
-                    </p>
-                    <p className="text-sm text-gray-500">
-                      Opposite Cleanshelf supermarket
-                    </p>
-                  </div>
+      {/* Compact Visit Our Shop Section */}
+      <section className="hidden md:block py-10 bg-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-3xl p-6 md:p-8 border border-green-200 shadow-lg">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Location */}
+              <div className="flex items-start space-x-3">
+                <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-5 h-5 text-white" />
                 </div>
-              </div>
-
-              <div className="bg-white/90 backdrop-blur-md border border-orange-200 rounded-2xl p-6 shadow-lg">
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-600 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <svg
-                      className="w-6 h-6 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">
-                      Opening Hours
-                    </h3>
-                    <div className="space-y-1 text-gray-700">
-                      <p>Monday - Friday: 8:00 AM - 7:00 PM</p>
-                      <p>Saturday: 9:00 AM - 6:00 PM</p>
-                      <p>Sunday: 10:00 AM - 5:00 PM</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-white/90 backdrop-blur-md border border-orange-200 rounded-2xl p-6 shadow-lg">
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-orange-500 to-red-600 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <svg
-                      className="w-6 h-6 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">
-                      Contact
-                    </h3>
-                    <p className="text-gray-700 mb-1">
-                      Phone: +254 700 776 994
-                    </p>
-                    <p className="text-gray-700">
-                      Email: safaricomshopruaka@gmail.com
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Side - Map and CTA */}
-            <div className="space-y-6">
-              {/* Map Placeholder */}
-              <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl h-64 flex items-center justify-center border-2 border-dashed border-gray-300">
-                <div className="text-center">
-                  <MapPin className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                  <p className="text-gray-500 font-medium">Interactive Map</p>
-                  <p className="text-sm text-gray-400">
-                    Click "Get Directions" to view in maps
+                <div>
+                  <h3 className="text-sm font-semibold text-gray-900 mb-1">
+                    Visit Us
+                  </h3>
+                  <p className="text-sm text-gray-600">
+                    Safaricom Shop Ruaka, Sandton Plaza, Ruaka
                   </p>
                 </div>
               </div>
 
-              {/* CTA Buttons */}
-              <div className="space-y-4">
-                <button
-                  onClick={openMaps}
-                  className="w-full group relative px-6 py-4 bg-gradient-to-r from-orange-500 to-red-600 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-orange-500/25 flex items-center justify-center gap-3"
-                >
-                  <MapPin className="w-5 h-5" />
-                  <span>Get Directions</span>
-                  <ExternalLink className="w-4 h-4" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-red-700 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </button>
+              {/* Hours */}
+              <div className="flex items-start space-x-3">
+                <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <svg
+                    className="w-5 h-5 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold text-gray-900 mb-1">
+                    Open Hours
+                  </h3>
+                  <p className="text-sm text-gray-600">
+                    Mon-Fri: 8AM-7PM, Sat: 9AM-6PM
+                  </p>
+                </div>
+              </div>
 
-                <div className="grid grid-cols-2 gap-4">
-                  <button className="px-4 py-3 bg-white border-2 border-orange-200 text-orange-600 font-semibold rounded-xl transition-all duration-300 hover:bg-orange-50 hover:border-orange-300 flex items-center justify-center gap-2">
-                    <svg
-                      className="w-4 h-4"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-                    </svg>
-                    Call Us
-                  </button>
-                  <button className="px-4 py-3 bg-white border-2 border-orange-200 text-orange-600 font-semibold rounded-xl transition-all duration-300 hover:bg-orange-50 hover:border-orange-300 flex items-center justify-center gap-2">
-                    <svg
-                      className="w-4 h-4"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-                    </svg>
-                    WhatsApp
-                  </button>
+              {/* Contact */}
+              <div className="flex items-start space-x-3">
+                <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <svg
+                    className="w-5 h-5 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                    />
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-sm font-semibold text-gray-900 mb-1">
+                    Contact
+                  </h3>
+                  <p className="text-sm text-gray-600">+254 700 776 994</p>
                 </div>
               </div>
             </div>
@@ -1041,13 +789,8 @@ export default function Home() {
       {/* Contact Section */}
       <section
         id="contact"
-        className="py-20 bg-gradient-to-b from-green-50 to-white relative overflow-hidden"
+        className="py-20 bg-white md:bg-gradient-to-b md:from-green-50 md:to-white relative overflow-hidden"
       >
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-20 w-96 h-96 bg-green-500/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 right-20 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl"></div>
-        </div>
-
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <span className="inline-block px-4 py-2 bg-green-500/20 text-green-600 text-sm font-semibold rounded-full mb-4">
