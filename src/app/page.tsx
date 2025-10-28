@@ -262,10 +262,7 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-12 items-center">
             {/* Left Content */}
             <div className="text-center lg:text-left order-1 lg:order-1">
-              <h1
-                className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-2 leading-tight"
-                style={{ fontFamily: "var(--font-saira), sans-serif" }}
-              >
+              <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-montserrat font-bold text-gray-900 mb-2 leading-tight">
                 Welcome to{" "}
                 <div>
                   <span className="bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent">
@@ -274,10 +271,7 @@ export default function Home() {
                 </div>
               </h1>
 
-              <p
-                className="text-start text-base sm:text-lg text-gray-700 mb-1 md:mb-6 leading-relaxed"
-                style={{ fontFamily: "var(--font-saira), sans-serif" }}
-              >
+              <p className="text-start text-base sm:text-lg text-gray-700 mb-1 md:mb-6 leading-relaxed font-open-sans">
                 Experience cutting-edge mobile technology with our premium
                 services and revolutionary{" "}
                 <span className="text-green-600 font-bold">
@@ -289,13 +283,28 @@ export default function Home() {
               <div className="hidden md:flex justify-center lg:justify-start">
                 <button
                   onClick={openMaps}
-                  className="group relative px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-green-500/25 text-base flex items-center justify-center gap-2"
+                  className="group relative px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-montserrat font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-green-500/25 text-base flex items-center justify-center gap-2"
                 >
                   <MapPin className="w-4 h-4" />
                   <span className="relative z-10">Visit Our Shop</span>
                   <ExternalLink className="w-3 h-3" />
                   <div className="absolute inset-0 bg-gradient-to-r from-green-600 to-emerald-700 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </button>
+              </div>
+            </div>
+
+            {/* Right Image - Desktop Only */}
+            <div className="hidden lg:block order-2 lg:order-2">
+              <div className="relative w-full h-[500px] flex items-center justify-center overflow-hidden rounded-2xl shadow-xl">
+                <Image
+                  src="/hero-image.png"
+                  alt="Welcome to Ruaka Safaricom Shop"
+                  width={800}
+                  height={1000}
+                  className="w-full h-full object-cover"
+                  loading="eager"
+                  priority
+                />
               </div>
             </div>
           </div>
@@ -308,20 +317,17 @@ export default function Home() {
         className="py-2 md:py-16 bg-white md:bg-gradient-to-b md:from-green-100 md:to-white relative overflow-hidden"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div
-            className="text-start md:text-center mb-8 md:mb-16"
-            style={{ fontFamily: "var(--font-saira), sans-serif" }}
-          >
+          <div className="text-start md:text-center mb-8 md:mb-16">
             <span className="hidden md:inline-block px-4 py-2 bg-green-500/20 text-green-600 text-sm font-semibold rounded-full mb-4">
               OUR SERVICES
             </span>
-            <h2 className="text-2xl md:text-5xl font-black text-gray-900 mb-4">
+            <h2 className="text-2xl md:text-5xl font-montserrat font-bold text-gray-900 mb-4">
               What We{" "}
               <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
                 Offer
               </span>
             </h2>
-            <p className="text-base md:text-lg text-gray-700 max-w-2xl mx-auto">
+            <p className="text-base md:text-lg text-gray-700 max-w-2xl mx-auto font-open-sans">
               Cutting-edge mobile solutions designed to elevate your digital
               experience
             </p>
@@ -359,11 +365,8 @@ export default function Home() {
                         className="w-7 h-7 md:w-12 md:h-12 object-contain"
                       />
                     </div>
-                    <div
-                      className="flex-1 min-w-0"
-                      style={{ fontFamily: "var(--font-saira), sans-serif" }}
-                    >
-                      <h3 className="text-base md:text-xl font-bold text-gray-900 mb-1">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base md:text-xl font-montserrat font-bold text-gray-900 mb-1">
                         Lipa Mdogo Mdogo
                       </h3>
                       <div className="inline-block bg-yellow-500 text-black px-2 py-0.5 rounded-full text-xs font-bold">
@@ -371,10 +374,7 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
-                  <p
-                    className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-3"
-                    style={{ fontFamily: "var(--font-saira), sans-serif" }}
-                  >
+                  <p className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-3 font-open-sans">
                     Our revolutionary flexible payment solution that makes
                     premium mobile devices accessible to everyone. Pay mdogo
                     mdogo and own your dream phone today!
@@ -423,19 +423,13 @@ export default function Home() {
                         className="w-7 h-7 md:w-12 md:h-12 object-contain"
                       />
                     </div>
-                    <div
-                      className="flex-1 min-w-0"
-                      style={{ fontFamily: "var(--font-saira), sans-serif" }}
-                    >
-                      <h3 className="text-base md:text-xl font-bold text-gray-900 mb-1">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base md:text-xl font-montserrat font-bold text-gray-900 mb-1">
                         Premium Accessories
                       </h3>
                     </div>
                   </div>
-                  <p
-                    className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-3"
-                    style={{ fontFamily: "var(--font-saira), sans-serif" }}
-                  >
+                  <p className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-3 font-open-sans">
                     Discover our curated collection of premium mobile
                     accessories. From protective cases to high-quality
                     headphones, we have everything you need.
@@ -489,19 +483,13 @@ export default function Home() {
                         className="w-7 h-7 md:w-12 md:h-12 object-contain"
                       />
                     </div>
-                    <div
-                      className="flex-1 min-w-0"
-                      style={{ fontFamily: "var(--font-saira), sans-serif" }}
-                    >
-                      <h3 className="text-base md:text-xl font-bold text-gray-900 mb-1">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base md:text-xl font-montserrat font-bold text-gray-900 mb-1">
                         Shop Latest Smartphones
                       </h3>
                     </div>
                   </div>
-                  <p
-                    className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-3"
-                    style={{ fontFamily: "var(--font-saira), sans-serif" }}
-                  >
+                  <p className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-3 font-open-sans">
                     Get your hands on the latest smartphones from top brands
                     with competitive prices, comprehensive warranty, and expert
                     setup assistance.
@@ -553,19 +541,13 @@ export default function Home() {
                         className="w-7 h-7 md:w-12 md:h-12 object-contain"
                       />
                     </div>
-                    <div
-                      className="flex-1 min-w-0"
-                      style={{ fontFamily: "var(--font-saira), sans-serif" }}
-                    >
-                      <h3 className="text-base md:text-xl font-bold text-gray-900 mb-1">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base md:text-xl font-montserrat font-bold text-gray-900 mb-1">
                         Customer Care Excellence
                       </h3>
                     </div>
                   </div>
-                  <p
-                    className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-3"
-                    style={{ fontFamily: "var(--font-saira), sans-serif" }}
-                  >
+                  <p className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-3 font-open-sans">
                     Professional customer support with expert assistance for all
                     your Safaricom needs. Our dedicated team ensures you get the
                     best service experience.
@@ -617,19 +599,13 @@ export default function Home() {
                         className="w-7 h-7 md:w-12 md:h-12 object-contain"
                       />
                     </div>
-                    <div
-                      className="flex-1 min-w-0"
-                      style={{ fontFamily: "var(--font-saira), sans-serif" }}
-                    >
-                      <h3 className="text-base md:text-xl font-bold text-gray-900 mb-1">
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base md:text-xl font-montserrat font-bold text-gray-900 mb-1">
                         Internet Services
                       </h3>
                     </div>
                   </div>
-                  <p
-                    className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-3"
-                    style={{ fontFamily: "var(--font-saira), sans-serif" }}
-                  >
+                  <p className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-3 font-open-sans">
                     Experience blazing-fast internet with our 5G and secure
                     fiber packages. Choose from flexible plans perfect for your
                     home or business needs.
@@ -664,23 +640,23 @@ export default function Home() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div style={{ fontFamily: "var(--font-saira), sans-serif" }}>
+            <div>
               <span className="inline-block px-4 py-2 bg-green-500/20 text-green-600 text-sm font-semibold rounded-full mb-6">
                 ABOUT US
               </span>
-              <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-6">
+              <h2 className="text-4xl md:text-5xl font-montserrat font-bold text-gray-900 mb-6">
                 Your Trusted{" "}
                 <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
                   Mobile Partner
                 </span>
               </h2>
-              <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+              <p className="text-lg text-gray-700 mb-6 leading-relaxed font-open-sans">
                 Located in the heart of Ruaka, we are your trusted Safaricom
                 partner providing comprehensive mobile solutions. Our
                 experienced team is dedicated to delivering exceptional service
                 and ensuring you get the best value for your money.
               </p>
-              <p className="text-lg text-gray-700 mb-8 leading-relaxed">
+              <p className="text-lg text-gray-700 mb-8 leading-relaxed font-open-sans">
                 We specialize in customer care, mobile accessories, the latest
                 smartphones, internet services, and our signature Lipa Mdogo
                 Mdogo service that makes premium mobile devices accessible to
@@ -705,11 +681,8 @@ export default function Home() {
 
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-3xl blur-2xl"></div>
-              <div
-                className="relative bg-white/90 backdrop-blur-md border border-green-200 rounded-3xl p-12 shadow-lg"
-                style={{ fontFamily: "var(--font-saira), sans-serif" }}
-              >
-                <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+              <div className="relative bg-white/90 backdrop-blur-md border border-green-200 rounded-3xl p-12 shadow-lg">
+                <h3 className="text-3xl font-montserrat font-bold text-gray-900 mb-8 text-center">
                   Why Choose Us?
                 </h3>
                 <div className="space-y-6">
@@ -728,10 +701,10 @@ export default function Home() {
                       </svg>
                     </div>
                     <div>
-                      <h4 className="text-gray-900 font-semibold text-lg mb-2">
+                      <h4 className="text-gray-900 font-montserrat font-medium text-lg mb-2">
                         Genuine Products with Warranty
                       </h4>
-                      <p className="text-gray-700">
+                      <p className="text-gray-700 font-open-sans">
                         All our products come with official warranty and
                         authenticity guarantee
                       </p>
@@ -752,10 +725,10 @@ export default function Home() {
                       </svg>
                     </div>
                     <div>
-                      <h4 className="text-gray-900 font-semibold text-lg mb-2">
+                      <h4 className="text-gray-900 font-montserrat font-medium text-lg mb-2">
                         Competitive Pricing
                       </h4>
-                      <p className="text-gray-700">
+                      <p className="text-gray-700 font-open-sans">
                         Best prices in the market with regular promotions and
                         discounts
                       </p>
@@ -776,10 +749,10 @@ export default function Home() {
                       </svg>
                     </div>
                     <div>
-                      <h4 className="text-gray-900 font-semibold text-lg mb-2">
+                      <h4 className="text-gray-900 font-montserrat font-medium text-lg mb-2">
                         Flexible Payment Options
                       </h4>
-                      <p className="text-gray-700">
+                      <p className="text-gray-700 font-open-sans">
                         Multiple payment methods including our signature Lipa
                         Mdogo Mdogo
                       </p>
@@ -800,10 +773,10 @@ export default function Home() {
                       </svg>
                     </div>
                     <div>
-                      <h4 className="text-gray-900 font-semibold text-lg mb-2">
+                      <h4 className="text-gray-900 font-montserrat font-medium text-lg mb-2">
                         Professional After-Sales Support
                       </h4>
-                      <p className="text-gray-700">
+                      <p className="text-gray-700 font-open-sans">
                         Comprehensive support and maintenance services for all
                         products
                       </p>
@@ -898,20 +871,17 @@ export default function Home() {
         className="py-20 bg-white md:bg-gradient-to-b md:from-green-50 md:to-white relative overflow-hidden"
       >
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div
-            className="text-center mb-16"
-            style={{ fontFamily: "var(--font-saira), sans-serif" }}
-          >
+          <div className="text-center mb-16">
             <span className="inline-block px-4 py-2 bg-green-500/20 text-green-600 text-sm font-semibold rounded-full mb-4">
               GET IN TOUCH
             </span>
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
+            <h2 className="text-4xl md:text-5xl font-montserrat font-bold text-gray-900 mb-4">
               Visit Us{" "}
               <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
                 Today
               </span>
             </h2>
-            <p className="text-lg text-gray-700">
+            <p className="text-lg text-gray-700 font-open-sans">
               We&apos;re here to serve you better
             </p>
           </div>
@@ -941,10 +911,12 @@ export default function Home() {
                     />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                <h3 className="text-2xl font-montserrat font-medium text-gray-900 mb-4">
                   Location
                 </h3>
-                <p className="text-gray-700 text-lg">Ruaka, Kiambu County</p>
+                <p className="text-gray-700 text-lg font-open-sans">
+                  Ruaka, Kiambu County
+                </p>
               </div>
             </div>
 
@@ -966,8 +938,12 @@ export default function Home() {
                     />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Phone</h3>
-                <p className="text-gray-700 text-lg">+254 700 776 994</p>
+                <h3 className="text-2xl font-montserrat font-medium text-gray-900 mb-4">
+                  Phone
+                </h3>
+                <p className="text-gray-700 text-lg font-open-sans">
+                  +254 700 776 994
+                </p>
               </div>
             </div>
 
@@ -989,9 +965,15 @@ export default function Home() {
                     />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Hours</h3>
-                <p className="text-gray-700 text-lg">Mon-Sat: 8AM-8PM</p>
-                <p className="text-gray-700 text-lg">Sun: 9AM-6PM</p>
+                <h3 className="text-2xl font-montserrat font-medium text-gray-900 mb-4">
+                  Hours
+                </h3>
+                <p className="text-gray-700 text-lg font-open-sans">
+                  Mon-Sat: 8AM-8PM
+                </p>
+                <p className="text-gray-700 text-lg font-open-sans">
+                  Sun: 9AM-6PM
+                </p>
               </div>
             </div>
           </div>
@@ -1006,10 +988,10 @@ export default function Home() {
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h3 className="text-4xl font-black bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent mb-6">
+            <h3 className="text-4xl font-montserrat font-bold bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent mb-6">
               Safaricom Shop Ruaka
             </h3>
-            <p className="text-gray-300 text-lg mb-8">
+            <p className="text-gray-300 text-lg mb-8 font-open-sans">
               Your trusted mobile partner in Ruaka
             </p>
 
@@ -1046,7 +1028,7 @@ export default function Home() {
               </a>
             </div>
 
-            <p className="text-gray-500">
+            <p className="text-gray-500 font-open-sans">
               &copy; 2024 Safaricom Shop Ruaka. All rights reserved.
             </p>
           </div>

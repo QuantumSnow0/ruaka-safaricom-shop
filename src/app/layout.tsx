@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Saira } from "next/font/google";
+import { Inter, Saira, Montserrat, Open_Sans } from "next/font/google";
 import "./globals.css";
 import { ChatProvider } from "./lipamdogomdogo/contexts/ChatContext";
 import ConditionalChatWidget from "./components/ConditionalChatWidget";
@@ -9,6 +9,17 @@ const saira = Saira({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800", "900"],
   variable: "--font-saira",
+});
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-montserrat",
+});
+const open_sans = Open_Sans({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-open-sans",
 });
 
 export const metadata: Metadata = {
@@ -84,7 +95,9 @@ export default function RootLayout({
           sizes="180x180"
         />
       </head>
-      <body className={`${inter.className} ${saira.variable}`}>
+      <body
+        className={`${inter.className} ${saira.variable} ${montserrat.variable} ${open_sans.variable}`}
+      >
         <ChatProvider>
           {children}
           <ConditionalChatWidget />

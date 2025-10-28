@@ -62,6 +62,9 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
+        saira: ["var(--font-saira)", "sans-serif"],
+        montserrat: ["var(--font-montserrat)", "sans-serif"],
+        "open-sans": ["var(--font-open-sans)", "sans-serif"],
       },
       animation: {
         "fade-in": "fadeIn 0.5s ease-in-out",
