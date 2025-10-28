@@ -6,6 +6,8 @@ import Image from "next/image";
 import { MapPin, ExternalLink } from "lucide-react";
 import { useState } from "react";
 import Popup from "./components/Popup";
+import Carousel3D from "./components/Carousel3D";
+import { testimonials } from "../data/testimonials";
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -311,6 +313,13 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 3D Testimonial Carousel - Mobile Only */}
+      <section className="md:hidden bg-gradient-to-b from-white to-green-50 py-0">
+        <div className="max-w-7xl mx-auto px-0">
+          <Carousel3D testimonials={testimonials} />
+        </div>
+      </section>
+
       {/* Services Section - Zigzag Layout */}
       <section
         id="services"
@@ -345,7 +354,27 @@ export default function Home() {
             >
               <div className="md:absolute md:inset-0 md:bg-gradient-to-r md:from-yellow-500/20 md:to-orange-500/20 md:rounded-2xl md:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
               <div className="relative bg-white border-l-4 md:border-l-0 border-yellow-500 md:border-yellow-500/30 rounded-none rounded-r-lg md:rounded-2xl hover:bg-gray-50 md:hover:bg-yellow-50 transition-all duration-500 md:ring-2 md:ring-yellow-500/20 shadow-sm md:shadow-lg overflow-hidden">
-                {/* Mobile Image at Top */}
+                {/* Icon and Title - Before Image */}
+                <div className="p-4 md:p-6 md:hidden">
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="w-8 h-8 flex items-center justify-center flex-shrink-0">
+                      <img
+                        src="/assets/icons/logo.png"
+                        alt="App Icon"
+                        className="w-8 h-8 object-contain"
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base font-montserrat font-bold text-gray-900 mb-1">
+                        Lipa Mdogo Mdogo
+                      </h3>
+                      <div className="inline-block bg-yellow-500 text-black px-2 py-0.5 rounded-full text-xs font-bold">
+                        FEATURED
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* Mobile Image */}
                 <div className="md:hidden h-48 w-full overflow-hidden bg-gradient-to-br from-yellow-50 to-orange-50 flex items-center justify-center relative">
                   <Image
                     src="/smartphones.webp"
@@ -357,16 +386,17 @@ export default function Home() {
                   />
                 </div>
                 <div className="p-4 md:p-6">
-                  <div className="flex md:flex-row items-center gap-3 mb-3">
-                    <div className="w-12 h-12 md:w-15 md:h-15 flex items-center justify-center flex-shrink-0 p-2.5 md:bg-transparent md:p-0">
+                  {/* Desktop: Icon and Title */}
+                  <div className="hidden md:flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 flex items-center justify-center flex-shrink-0">
                       <img
                         src="/assets/icons/logo.png"
                         alt="App Icon"
-                        className="w-7 h-7 md:w-12 md:h-12 object-contain"
+                        className="w-10 h-10 object-contain"
                       />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-base md:text-xl font-montserrat font-bold text-gray-900 mb-1">
+                      <h3 className="text-lg font-montserrat font-bold text-gray-900 mb-1">
                         Lipa Mdogo Mdogo
                       </h3>
                       <div className="inline-block bg-yellow-500 text-black px-2 py-0.5 rounded-full text-xs font-bold">
@@ -403,7 +433,24 @@ export default function Home() {
             <div className="relative group">
               <div className="md:absolute md:inset-0 md:bg-gradient-to-r md:from-red-500/20 md:to-pink-500/20 md:rounded-2xl md:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
               <div className="relative bg-white border-l-4 md:border-l-0 border-red-500 md:border-green-200 rounded-none rounded-r-lg md:rounded-2xl hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-sm overflow-hidden">
-                {/* Mobile Image at Top */}
+                {/* Icon and Title - Before Image */}
+                <div className="p-4 md:p-6 md:hidden">
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="w-8 h-8 flex items-center justify-center flex-shrink-0">
+                      <img
+                        src="/assets/icons/battery.png"
+                        alt="App Icon"
+                        className="w-8 h-8 object-contain"
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base font-montserrat font-bold text-gray-900 mb-1">
+                        Premium Accessories
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+                {/* Mobile Image */}
                 <div className="md:hidden h-48 w-full overflow-hidden bg-gradient-to-br from-red-50 to-pink-50 flex items-center justify-center relative">
                   <Image
                     src="/phone-mobile.jpg"
@@ -415,16 +462,17 @@ export default function Home() {
                   />
                 </div>
                 <div className="p-4 md:p-6">
-                  <div className="flex md:flex-row items-center gap-3 mb-3">
-                    <div className="w-12 h-12 flex items-center justify-center flex-shrink-0 p-2.5 md:bg-transparent md:p-0">
+                  {/* Desktop: Icon and Title */}
+                  <div className="hidden md:flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 flex items-center justify-center flex-shrink-0">
                       <img
                         src="/assets/icons/battery.png"
                         alt="App Icon"
-                        className="w-7 h-7 md:w-12 md:h-12 object-contain"
+                        className="w-10 h-10 object-contain"
                       />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-base md:text-xl font-montserrat font-bold text-gray-900 mb-1">
+                      <h3 className="text-lg font-montserrat font-bold text-gray-900 mb-1">
                         Premium Accessories
                       </h3>
                     </div>
@@ -463,7 +511,24 @@ export default function Home() {
             >
               <div className="md:absolute md:inset-0 md:bg-gradient-to-r md:from-blue-500/20 md:to-cyan-500/20 md:rounded-2xl md:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
               <div className="relative bg-white border-l-4 md:border-l-0 border-blue-500 md:border-green-200 rounded-none rounded-r-lg md:rounded-2xl hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-sm overflow-hidden">
-                {/* Mobile Image at Top */}
+                {/* Icon and Title - Before Image */}
+                <div className="p-4 md:p-6 md:hidden">
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="w-8 h-8 flex items-center justify-center flex-shrink-0">
+                      <img
+                        src="/logo.jpeg"
+                        alt="PhoneUp Kenya Logo"
+                        className="w-8 h-8 object-contain"
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base font-montserrat font-bold text-gray-900 mb-1">
+                        Shop Latest Smartphones
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+                {/* Mobile Image */}
                 <div className="md:hidden h-48 w-full overflow-hidden bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center relative">
                   <Image
                     src="/latest-phones.webp"
@@ -475,16 +540,17 @@ export default function Home() {
                   />
                 </div>
                 <div className="p-4 md:p-6">
-                  <div className="flex md:flex-row items-center gap-3 mb-3">
-                    <div className="w-12 h-12 flex items-center justify-center flex-shrink-0 p-2.5 md:bg-transparent md:p-0">
+                  {/* Desktop: Icon and Title */}
+                  <div className="hidden md:flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 flex items-center justify-center flex-shrink-0">
                       <img
                         src="/logo.jpeg"
                         alt="PhoneUp Kenya Logo"
-                        className="w-7 h-7 md:w-12 md:h-12 object-contain"
+                        className="w-10 h-10 object-contain"
                       />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-base md:text-xl font-montserrat font-bold text-gray-900 mb-1">
+                      <h3 className="text-lg font-montserrat font-bold text-gray-900 mb-1">
                         Shop Latest Smartphones
                       </h3>
                     </div>
@@ -521,7 +587,24 @@ export default function Home() {
             >
               <div className="md:absolute md:inset-0 md:bg-gradient-to-r md:from-green-500/20 md:to-emerald-500/20 md:rounded-2xl md:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
               <div className="relative bg-white border-l-4 md:border-l-0 border-green-500 md:border-green-200 rounded-none rounded-r-lg md:rounded-2xl hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-sm overflow-hidden">
-                {/* Mobile Image at Top */}
+                {/* Icon and Title - Before Image */}
+                <div className="p-4 md:p-6 md:hidden">
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="w-8 h-8 flex items-center justify-center flex-shrink-0">
+                      <img
+                        src="/assets/icons/support.png"
+                        alt="App Icon"
+                        className="w-8 h-8 object-contain"
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base font-montserrat font-bold text-gray-900 mb-1">
+                        Customer Care Excellence
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+                {/* Mobile Image */}
                 <div className="md:hidden h-48 w-full overflow-hidden bg-gradient-to-br from-green-50 to-emerald-50 flex items-center justify-center relative">
                   <Image
                     src="/customer-care.jpg"
@@ -533,16 +616,17 @@ export default function Home() {
                   />
                 </div>
                 <div className="p-4 md:p-6">
-                  <div className="flex md:flex-row items-center gap-3 mb-3">
-                    <div className="w-12 h-12 flex items-center justify-center flex-shrink-0 p-2.5 md:bg-transparent md:p-0">
+                  {/* Desktop: Icon and Title */}
+                  <div className="hidden md:flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 flex items-center justify-center flex-shrink-0">
                       <img
                         src="/assets/icons/support.png"
                         alt="App Icon"
-                        className="w-7 h-7 md:w-12 md:h-12 object-contain"
+                        className="w-10 h-10 object-contain"
                       />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-base md:text-xl font-montserrat font-bold text-gray-900 mb-1">
+                      <h3 className="text-lg font-montserrat font-bold text-gray-900 mb-1">
                         Customer Care Excellence
                       </h3>
                     </div>
@@ -579,7 +663,24 @@ export default function Home() {
             >
               <div className="md:absolute md:inset-0 md:bg-gradient-to-r md:from-purple-500/20 md:to-indigo-500/20 md:rounded-2xl md:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
               <div className="relative bg-white border-l-4 md:border-l-0 border-purple-500 md:border-green-200 rounded-none rounded-r-lg md:rounded-2xl hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-sm overflow-hidden">
-                {/* Mobile Image at Top */}
+                {/* Icon and Title - Before Image */}
+                <div className="p-4 md:p-6 md:hidden">
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="w-8 h-8 flex items-center justify-center flex-shrink-0">
+                      <img
+                        src="/assets/icons/wifi.png"
+                        alt="App Icon"
+                        className="w-8 h-8 object-contain"
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-base font-montserrat font-bold text-gray-900 mb-1">
+                        Internet Services
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+                {/* Mobile Image */}
                 <div className="md:hidden h-48 w-full overflow-hidden bg-gradient-to-br from-purple-50 to-indigo-50 flex items-center justify-center relative">
                   <Image
                     src="/fiber.jpg"
@@ -591,16 +692,17 @@ export default function Home() {
                   />
                 </div>
                 <div className="p-4 md:p-6">
-                  <div className="flex md:flex-row items-center gap-3 mb-3">
-                    <div className="w-12 h-12 flex items-center justify-center flex-shrink-0 p-2.5 md:bg-transparent md:p-0">
+                  {/* Desktop: Icon and Title */}
+                  <div className="hidden md:flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 flex items-center justify-center flex-shrink-0">
                       <img
                         src="/assets/icons/wifi.png"
                         alt="App Icon"
-                        className="w-7 h-7 md:w-12 md:h-12 object-contain"
+                        className="w-10 h-10 object-contain"
                       />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-base md:text-xl font-montserrat font-bold text-gray-900 mb-1">
+                      <h3 className="text-lg font-montserrat font-bold text-gray-900 mb-1">
                         Internet Services
                       </h3>
                     </div>
