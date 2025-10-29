@@ -353,20 +353,20 @@ export default function Home() {
       {/* Services Section - Zigzag Layout */}
       <section
         id="services"
-        className="py-2 md:py-16 bg-white md:bg-gradient-to-b md:from-green-100 md:to-white relative overflow-hidden"
+        className="py-4 md:py-16 bg-white md:bg-gradient-to-b md:from-green-100 md:to-white relative overflow-hidden"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-start md:text-center mb-8 md:mb-16">
+          <div className="text-start md:text-center mb-4 md:mb-16">
             <span className="hidden md:inline-block px-4 py-2 bg-green-500/20 text-green-600 text-sm font-semibold rounded-full mb-4">
               OUR SERVICES
             </span>
-            <h2 className="text-xl md:text-5xl font-montserrat font-bold text-gray-900 mb-4">
+            <h2 className="text-xl md:text-5xl font-montserrat font-bold text-gray-900 mb-2 md:mb-4">
               What We{" "}
               <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
                 Offer
               </span>
             </h2>
-            <p className="text-base md:text-lg text-gray-700 max-w-2xl mx-auto font-open-sans">
+            <p className="text-base md:text-lg text-gray-700 max-w-2xl mx-auto font-open-sans mb-4 md:mb-0">
               Cutting-edge mobile solutions designed to elevate your digital
               experience
             </p>
@@ -768,27 +768,27 @@ export default function Home() {
       {/* About Section */}
       <section
         id="about"
-        className="py-20 bg-white md:bg-gradient-to-b md:from-white md:to-green-50 relative"
+        className="py-8 md:py-20 bg-white md:bg-gradient-to-b md:from-white md:to-green-50 relative"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 items-center">
             <div>
               <span className="inline-block px-4 py-2 bg-green-500/20 text-green-600 text-sm font-semibold rounded-full mb-6">
                 ABOUT US
               </span>
-              <h2 className="text-2xl md:text-5xl font-montserrat font-bold text-gray-900 mb-6">
+              <h2 className="text-2xl md:text-5xl font-montserrat font-bold text-gray-900 mb-3 md:mb-6">
                 Your Trusted{" "}
                 <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
                   Mobile Partner
                 </span>
               </h2>
-              <p className="text-lg text-gray-700 mb-6 leading-relaxed font-open-sans">
+              <p className="text-lg text-gray-700 mb-3 md:mb-6 leading-relaxed font-open-sans">
                 Located in the heart of Ruaka, we are your trusted Safaricom
                 partner providing comprehensive mobile solutions. Our
                 experienced team is dedicated to delivering exceptional service
                 and ensuring you get the best value for your money.
               </p>
-              <p className="text-lg text-gray-700 mb-8 leading-relaxed font-open-sans">
+              <p className="text-lg text-gray-700 mb-4 md:mb-8 leading-relaxed font-open-sans">
                 We specialize in customer care, mobile accessories, the latest
                 smartphones, internet services, and our signature Lipa Mdogo
                 Mdogo service that makes premium mobile devices accessible to
@@ -812,12 +812,101 @@ export default function Home() {
             </div>
 
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-3xl blur-2xl"></div>
-              <div className="relative bg-white/90 backdrop-blur-md border border-green-200 rounded-3xl p-12 shadow-lg">
-                <h3 className="text-3xl font-montserrat font-bold text-gray-900 mb-8 text-center">
+              <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-3xl blur-2xl hidden md:block"></div>
+              <div className="relative bg-white/90 backdrop-blur-md border border-green-200 rounded-2xl md:rounded-3xl p-4 md:p-12 shadow-lg">
+                <h3 className="text-xl md:text-3xl font-montserrat font-bold text-gray-900 mb-1 md:mb-8 text-center">
                   Why Choose Us?
                 </h3>
-                <div className="space-y-6">
+                {/* Mobile: Compact Grid Layout */}
+                <div className="grid grid-cols-2 gap-3 md:hidden">
+                  <div className="bg-green-50 rounded-xl p-3 border border-green-200">
+                    <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mb-2">
+                      <svg
+                        className="w-3.5 h-3.5 text-white"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                    <h4 className="text-gray-900 font-montserrat font-semibold text-xs mb-1 leading-tight">
+                      Genuine Products
+                    </h4>
+                    <p className="text-gray-600 font-open-sans text-xs leading-tight">
+                      Official warranty
+                    </p>
+                  </div>
+                  <div className="bg-green-50 rounded-xl p-3 border border-green-200">
+                    <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mb-2">
+                      <svg
+                        className="w-3.5 h-3.5 text-white"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                    <h4 className="text-gray-900 font-montserrat font-semibold text-xs mb-1 leading-tight">
+                      Best Prices
+                    </h4>
+                    <p className="text-gray-600 font-open-sans text-xs leading-tight">
+                      Regular promotions
+                    </p>
+                  </div>
+                  <div className="bg-green-50 rounded-xl p-3 border border-green-200">
+                    <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mb-2">
+                      <svg
+                        className="w-3.5 h-3.5 text-white"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                    <h4 className="text-gray-900 font-montserrat font-semibold text-xs mb-1 leading-tight">
+                      Flexible Payment
+                    </h4>
+                    <p className="text-gray-600 font-open-sans text-xs leading-tight">
+                      Lipa Mdogo Mdogo
+                    </p>
+                  </div>
+                  <div className="bg-green-50 rounded-xl p-3 border border-green-200">
+                    <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mb-2">
+                      <svg
+                        className="w-3.5 h-3.5 text-white"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                    <h4 className="text-gray-900 font-montserrat font-semibold text-xs mb-1 leading-tight">
+                      After-Sales Support
+                    </h4>
+                    <p className="text-gray-600 font-open-sans text-xs leading-tight">
+                      Comprehensive service
+                    </p>
+                  </div>
+                </div>
+
+                {/* Desktop: Original Layout */}
+                <div className="hidden md:block space-y-6">
                   <div className="flex items-start">
                     <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center mr-4 flex-shrink-0 mt-1">
                       <svg
@@ -1000,14 +1089,11 @@ export default function Home() {
       {/* Contact Section */}
       <section
         id="contact"
-        className="py-20 bg-white md:bg-gradient-to-b md:from-green-50 md:to-white relative overflow-hidden"
+        className="py-2 md:py-20 bg-white md:bg-gradient-to-b md:from-green-50 md:to-white relative overflow-hidden"
       >
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <span className="inline-block px-4 py-2 bg-green-500/20 text-green-600 text-sm font-semibold rounded-full mb-4">
-              GET IN TOUCH
-            </span>
-            <h2 className="text-2xl md:text-5xl font-montserrat font-bold text-gray-900 mb-4">
+          <div className="text-center mb-8 md:mb-16">
+            <h2 className="text-2xl md:text-5xl font-montserrat font-bold text-gray-900 mb-2 md:mb-4">
               Visit Us{" "}
               <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
                 Today
@@ -1018,7 +1104,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
             <div className="group relative">
               <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
               <div className="relative bg-white/90 backdrop-blur-md border border-green-200 rounded-3xl p-8 text-center hover:bg-green-50 transition-all duration-500 shadow-lg">
@@ -1113,7 +1199,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 py-16 relative overflow-hidden">
+      <footer className="bg-gray-900 py-8 md:py-16 relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-96 h-96 bg-green-500/5 rounded-full blur-3xl"></div>
         </div>
