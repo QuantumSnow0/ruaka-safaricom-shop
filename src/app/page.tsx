@@ -7,6 +7,7 @@ import { MapPin, ExternalLink } from "lucide-react";
 import { useState } from "react";
 import Popup from "./components/Popup";
 import Carousel3D from "./components/Carousel3D";
+import GalleryGrid from "./components/GalleryGrid";
 import { testimonials } from "../data/testimonials";
 
 export default function Home() {
@@ -46,7 +47,7 @@ export default function Home() {
   };
 
   return (
-    <div className="relative min-h-screen bg-white">
+    <div className="relative min-h-screen bg-white text-[0.95rem] md:text-base">
       {/* FAQ JSON-LD covering Lipa Mdogo Mdogo, Internet, and Customer Care */}
       <script
         type="application/ld+json"
@@ -264,7 +265,7 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-12 items-center">
             {/* Left Content */}
             <div className="text-center lg:text-left order-1 lg:order-1">
-              <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-montserrat font-bold text-gray-900 mb-2 leading-tight">
+              <h1 className="text-xl sm:text-3xl md:text-5xl lg:text-6xl font-montserrat font-bold text-gray-900 mb-2 leading-tight">
                 Welcome to{" "}
                 <div>
                   <span className="bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent">
@@ -295,17 +296,46 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Image - Desktop Only */}
+            {/* Right Image Gallery - Desktop Only */}
             <div className="hidden lg:block order-2 lg:order-2">
-              <div className="relative w-full h-[500px] flex items-center justify-center overflow-hidden rounded-2xl shadow-xl">
-                <Image
-                  src="/hero-image.png"
-                  alt="Welcome to Ruaka Safaricom Shop"
-                  width={800}
-                  height={1000}
-                  className="w-full h-full object-cover"
-                  loading="eager"
-                  priority
+              <div className="relative w-full h-[500px] overflow-hidden rounded-2xl shadow-xl">
+                <GalleryGrid
+                  items={[
+                    {
+                      src: "/gallery/ruakashop2.webp",
+                      alt: "Safaricom Shop",
+                      span: 2,
+                    },
+                    {
+                      src: "/gallery/lipamdogomdogo.png",
+                      alt: "Premium Phones",
+                      span: 1,
+                    },
+                    {
+                      src: "/gallery/ruakashop1.webp",
+                      alt: "Latest Smartphones",
+                      span: 1,
+                    },
+                    {
+                      src: "/gallery/anniversary.jpg",
+                      alt: "Mobile Devices",
+                      span: 1,
+                    },
+                    {
+                      src: "/gallery/safaricom.jpg",
+                      alt: "Phone Collection",
+                      span: 1,
+                    },
+                    { src: "/hero-image.png", alt: "Great Deals", span: 1 },
+                  ]}
+                  columns={3}
+                  gap={8}
+                  borderRadius={12}
+                  enableHover={true}
+                  enableAnimation={true}
+                  enableShadow={false}
+                  noOverflow={true}
+                  backgroundColor="transparent"
                 />
               </div>
             </div>
@@ -330,7 +360,7 @@ export default function Home() {
             <span className="hidden md:inline-block px-4 py-2 bg-green-500/20 text-green-600 text-sm font-semibold rounded-full mb-4">
               OUR SERVICES
             </span>
-            <h2 className="text-2xl md:text-5xl font-montserrat font-bold text-gray-900 mb-4">
+            <h2 className="text-xl md:text-5xl font-montserrat font-bold text-gray-900 mb-4">
               What We{" "}
               <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
                 Offer
@@ -746,7 +776,7 @@ export default function Home() {
               <span className="inline-block px-4 py-2 bg-green-500/20 text-green-600 text-sm font-semibold rounded-full mb-6">
                 ABOUT US
               </span>
-              <h2 className="text-4xl md:text-5xl font-montserrat font-bold text-gray-900 mb-6">
+              <h2 className="text-2xl md:text-5xl font-montserrat font-bold text-gray-900 mb-6">
                 Your Trusted{" "}
                 <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
                   Mobile Partner
@@ -977,7 +1007,7 @@ export default function Home() {
             <span className="inline-block px-4 py-2 bg-green-500/20 text-green-600 text-sm font-semibold rounded-full mb-4">
               GET IN TOUCH
             </span>
-            <h2 className="text-4xl md:text-5xl font-montserrat font-bold text-gray-900 mb-4">
+            <h2 className="text-2xl md:text-5xl font-montserrat font-bold text-gray-900 mb-4">
               Visit Us{" "}
               <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
                 Today
@@ -1090,7 +1120,7 @@ export default function Home() {
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h3 className="text-4xl font-montserrat font-bold bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent mb-6">
+            <h3 className="text-2xl md:text-4xl font-montserrat font-bold bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent mb-6">
               Safaricom Shop Ruaka
             </h3>
             <p className="text-gray-300 text-lg mb-8 font-open-sans">
