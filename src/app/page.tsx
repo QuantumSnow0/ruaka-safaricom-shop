@@ -390,29 +390,9 @@ export default function Home() {
               className="relative group"
             >
               <div className="md:absolute md:inset-0 md:bg-gradient-to-r md:from-yellow-500/20 md:to-orange-500/20 md:rounded-2xl md:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-              <div className="relative bg-white border-l-4 md:border-l-0 border-yellow-500 md:border-yellow-500/30 rounded-none rounded-r-lg md:rounded-2xl hover:bg-gray-50 md:hover:bg-yellow-50 transition-all duration-500 md:ring-2 md:ring-yellow-500/20 shadow-sm md:shadow-lg overflow-hidden">
-                {/* Icon and Title - Before Image */}
-                <div className="p-4 md:p-6 md:hidden">
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="w-8 h-8 flex items-center justify-center flex-shrink-0">
-                      <img
-                        src="/assets/icons/logo.png"
-                        alt="App Icon"
-                        className="w-8 h-8 object-contain"
-                      />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-base font-montserrat font-bold text-gray-900 mb-1">
-                        Lipa Mdogo Mdogo
-                      </h3>
-                      <div className="inline-block bg-yellow-500 text-black px-2 py-0.5 rounded-full text-xs font-bold">
-                        FEATURED
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* Mobile Image */}
-                <div className="md:hidden h-48 w-full overflow-hidden bg-gradient-to-br from-yellow-50 to-orange-50 flex items-center justify-center relative">
+              <div className="relative bg-white md:border-yellow-500/30 rounded-xl md:rounded-2xl hover:bg-gray-50 md:hover:bg-yellow-50 transition-all duration-500 md:ring-2 md:ring-yellow-500/20 shadow-md md:shadow-lg overflow-hidden">
+                {/* Mobile: Compact Design with Image Background */}
+                <div className="md:hidden relative h-40 overflow-hidden rounded-t-xl">
                   <Image
                     src="/smartphones.webp"
                     alt="Premium Phones"
@@ -421,6 +401,22 @@ export default function Home() {
                     sizes="(max-width: 768px) 100vw, 0vw"
                     loading="lazy"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <div className="flex items-center gap-2 mb-1">
+                      <img
+                        src="/assets/icons/logo.png"
+                        alt="App Icon"
+                        className="w-6 h-6 object-contain"
+                      />
+                      <h3 className="text-white font-montserrat font-bold text-sm">
+                        Lipa Mdogo Mdogo
+                      </h3>
+                      <div className="ml-auto bg-yellow-500 text-black px-2 py-0.5 rounded-full text-xs font-bold">
+                        FEATURED
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div className="p-4 md:p-6">
                   {/* Desktop: Icon and Title */}
@@ -441,15 +437,15 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
-                  <p className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-2 md:line-clamp-3 font-open-sans">
+                  <p className="text-xs md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-2 md:line-clamp-3 font-open-sans">
                     Our revolutionary flexible payment solution that makes
                     premium mobile devices accessible to everyone. Pay mdogo
                     mdogo and own your dream phone today!
                   </p>
-                  <div className="flex items-center text-yellow-600 font-semibold text-sm">
+                  <div className="flex items-center text-yellow-600 font-semibold text-xs md:text-sm">
                     Start Paying mdogo mdogo
                     <svg
-                      className="w-4 h-4 ml-2"
+                      className="w-3 h-3 md:w-4 md:h-4 ml-2"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -469,26 +465,9 @@ export default function Home() {
             {/* Service 2 - Mobile Accessories */}
             <div className="relative group">
               <div className="md:absolute md:inset-0 md:bg-gradient-to-r md:from-red-500/20 md:to-pink-500/20 md:rounded-2xl md:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-              <div className="relative bg-white border-l-4 md:border-l-0 border-red-500 md:border-green-200 rounded-none rounded-r-lg md:rounded-2xl hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-sm overflow-hidden">
-                {/* Icon and Title - Before Image */}
-                <div className="p-4 md:p-6 md:hidden">
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="w-8 h-8 flex items-center justify-center flex-shrink-0">
-                      <img
-                        src="/assets/icons/battery.png"
-                        alt="App Icon"
-                        className="w-8 h-8 object-contain"
-                      />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-base font-montserrat font-bold text-gray-900 mb-1">
-                        Premium Accessories
-                      </h3>
-                    </div>
-                  </div>
-                </div>
-                {/* Mobile Image */}
-                <div className="md:hidden h-48 w-full overflow-hidden bg-gradient-to-br from-red-50 to-pink-50 flex items-center justify-center relative">
+              <div className="relative bg-white md:border-green-200 rounded-xl md:rounded-2xl hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-md overflow-hidden">
+                {/* Mobile: Compact Design with Image Background */}
+                <div className="md:hidden relative h-40 overflow-hidden rounded-t-xl">
                   <Image
                     src="/phone-mobile.jpg"
                     alt="Mobile Accessories"
@@ -497,6 +476,19 @@ export default function Home() {
                     sizes="(max-width: 768px) 100vw, 0vw"
                     loading="lazy"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <div className="flex items-center gap-2">
+                      <img
+                        src="/assets/icons/battery.png"
+                        alt="App Icon"
+                        className="w-6 h-6 object-contain"
+                      />
+                      <h3 className="text-white font-montserrat font-bold text-sm">
+                        Premium Accessories
+                      </h3>
+                    </div>
+                  </div>
                 </div>
                 <div className="p-4 md:p-6">
                   {/* Desktop: Icon and Title */}
@@ -514,15 +506,15 @@ export default function Home() {
                       </h3>
                     </div>
                   </div>
-                  <p className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-2 md:line-clamp-3 font-open-sans">
+                  <p className="text-xs md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-2 md:line-clamp-3 font-open-sans">
                     Discover our curated collection of premium mobile
                     accessories. From protective cases to high-quality
                     headphones, we have everything you need.
                   </p>
-                  <div className="flex items-center text-red-600 font-semibold text-sm">
+                  <div className="flex items-center text-red-600 font-semibold text-xs md:text-sm">
                     Explore Collection
                     <svg
-                      className="w-4 h-4 ml-2"
+                      className="w-3 h-3 md:w-4 md:h-4 ml-2"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -547,26 +539,9 @@ export default function Home() {
               className="relative group"
             >
               <div className="md:absolute md:inset-0 md:bg-gradient-to-r md:from-blue-500/20 md:to-cyan-500/20 md:rounded-2xl md:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-              <div className="relative bg-white border-l-4 md:border-l-0 border-blue-500 md:border-green-200 rounded-none rounded-r-lg md:rounded-2xl hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-sm overflow-hidden">
-                {/* Icon and Title - Before Image */}
-                <div className="p-4 md:p-6 md:hidden">
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="w-8 h-8 flex items-center justify-center flex-shrink-0">
-                      <img
-                        src="/logo.jpeg"
-                        alt="PhoneUp Kenya Logo"
-                        className="w-8 h-8 object-contain"
-                      />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-base font-montserrat font-bold text-gray-900 mb-1">
-                        Shop Latest Smartphones
-                      </h3>
-                    </div>
-                  </div>
-                </div>
-                {/* Mobile Image */}
-                <div className="md:hidden h-48 w-full overflow-hidden bg-gradient-to-br from-blue-50 to-cyan-50 flex items-center justify-center relative">
+              <div className="relative bg-white md:border-green-200 rounded-xl md:rounded-2xl hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-md overflow-hidden">
+                {/* Mobile: Compact Design with Image Background */}
+                <div className="md:hidden relative h-40 overflow-hidden rounded-t-xl">
                   <Image
                     src="/latest-phones.webp"
                     alt="Latest Smartphones"
@@ -575,6 +550,19 @@ export default function Home() {
                     sizes="(max-width: 768px) 100vw, 0vw"
                     loading="lazy"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <div className="flex items-center gap-2">
+                      <img
+                        src="/logo.jpeg"
+                        alt="PhoneUp Kenya Logo"
+                        className="w-6 h-6 object-contain"
+                      />
+                      <h3 className="text-white font-montserrat font-bold text-sm">
+                        Shop Latest Smartphones
+                      </h3>
+                    </div>
+                  </div>
                 </div>
                 <div className="p-4 md:p-6">
                   {/* Desktop: Icon and Title */}
@@ -592,15 +580,15 @@ export default function Home() {
                       </h3>
                     </div>
                   </div>
-                  <p className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-2 md:line-clamp-3 font-open-sans">
+                  <p className="text-xs md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-2 md:line-clamp-3 font-open-sans">
                     Get your hands on the latest smartphones from top brands
                     with competitive prices, comprehensive warranty, and expert
                     setup assistance.
                   </p>
-                  <div className="flex items-center text-blue-600 font-semibold text-sm">
+                  <div className="flex items-center text-blue-600 font-semibold text-xs md:text-sm">
                     Shop at PhoneUp Kenya
                     <svg
-                      className="w-4 h-4 ml-2"
+                      className="w-3 h-3 md:w-4 md:h-4 ml-2"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -623,26 +611,9 @@ export default function Home() {
               className="relative group hover:cursor-pointer"
             >
               <div className="md:absolute md:inset-0 md:bg-gradient-to-r md:from-green-500/20 md:to-emerald-500/20 md:rounded-2xl md:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-              <div className="relative bg-white border-l-4 md:border-l-0 border-green-500 md:border-green-200 rounded-none rounded-r-lg md:rounded-2xl hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-sm overflow-hidden">
-                {/* Icon and Title - Before Image */}
-                <div className="p-4 md:p-6 md:hidden">
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="w-8 h-8 flex items-center justify-center flex-shrink-0">
-                      <img
-                        src="/assets/icons/support.png"
-                        alt="App Icon"
-                        className="w-8 h-8 object-contain"
-                      />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-base font-montserrat font-bold text-gray-900 mb-1">
-                        Customer Care Excellence
-                      </h3>
-                    </div>
-                  </div>
-                </div>
-                {/* Mobile Image */}
-                <div className="md:hidden h-48 w-full overflow-hidden bg-gradient-to-br from-green-50 to-emerald-50 flex items-center justify-center relative">
+              <div className="relative bg-white md:border-green-200 rounded-xl md:rounded-2xl hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-md overflow-hidden">
+                {/* Mobile: Compact Design with Image Background */}
+                <div className="md:hidden relative h-40 overflow-hidden rounded-t-xl">
                   <Image
                     src="/customer-care.jpg"
                     alt="Customer Care"
@@ -651,6 +622,19 @@ export default function Home() {
                     sizes="(max-width: 768px) 100vw, 0vw"
                     loading="lazy"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <div className="flex items-center gap-2">
+                      <img
+                        src="/assets/icons/support.png"
+                        alt="App Icon"
+                        className="w-6 h-6 object-contain"
+                      />
+                      <h3 className="text-white font-montserrat font-bold text-sm">
+                        Customer Care Excellence
+                      </h3>
+                    </div>
+                  </div>
                 </div>
                 <div className="p-4 md:p-6">
                   {/* Desktop: Icon and Title */}
@@ -668,15 +652,15 @@ export default function Home() {
                       </h3>
                     </div>
                   </div>
-                  <p className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-2 md:line-clamp-3 font-open-sans">
+                  <p className="text-xs md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-2 md:line-clamp-3 font-open-sans">
                     Professional customer support with expert assistance for all
                     your Safaricom needs. Our dedicated team ensures you get the
                     best service experience.
                   </p>
-                  <div className="flex items-center text-green-600 font-semibold text-sm">
+                  <div className="flex items-center text-green-600 font-semibold text-xs md:text-sm">
                     Get Support
                     <svg
-                      className="w-4 h-4 ml-2"
+                      className="w-3 h-3 md:w-4 md:h-4 ml-2"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -699,26 +683,9 @@ export default function Home() {
               className="relative group hover:cursor-pointer"
             >
               <div className="md:absolute md:inset-0 md:bg-gradient-to-r md:from-purple-500/20 md:to-indigo-500/20 md:rounded-2xl md:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-              <div className="relative bg-white border-l-4 md:border-l-0 border-purple-500 md:border-green-200 rounded-none rounded-r-lg md:rounded-2xl hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-sm overflow-hidden">
-                {/* Icon and Title - Before Image */}
-                <div className="p-4 md:p-6 md:hidden">
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="w-8 h-8 flex items-center justify-center flex-shrink-0">
-                      <img
-                        src="/assets/icons/wifi.png"
-                        alt="App Icon"
-                        className="w-8 h-8 object-contain"
-                      />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-base font-montserrat font-bold text-gray-900 mb-1">
-                        Internet Services
-                      </h3>
-                    </div>
-                  </div>
-                </div>
-                {/* Mobile Image */}
-                <div className="md:hidden h-48 w-full overflow-hidden bg-gradient-to-br from-purple-50 to-indigo-50 flex items-center justify-center relative">
+              <div className="relative bg-white md:border-green-200 rounded-xl md:rounded-2xl hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-md overflow-hidden">
+                {/* Mobile: Compact Design with Image Background */}
+                <div className="md:hidden relative h-40 overflow-hidden rounded-t-xl">
                   <Image
                     src="/fiber.jpg"
                     alt="Internet Services"
@@ -727,6 +694,19 @@ export default function Home() {
                     sizes="(max-width: 768px) 100vw, 0vw"
                     loading="lazy"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <div className="flex items-center gap-2">
+                      <img
+                        src="/assets/icons/wifi.png"
+                        alt="App Icon"
+                        className="w-6 h-6 object-contain"
+                      />
+                      <h3 className="text-white font-montserrat font-bold text-sm">
+                        Internet Services
+                      </h3>
+                    </div>
+                  </div>
                 </div>
                 <div className="p-4 md:p-6">
                   {/* Desktop: Icon and Title */}
@@ -744,15 +724,15 @@ export default function Home() {
                       </h3>
                     </div>
                   </div>
-                  <p className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-2 md:line-clamp-3 font-open-sans">
+                  <p className="text-xs md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-2 md:line-clamp-3 font-open-sans">
                     Experience blazing-fast internet with our 5G and secure
                     fiber packages. Choose from flexible plans perfect for your
                     home or business needs.
                   </p>
-                  <div className="flex items-center text-purple-600 font-semibold text-sm">
+                  <div className="flex items-center text-purple-600 font-semibold text-xs md:text-sm">
                     View Plans
                     <svg
-                      className="w-4 h-4 ml-2"
+                      className="w-3 h-3 md:w-4 md:h-4 ml-2"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
