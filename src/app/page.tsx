@@ -6,9 +6,8 @@ import Image from "next/image";
 import { MapPin, ExternalLink } from "lucide-react";
 import { useState } from "react";
 import Popup from "./components/Popup";
-import Carousel3D from "./components/Carousel3D";
+import ImageCarousel from "./components/TestimonialCarousel";
 import GalleryGrid from "./components/GalleryGrid";
-import { testimonials } from "../data/testimonials";
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -343,10 +342,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3D Testimonial Carousel - Mobile Only */}
-      <section className="md:hidden bg-gradient-to-b from-white to-green-50 py-0">
-        <div className="max-w-7xl mx-auto px-0">
-          <Carousel3D testimonials={testimonials} />
+      {/* Image Carousel - Mobile Only */}
+      <section className="md:hidden bg-gradient-to-b from-white to-green-50 py-4 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 overflow-hidden">
+          <ImageCarousel
+            images={[
+              "/safaricom-5g.jpg",
+              "/phone.jpg",
+              "/gallery/anniversary.jpg",
+              "/gallery/safaricom.jpg",
+              "/hero-image.png",
+            ]}
+          />
         </div>
       </section>
 
@@ -434,7 +441,7 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
-                  <p className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-3 font-open-sans">
+                  <p className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-2 md:line-clamp-3 font-open-sans">
                     Our revolutionary flexible payment solution that makes
                     premium mobile devices accessible to everyone. Pay mdogo
                     mdogo and own your dream phone today!
@@ -507,7 +514,7 @@ export default function Home() {
                       </h3>
                     </div>
                   </div>
-                  <p className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-3 font-open-sans">
+                  <p className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-2 md:line-clamp-3 font-open-sans">
                     Discover our curated collection of premium mobile
                     accessories. From protective cases to high-quality
                     headphones, we have everything you need.
@@ -585,7 +592,7 @@ export default function Home() {
                       </h3>
                     </div>
                   </div>
-                  <p className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-3 font-open-sans">
+                  <p className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-2 md:line-clamp-3 font-open-sans">
                     Get your hands on the latest smartphones from top brands
                     with competitive prices, comprehensive warranty, and expert
                     setup assistance.
@@ -661,7 +668,7 @@ export default function Home() {
                       </h3>
                     </div>
                   </div>
-                  <p className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-3 font-open-sans">
+                  <p className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-2 md:line-clamp-3 font-open-sans">
                     Professional customer support with expert assistance for all
                     your Safaricom needs. Our dedicated team ensures you get the
                     best service experience.
@@ -737,7 +744,7 @@ export default function Home() {
                       </h3>
                     </div>
                   </div>
-                  <p className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-3 font-open-sans">
+                  <p className="text-sm md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-2 md:line-clamp-3 font-open-sans">
                     Experience blazing-fast internet with our 5G and secure
                     fiber packages. Choose from flexible plans perfect for your
                     home or business needs.
