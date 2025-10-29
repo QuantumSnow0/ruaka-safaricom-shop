@@ -6,8 +6,9 @@ import Image from "next/image";
 import { MapPin, ExternalLink } from "lucide-react";
 import { useState } from "react";
 import Popup from "./components/Popup";
-import ImageCarousel from "./components/TestimonialCarousel";
+import ImageCarouselGlass from "./components/ImageCarouselGlass";
 import GalleryGrid from "./components/GalleryGrid";
+import FlickerText from "./components/FlickerText";
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -264,13 +265,35 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-12 items-center">
             {/* Left Content */}
             <div className="text-start lg:text-left order-1 lg:order-1">
-              <h1 className="text-xl sm:text-3xl md:text-5xl lg:text-6xl font-montserrat font-bold text-gray-900 mb-1 leading-tight">
+              {/* Mobile: FlickerText */}
+              <div className="md:hidden mb-3">
+                <FlickerText
+                  text="Ruaka Safaricom Shop"
+                  textColor="#22c55e"
+                  glowColor="#22c55e"
+                  backgroundColor="transparent"
+                  animationSpeed={1.5}
+                  animationPattern="sequential"
+                  repeatBehavior="loop"
+                  animationStyle="neon"
+                  strokeWidth={1}
+                  glowIntensity={8}
+                  showBackground={false}
+                  autoPlay={true}
+                  font={{
+                    fontSize: "1.75rem",
+                    letterSpacing: "0.05em",
+                    lineHeight: "1.2em",
+                  }}
+                  style={{ padding: "0" }}
+                />
+              </div>
+              {/* Desktop: Original Title */}
+              <h1 className="hidden md:block text-xl sm:text-3xl md:text-5xl lg:text-6xl font-montserrat font-bold text-gray-900 mb-1 leading-tight">
                 Welcome to{" "}
-                <div>
-                  <span className="bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent">
-                    Ruaka Safaricom Shop
-                  </span>
-                </div>
+                <span className="bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                  Ruaka Safaricom Shop
+                </span>
               </h1>
 
               <p className="text-start text-base sm:text-lg text-gray-700 mb-1 md:mb-6 leading-relaxed font-open-sans">
@@ -345,7 +368,7 @@ export default function Home() {
       {/* Image Carousel - Mobile Only */}
       <section className="md:hidden bg-gradient-to-b from-white to-green-50 py-1 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 overflow-hidden">
-          <ImageCarousel
+          <ImageCarouselGlass
             images={[
               "/safaricom-5g.jpg",
               "/phone.jpg",
@@ -353,6 +376,7 @@ export default function Home() {
               "/gallery/safaricom.jpg",
               "/hero-image.png",
             ]}
+            autoSwipeInterval={2500}
           />
         </div>
       </section>
@@ -360,8 +384,10 @@ export default function Home() {
       {/* Services Section - Zigzag Layout */}
       <section
         id="services"
-        className="py-4 md:py-16 bg-white md:bg-gradient-to-b md:from-green-100 md:to-white relative overflow-hidden"
+        className="py-6 md:py-16 bg-white md:bg-gradient-to-b md:from-green-100 md:to-white relative overflow-hidden"
       >
+        {/* Styled Separator */}
+        <div className="md:hidden w-full h-[2px] bg-gradient-to-r from-transparent via-green-400/40 to-transparent mb-6"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-start md:text-center mb-4 md:mb-16">
             <span className="hidden md:inline-block px-4 py-2 bg-green-500/20 text-green-600 text-sm font-semibold rounded-full mb-4">
@@ -757,6 +783,8 @@ export default function Home() {
         id="about"
         className="py-8 md:py-20 bg-white md:bg-gradient-to-b md:from-white md:to-green-50 relative"
       >
+        {/* Styled Separator */}
+        <div className="md:hidden w-full h-[2px] bg-gradient-to-r from-transparent via-green-400/40 to-transparent mb-6"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 items-center">
             <div>
@@ -1076,8 +1104,10 @@ export default function Home() {
       {/* Contact Section */}
       <section
         id="contact"
-        className="py-2 md:py-20 bg-white md:bg-gradient-to-b md:from-green-50 md:to-white relative overflow-hidden"
+        className="py-6 md:py-20 bg-white md:bg-gradient-to-b md:from-green-50 md:to-white relative overflow-hidden"
       >
+        {/* Styled Separator */}
+        <div className="md:hidden w-full h-[2px] bg-gradient-to-r from-transparent via-green-400/40 to-transparent mb-6"></div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8 md:mb-16">
             <h2 className="text-2xl md:text-5xl font-montserrat font-bold text-gray-900 mb-2 md:mb-4">

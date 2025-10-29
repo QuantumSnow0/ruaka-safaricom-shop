@@ -18,7 +18,7 @@ export default function ImageCarousel({ images }: ImageCarouselProps) {
     if (!isAutoRotating || isDragging) return;
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % images.length);
-    }, 4000);
+    }, 2500);
     return () => clearInterval(interval);
   }, [images.length, isAutoRotating, isDragging]);
 
@@ -41,8 +41,8 @@ export default function ImageCarousel({ images }: ImageCarouselProps) {
     const deltaX = currentX - startX.current;
     const deltaY = currentY - startY.current;
 
-    // Only swipe if horizontal movement is greater than vertical
-    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 10) {
+    // Only prevent default if horizontal movement is clearly dominant
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 30) {
       e.preventDefault();
     }
   };
@@ -79,12 +79,13 @@ export default function ImageCarousel({ images }: ImageCarouselProps) {
     return (
       <div
         key={`${index}-${position}`}
-        className={`transition-all duration-500 ease-out ${
+        className={`transition-all duration-[400ms] ease-out ${
           isCenter ? "scale-100 opacity-100 z-10" : "scale-75 opacity-60 -z-10"
         }`}
         style={{
           width: isCenter ? "240px" : "180px",
           height: isCenter ? "200px" : "150px",
+          willChange: "transform, opacity",
         }}
       >
         <div
@@ -118,33 +119,47 @@ export default function ImageCarousel({ images }: ImageCarouselProps) {
             width: "100%",
             maxWidth: "100vw",
             overflow: "hidden",
-            touchAction: "pan-x pinch-zoom",
+            touchAction: "pan-y pan-x",
           }}
         >
-          {/* Left Image - Behind */}
+          {/* All cards positioned relative to center for smooth sliding */}
           <div
-            className="absolute transition-all duration-500 ease-out"
+            key={`left-${getIndex(-1)}-${currentIndex}`}
+            className="absolute"
             style={{
-              left: "10%",
-              transform: "translateX(-50%)",
+              left: "50%",
+              transform: `translate3d(calc(-50% - 140px), 0, 0)`,
               zIndex: 1,
+              transition: "transform 400ms cubic-bezier(0.4, 0, 0.2, 1)",
+              willChange: "transform",
             }}
           >
             {getImageCard(getIndex(-1), "left")}
           </div>
 
           {/* Center Image - Focused */}
-          <div className="relative z-10 mx-auto transition-all duration-500 ease-out">
+          <div
+            key={`center-${currentIndex}`}
+            className="absolute left-1/2 z-10"
+            style={{
+              transform: `translate3d(-50%, 0, 0)`,
+              transition: "transform 400ms cubic-bezier(0.4, 0, 0.2, 1)",
+              willChange: "transform",
+            }}
+          >
             {getImageCard(currentIndex, "center")}
           </div>
 
           {/* Right Image - Behind */}
           <div
-            className="absolute transition-all duration-500 ease-out"
+            key={`right-${getIndex(1)}-${currentIndex}`}
+            className="absolute"
             style={{
-              right: "10%",
-              transform: "translateX(50%)",
+              left: "50%",
+              transform: `translate3d(calc(-50% + 140px), 0, 0)`,
               zIndex: 1,
+              transition: "transform 400ms cubic-bezier(0.4, 0, 0.2, 1)",
+              willChange: "transform",
             }}
           >
             {getImageCard(getIndex(1), "right")}
