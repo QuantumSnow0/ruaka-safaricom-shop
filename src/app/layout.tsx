@@ -226,6 +226,96 @@ export default function RootLayout({
                     bestRating: "5",
                     worstRating: "3",
                   },
+                  review: [
+                    {
+                      "@type": "Review",
+                      author: {
+                        "@type": "Person",
+                        name: "Winnie Connie",
+                      },
+                      reviewRating: {
+                        "@type": "Rating",
+                        ratingValue: "5",
+                        bestRating: "5",
+                      },
+                      reviewBody:
+                        "Great customer service....I highly recommend.",
+                      datePublished: "2024-01-15",
+                    },
+                    {
+                      "@type": "Review",
+                      author: {
+                        "@type": "Person",
+                        name: "Winfrey Kimani",
+                      },
+                      reviewRating: {
+                        "@type": "Rating",
+                        ratingValue: "5",
+                        bestRating: "5",
+                      },
+                      reviewBody:
+                        "Thank you for being attentive to my issues,,, you solved what I long wished to be done. Asanteni🙏🏽",
+                      datePublished: "2024-02-10",
+                    },
+                    {
+                      "@type": "Review",
+                      author: {
+                        "@type": "Person",
+                        name: "Silvester Waruih",
+                      },
+                      reviewRating: {
+                        "@type": "Rating",
+                        ratingValue: "5",
+                        bestRating: "5",
+                      },
+                      reviewBody: "Very excellent customer service",
+                      datePublished: "2024-03-05",
+                    },
+                    {
+                      "@type": "Review",
+                      author: {
+                        "@type": "Person",
+                        name: "Linnet Mutuku",
+                      },
+                      reviewRating: {
+                        "@type": "Rating",
+                        ratingValue: "5",
+                        bestRating: "5",
+                      },
+                      reviewBody: "Top notch customer service",
+                      datePublished: "2024-03-20",
+                    },
+                    {
+                      "@type": "Review",
+                      author: {
+                        "@type": "Person",
+                        name: "Bonface Muthuri",
+                      },
+                      reviewRating: {
+                        "@type": "Rating",
+                        ratingValue: "5",
+                        bestRating: "5",
+                      },
+                      reviewBody:
+                        "Great customer service, sales high quality phones, I would recommend anyone",
+                      datePublished: "2024-04-12",
+                    },
+                    {
+                      "@type": "Review",
+                      author: {
+                        "@type": "Person",
+                        name: "Victor Wandeto",
+                      },
+                      reviewRating: {
+                        "@type": "Rating",
+                        ratingValue: "5",
+                        bestRating: "5",
+                      },
+                      reviewBody:
+                        "Bought a 5g router in a different store and not even Safaricom customer care was of help.Called these guys and was sorted in 10 minutes",
+                      datePublished: "2024-05-08",
+                    },
+                  ],
                   servesCuisine: null,
                   areaServed: {
                     "@type": "City",
