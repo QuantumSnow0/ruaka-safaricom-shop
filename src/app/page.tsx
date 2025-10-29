@@ -264,7 +264,7 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-12 items-center">
             {/* Left Content */}
             <div className="text-center lg:text-left order-1 lg:order-1">
-              <h1 className="text-xl sm:text-3xl md:text-5xl lg:text-6xl font-montserrat font-bold text-gray-900 mb-2 leading-tight">
+              <h1 className="text-xl sm:text-3xl md:text-5xl lg:text-6xl font-montserrat font-bold text-gray-900 mb-1 leading-tight">
                 Welcome to{" "}
                 <div>
                   <span className="bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent">
@@ -343,7 +343,7 @@ export default function Home() {
       </section>
 
       {/* Image Carousel - Mobile Only */}
-      <section className="md:hidden bg-gradient-to-b from-white to-green-50 py-4 overflow-hidden">
+      <section className="md:hidden bg-gradient-to-b from-white to-green-50 py-1 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 overflow-hidden">
           <ImageCarousel
             images={[
@@ -783,19 +783,19 @@ export default function Home() {
               <span className="inline-block px-4 py-2 bg-green-500/20 text-green-600 text-sm font-semibold rounded-full mb-6">
                 ABOUT US
               </span>
-              <h2 className="text-2xl md:text-5xl font-montserrat font-bold text-gray-900 mb-3 md:mb-6">
+              <h2 className="text-xl md:text-5xl font-montserrat font-bold text-gray-900 mb-3 md:mb-6">
                 Your Trusted{" "}
                 <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
                   Mobile Partner
                 </span>
               </h2>
-              <p className="text-lg text-gray-700 mb-3 md:mb-6 leading-relaxed font-open-sans">
+              <p className="text-base md:text-lg text-gray-700 mb-3 md:mb-6 leading-relaxed font-open-sans">
                 Located in the heart of Ruaka, we are your trusted Safaricom
                 partner providing comprehensive mobile solutions. Our
                 experienced team is dedicated to delivering exceptional service
                 and ensuring you get the best value for your money.
               </p>
-              <p className="text-lg text-gray-700 mb-4 md:mb-8 leading-relaxed font-open-sans">
+              <p className="text-base md:text-lg text-gray-700 mb-4 md:mb-8 leading-relaxed font-open-sans">
                 We specialize in customer care, mobile accessories, the latest
                 smartphones, internet services, and our signature Lipa Mdogo
                 Mdogo service that makes premium mobile devices accessible to
@@ -805,13 +805,13 @@ export default function Home() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="flex items-center p-4 bg-white/80 backdrop-blur-md rounded-2xl border border-green-200 shadow-lg">
                   <div className="w-3 h-3 bg-green-500 rounded-full mr-4"></div>
-                  <span className="text-gray-800 font-semibold">
+                  <span className="text-gray-800 font-semibold text-sm md:text-base">
                     Authorized Safaricom Dealer
                   </span>
                 </div>
                 <div className="flex items-center p-4 bg-white/80 backdrop-blur-md rounded-2xl border border-green-200 shadow-lg">
                   <div className="w-3 h-3 bg-red-500 rounded-full mr-4"></div>
-                  <span className="text-gray-800 font-semibold">
+                  <span className="text-gray-800 font-semibold text-sm md:text-base">
                     Expert Customer Support
                   </span>
                 </div>
@@ -821,7 +821,7 @@ export default function Home() {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-3xl blur-2xl hidden md:block"></div>
               <div className="relative bg-white/90 backdrop-blur-md border border-green-200 rounded-2xl md:rounded-3xl p-4 md:p-12 shadow-lg">
-                <h3 className="text-xl md:text-3xl font-montserrat font-bold text-gray-900 mb-1 md:mb-8 text-center">
+                <h3 className="text-base md:text-3xl font-montserrat font-bold text-gray-900 mb-1 md:mb-8 text-center">
                   Why Choose Us?
                 </h3>
                 {/* Mobile: Compact Grid Layout */}
