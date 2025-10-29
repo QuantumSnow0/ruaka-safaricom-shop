@@ -263,7 +263,7 @@ export default function Home() {
         <div className="relative z-10 max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-12 items-center">
             {/* Left Content */}
-            <div className="text-center lg:text-left order-1 lg:order-1">
+            <div className="text-start lg:text-left order-1 lg:order-1">
               <h1 className="text-xl sm:text-3xl md:text-5xl lg:text-6xl font-montserrat font-bold text-gray-900 mb-1 leading-tight">
                 Welcome to{" "}
                 <div>
@@ -390,7 +390,7 @@ export default function Home() {
               className="relative group"
             >
               <div className="md:absolute md:inset-0 md:bg-gradient-to-r md:from-yellow-500/20 md:to-orange-500/20 md:rounded-2xl md:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-              <div className="relative bg-white md:border-yellow-500/30 rounded-xl md:rounded-2xl hover:bg-gray-50 md:hover:bg-yellow-50 transition-all duration-500 md:ring-2 md:ring-yellow-500/20 shadow-md md:shadow-lg overflow-hidden">
+              <div className="relative bg-white md:border-yellow-500/30 rounded-xl md:rounded-2xl hover:bg-gray-50 md:hover:bg-yellow-50 transition-all duration-500 md:ring-2 md:ring-yellow-500/20 shadow-md md:shadow-lg overflow-hidden ring-2 ring-yellow-500/30 shadow-yellow-500/20">
                 {/* Mobile: Compact Design with Image Background */}
                 <div className="md:hidden relative h-40 overflow-hidden rounded-t-xl">
                   <Image
@@ -465,7 +465,7 @@ export default function Home() {
             {/* Service 2 - Mobile Accessories */}
             <div className="relative group">
               <div className="md:absolute md:inset-0 md:bg-gradient-to-r md:from-red-500/20 md:to-pink-500/20 md:rounded-2xl md:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-              <div className="relative bg-white md:border-green-200 rounded-xl md:rounded-2xl hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-md overflow-hidden">
+              <div className="relative bg-white md:border-green-200 rounded-xl md:rounded-2xl hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-md overflow-hidden ring-2 ring-red-500/30 shadow-red-500/20">
                 {/* Mobile: Compact Design with Image Background */}
                 <div className="md:hidden relative h-40 overflow-hidden rounded-t-xl">
                   <Image
@@ -539,7 +539,7 @@ export default function Home() {
               className="relative group"
             >
               <div className="md:absolute md:inset-0 md:bg-gradient-to-r md:from-blue-500/20 md:to-cyan-500/20 md:rounded-2xl md:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-              <div className="relative bg-white md:border-green-200 rounded-xl md:rounded-2xl hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-md overflow-hidden">
+              <div className="relative bg-white md:border-green-200 rounded-xl md:rounded-2xl hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-md overflow-hidden ring-2 ring-blue-500/30 shadow-blue-500/20">
                 {/* Mobile: Compact Design with Image Background */}
                 <div className="md:hidden relative h-40 overflow-hidden rounded-t-xl">
                   <Image
@@ -611,7 +611,7 @@ export default function Home() {
               className="relative group hover:cursor-pointer"
             >
               <div className="md:absolute md:inset-0 md:bg-gradient-to-r md:from-green-500/20 md:to-emerald-500/20 md:rounded-2xl md:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-              <div className="relative bg-white md:border-green-200 rounded-xl md:rounded-2xl hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-md overflow-hidden">
+              <div className="relative bg-white md:border-green-200 rounded-xl md:rounded-2xl hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-md overflow-hidden ring-2 ring-green-500/30 shadow-green-500/20">
                 {/* Mobile: Compact Design with Image Background */}
                 <div className="md:hidden relative h-40 overflow-hidden rounded-t-xl">
                   <Image
@@ -683,7 +683,7 @@ export default function Home() {
               className="relative group hover:cursor-pointer"
             >
               <div className="md:absolute md:inset-0 md:bg-gradient-to-r md:from-purple-500/20 md:to-indigo-500/20 md:rounded-2xl md:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-              <div className="relative bg-white md:border-green-200 rounded-xl md:rounded-2xl hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-md overflow-hidden">
+              <div className="relative bg-white md:border-green-200 rounded-xl md:rounded-2xl hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-md overflow-hidden ring-2 ring-purple-500/30 shadow-purple-500/20">
                 {/* Mobile: Compact Design with Image Background */}
                 <div className="md:hidden relative h-40 overflow-hidden rounded-t-xl">
                   <Image
