@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://www.safaricomshopruaka.co.ke/hero-image.png",
+        url: "https://www.safaricomshopruaka.co.ke/hero.png",
         width: 1200,
         height: 630,
         alt: "Safaricom Shop Ruaka - Your Trusted Mobile Partner",
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     title: "Safaricom Shop Ruaka - Your Trusted Mobile Partner",
     description:
       "Visit Safaricom Shop Ruaka for customer care, mobile accessories, phones, and Lipa Mdogo Mdogo services.",
-    images: ["https://www.safaricomshopruaka.co.ke/hero-image.png"],
+    images: ["https://www.safaricomshopruaka.co.ke/hero.png"],
   },
   icons: {
     icon: [
@@ -176,7 +176,7 @@ export default function RootLayout({
                   "@type": "LocalBusiness",
                   "@id": "https://www.safaricomshopruaka.co.ke/#localbusiness",
                   name: "Safaricom Shop Ruaka",
-                  image: "https://www.safaricomshopruaka.co.ke/hero-image.png",
+                  image: "https://www.safaricomshopruaka.co.ke/hero.png",
                   sameAs: "https://www.safaricomshopruaka.co.ke/#organization",
                   address: {
                     "@type": "PostalAddress",
@@ -365,7 +365,7 @@ export default function RootLayout({
                   },
                   primaryImageOfPage: {
                     "@type": "ImageObject",
-                    url: "https://www.safaricomshopruaka.co.ke/hero-image.png",
+                    url: "https://www.safaricomshopruaka.co.ke/hero.png",
                   },
                   breadcrumb: {
                     "@type": "BreadcrumbList",
