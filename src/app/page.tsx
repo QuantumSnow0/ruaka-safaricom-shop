@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { MapPin, ExternalLink } from "lucide-react";
 import { useState } from "react";
-import Popup from "./components/Popup";
+
 import ImageCarouselGlass from "./components/ImageCarouselGlass";
 import GalleryGrid from "./components/GalleryGrid";
 import FlickerText from "./components/FlickerText";
@@ -1269,9 +1269,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-
-      {/* Internet Services Offer Popup */}
-      <Popup />
     </div>
   );
 }
