@@ -141,6 +141,12 @@ export default function Home() {
                 >
                   Services
                 </a>
+                <Link
+                  href="/routers"
+                  className="text-gray-700 hover:text-green-600 text-sm font-medium transition-colors"
+                >
+                  Routers
+                </Link>
                 <a
                   href="#about"
                   className="text-gray-700 hover:text-green-600 text-sm font-medium transition-colors"
@@ -218,6 +224,13 @@ export default function Home() {
                 >
                   Services
                 </a>
+                <Link
+                  href="/routers"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-gray-700 hover:text-green-600 text-sm font-medium transition-colors py-2.5 px-3 border-b border-gray-200"
+                >
+                  Routers
+                </Link>
                 <a
                   href="#about"
                   onClick={() => setMobileMenuOpen(false)}
@@ -348,7 +361,7 @@ export default function Home() {
                       alt: "Phone Collection",
                       span: 1,
                     },
-                    { src: "/hero-image.png", alt: "Great Deals", span: 1 },
+                    { src: "/router.webp", alt: "Safaricom Router", span: 1 },
                   ]}
                   columns={3}
                   gap={8}
@@ -374,7 +387,7 @@ export default function Home() {
               "/phone.jpg",
               "/gallery/anniversary.jpg",
               "/gallery/safaricom.jpg",
-              "/hero-image.png",
+              "/router.webp",
             ]}
             autoSwipeInterval={2500}
           />
@@ -488,15 +501,15 @@ export default function Home() {
               </div>
             </a>
 
-            {/* Service 2 - Mobile Accessories */}
-            <div className="relative group">
-              <div className="md:absolute md:inset-0 md:bg-gradient-to-r md:from-red-500/20 md:to-pink-500/20 md:rounded-2xl md:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-              <div className="relative bg-white md:border-green-200 rounded-xl md:rounded-2xl hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-md overflow-hidden ring-2 ring-red-500/30 shadow-red-500/20">
+            {/* Service 2 - Routers & Home Internet */}
+            <Link href="/routers" className="relative group">
+              <div className="md:absolute md:inset-0 md:bg-gradient-to-r md:from-emerald-500/20 md:to-teal-500/20 md:rounded-2xl md:blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+              <div className="relative bg-white md:border-green-200 rounded-xl md:rounded-2xl hover:bg-gray-50 md:hover:bg-green-50 transition-all duration-500 md:shadow-lg shadow-md overflow-hidden ring-2 ring-emerald-500/30 shadow-emerald-500/20">
                 {/* Mobile: Compact Design with Image Background */}
                 <div className="md:hidden relative h-40 overflow-hidden rounded-t-xl">
                   <Image
-                    src="/phone-mobile.jpg"
-                    alt="Mobile Accessories"
+                    src="/router.webp"
+                    alt="Safaricom Routers"
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, 0vw"
@@ -506,13 +519,16 @@ export default function Home() {
                   <div className="absolute bottom-0 left-0 right-0 p-4">
                     <div className="flex items-center gap-2">
                       <img
-                        src="/assets/icons/battery.png"
-                        alt="App Icon"
+                        src="/assets/icons/wifi.png"
+                        alt="WiFi Icon"
                         className="w-6 h-6 object-contain"
                       />
                       <h3 className="text-white font-montserrat font-bold text-sm">
-                        Premium Accessories
+                        Routers & Home Internet
                       </h3>
+                      <div className="ml-auto bg-emerald-500 text-white px-2 py-0.5 rounded-full text-xs font-bold">
+                        NEW
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -521,24 +537,27 @@ export default function Home() {
                   <div className="hidden md:flex items-center gap-3 mb-3">
                     <div className="w-10 h-10 flex items-center justify-center flex-shrink-0">
                       <img
-                        src="/assets/icons/battery.png"
-                        alt="App Icon"
+                        src="/assets/icons/wifi.png"
+                        alt="WiFi Icon"
                         className="w-10 h-10 object-contain"
                       />
                     </div>
                     <div className="flex-1 min-w-0">
                       <h3 className="text-lg font-montserrat font-bold text-gray-900 mb-1">
-                        Premium Accessories
+                        Routers & Home Internet
                       </h3>
+                      <div className="inline-block bg-emerald-500 text-white px-2 py-0.5 rounded-full text-xs font-bold">
+                        NEW
+                      </div>
                     </div>
                   </div>
                   <p className="text-xs md:text-sm text-gray-600 md:text-gray-700 leading-relaxed mb-3 md:mb-4 line-clamp-2 md:line-clamp-3 font-open-sans">
-                    Discover our curated collection of premium mobile
-                    accessories. From protective cases to high-quality
-                    headphones, we have everything you need.
+                    Choose between portable 5G routers with unlimited data or 4G
+                    home Wi-Fi bundles. Enjoy free setup, reliable coverage, and
+                    flexible monthly plans.
                   </p>
-                  <div className="flex items-center text-red-600 font-semibold text-xs md:text-sm">
-                    Explore Collection
+                  <div className="flex items-center text-emerald-600 font-semibold text-xs md:text-sm">
+                    Explore Router Plans
                     <svg
                       className="w-3 h-3 md:w-4 md:h-4 ml-2"
                       fill="none"
@@ -555,7 +574,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
 
             {/* Service 3 - Mobile Phones */}
             <a
