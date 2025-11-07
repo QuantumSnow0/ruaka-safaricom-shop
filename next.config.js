@@ -7,6 +7,7 @@ const nextConfig = {
 
   // Image optimization
   images: {
+    unoptimized: true,
     domains: [
       "jvrqdpiuixdeeofazqfu.supabase.co",
       "your-supabase-project.supabase.co",
