@@ -119,11 +119,11 @@ export default function RoutersPage() {
   const whatsappLink = "https://wa.me/254700776994";
 
   return (
-    <div className="min-h-screen bg-white text-gray-900">
+    <div className="min-h-screen bg-white text-gray-900 text-[0.95rem] md:text-base">
       <section className="relative overflow-hidden bg-gradient-to-br from-emerald-600 via-emerald-500 to-teal-500 text-white">
         <div className="absolute inset-0">
           <Image
-            src="/router3.webp"
+            src="/router7.jpg"
             alt="Safaricom 5G Router"
             fill
             priority
@@ -131,27 +131,27 @@ export default function RoutersPage() {
             className="object-cover"
           />
         </div>
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+        <div className="relative z-10 max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-2 md:py-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <span className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm text-white px-3 py-1.5 rounded-full text-sm font-semibold uppercase tracking-wide mb-4">
+            <div className="bg-[#FDF2E6]/10 p-5 rounded-2xl backdrop-blur-md border border-white/30 shadow-lg lg:bg-transparent lg:p-0 lg:border-0 lg:shadow-none">
+              <span className="inline-flex items-center gap-2 bg-[#FFE7C2] text-emerald-700 px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wide mb-4 lg:bg-white/15 lg:text-white">
                 <Zap className="w-4 h-4" />
                 5G & 4G Internet
               </span>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-montserrat mb-4">
+              <h1 className="text-lg sm:text-4xl lg:text-5xl font-bold font-montserrat mb-4 text-white lg:text-white">
                 Routers for Every Home & Business in Ruaka
               </h1>
-              <p className="text-base md:text-lg text-white/90 font-open-sans mb-6">
+              <p className="text-sm sm:text-base md:text-lg text-wgite lg:text-white/90 font-open-sans mb-6">
                 Enjoy fibre-like speeds with our portable 5G router or choose
                 flexible 4G Wi-Fi bundles. We deliver, install, and keep you
                 online with the most reliable Safaricom connectivity.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
-                <div className="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3 text-sm">
+                <div className="flex items-center gap-3 bg-white/80 text-gray-900 rounded-xl px-4 py-3 text-sm lg:bg-white/10 lg:text-white">
                   <Wifi className="w-4 h-4" />
                   Unlimited monthly data on 5G speeds
                 </div>
-                <div className="flex items-center gap-3 bg-white/10 rounded-xl px-4 py-3 text-sm">
+                <div className="flex items-center gap-3 bg-white/80 text-gray-900 rounded-xl px-4 py-3 text-sm lg:bg-white/10 lg:text-white">
                   <Truck className="w-4 h-4" />
                   Free delivery & same-day activation
                 </div>
