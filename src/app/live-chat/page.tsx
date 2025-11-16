@@ -71,7 +71,7 @@ export default function LiveChatPage() {
                 .trim()
                 .split(/\s+/)
                 .slice(0, 2)
-                .map((s) => s[0]?.toUpperCase())
+                .map((s: string) => s?.[0]?.toUpperCase?.() || "")
                 .join("");
               if (initials) setAgentInitials(initials);
             }
@@ -85,7 +85,7 @@ export default function LiveChatPage() {
                 .trim()
                 .split(/\s+/)
                 .slice(0, 2)
-                .map((s) => s[0]?.toUpperCase())
+                .map((s: string) => s?.[0]?.toUpperCase?.() || "")
                 .join("");
               if (initials) setAgentInitials(initials);
             }

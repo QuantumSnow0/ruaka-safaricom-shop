@@ -1,12 +1,13 @@
+export const runtime = 'nodejs';
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
-import webpush from "web-push";
 
 // Expect env vars:
 // VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY, NEXT_PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
 
 export async function POST(req: NextRequest) {
   try {
+    const webpush = (await import("web-push")).default as any;
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
     const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
     const vapidPublic = process.env.VAPID_PUBLIC_KEY!;
