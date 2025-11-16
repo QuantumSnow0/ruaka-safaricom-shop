@@ -243,19 +243,16 @@ export default function LiveChatPage() {
 
         .message-bubble {
           max-width: 75%;
-          margin-bottom: 12px;
           word-wrap: break-word;
         }
 
         .message-customer {
-          margin-left: auto;
           background: #10b981;
           color: white;
           border-radius: 18px 18px 6px 18px;
         }
 
         .message-agent {
-          margin-right: auto;
           background: white;
           color: #1f2937;
           border-radius: 18px 18px 18px 6px;
@@ -263,7 +260,6 @@ export default function LiveChatPage() {
         }
 
         .message-system {
-          margin: 0 auto;
           background: #f1f5f9;
           color: #64748b;
           border-radius: 18px;
@@ -503,41 +499,99 @@ export default function LiveChatPage() {
             <p>Start chatting with us!</p>
           </div>
         ) : (
-          messages.map((message, index) => (
-            <div
-              key={`${message.id}-${index}`}
-              className={`message-bubble ${
-                message.sender_type === "customer"
-                  ? "message-customer"
-                  : message.sender_type === "system"
-                  ? "message-system"
-                  : "message-agent"
-              }`}
-            >
-              <div className="message-content">
-                {message.sender_type !== "customer" &&
-                  message.sender_type !== "system" && (
-                    <div
-                      style={{
-                        fontSize: "12px",
-                        fontWeight: "600",
-                        marginBottom: "4px",
-                        color: "#059669",
-                      }}
-                    >
-                      {message.sender_name}
+          messages.map((message, index) => {
+            const isAgent = message.sender_type === "agent";
+            const isCustomer = message.sender_type === "customer";
+            const isSystem = message.sender_type === "system";
+            
+            // Generate avatars
+            const agentAvatarUrl = message.sender_name || message.sender_id
+              ? `https://api.dicebear.com/9.x/fun-emoji/svg?seed=${encodeURIComponent(
+                  message.sender_name || message.sender_id || "agent"
+                )}`
+              : null;
+            
+            const customerAvatarUrl = currentConversation?.id
+              ? `https://api.dicebear.com/9.x/fun-emoji/svg?seed=${encodeURIComponent(
+                  currentConversation.customer_email || currentConversation.customer_name || currentConversation.id
+                )}`
+              : null;
+
+            return (
+              <div
+                key={`${message.id}-${index}`}
+                style={{
+                  display: "flex",
+                  alignItems: "flex-end",
+                  gap: 8,
+                  marginBottom: 12,
+                  justifyContent: isCustomer ? "flex-end" : isSystem ? "center" : "flex-start",
+                }}
+              >
+                {!isSystem && (
+                  <div
+                    style={{
+                      width: 32,
+                      height: 32,
+                      borderRadius: "50%",
+                      overflow: "hidden",
+                      backgroundColor: "#e5e7eb",
+                      flexShrink: 0,
+                    }}
+                  >
+                    {isAgent && agentAvatarUrl && (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={agentAvatarUrl}
+                        alt={message.sender_name || "Agent"}
+                        style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                      />
+                    )}
+                    {isCustomer && customerAvatarUrl && (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={customerAvatarUrl}
+                        alt="You"
+                        style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                      />
+                    )}
+                  </div>
+                )}
+                <div
+                  className={`message-bubble ${
+                    isCustomer
+                      ? "message-customer"
+                      : isSystem
+                      ? "message-system"
+                      : "message-agent"
+                  }`}
+                  style={{ maxWidth: "75%" }}
+                >
+                  <div className="message-content">
+                    {isAgent && message.sender_name && (
+                      <div
+                        style={{
+                          fontSize: "12px",
+                          fontWeight: "600",
+                          marginBottom: "4px",
+                          color: "#059669",
+                        }}
+                      >
+                        {message.sender_name}
+                      </div>
+                    )}
+                    <p style={{ margin: 0 }}>{message.content}</p>
+                    <div className="message-time">
+                      {new Date(message.created_at).toLocaleTimeString([], {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
                     </div>
-                  )}
-                <p style={{ margin: 0 }}>{message.content}</p>
-                <div className="message-time">
-                  {new Date(message.created_at).toLocaleTimeString([], {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))
+            );
+          })
         )}
         <div ref={messagesEndRef} />
       </div>
