@@ -89,6 +89,14 @@ export default function AgentDashboard({
     return () => mm.removeEventListener?.("change", apply);
   }, []);
 
+  // On mobile, whenever a conversation is selected (including from deep links),
+  // automatically switch to the chat view instead of keeping the sidebar open.
+  useEffect(() => {
+    if (isMobile && currentConversation) {
+      setShowListOnMobile(false);
+    }
+  }, [isMobile, currentConversation]);
+
   // Check existing push subscription to update UI
   useEffect(() => {
     (async () => {
@@ -455,7 +463,7 @@ export default function AgentDashboard({
   }
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-gray-50 overflow-hidden">
       <style jsx global>{`
         @keyframes pingDot {
           0%, 80%, 100% { transform: scale(0); opacity: 0.4; }
@@ -635,7 +643,11 @@ export default function AgentDashboard({
       </div>
 
       {/* ===== MAIN CHAT AREA ===== */}
-      <div className={`flex-1 flex flex-col ${isMobile ? (showListOnMobile ? "hidden" : "flex") : "flex"}`}>
+      <div
+        className={`flex-1 flex flex-col h-full min-h-0 ${
+          isMobile ? (showListOnMobile ? "hidden" : "flex") : "flex"
+        }`}
+      >
         {currentConversation ? (
           <>
             {/* Chat Header */}
@@ -707,8 +719,8 @@ export default function AgentDashboard({
               </div>
             </div>
 
-            {/* Messages Area */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+            {/* Messages Area (only this scrolls) */}
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 min-h-0">
               {messages.map((message, index) => (
                 <div
                   key={`${message.id}-${index}`}
@@ -786,8 +798,8 @@ export default function AgentDashboard({
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Message Input */}
-            <div className="bg-white border-t border-gray-200 p-4">
+            {/* Message Input - fixed at bottom of chat column */}
+            <div className="bg-white border-t border-gray-200 p-4 shrink-0">
               <form onSubmit={handleSendMessage} className="flex space-x-2">
                 <input
                   type="text"
