@@ -58,18 +58,17 @@ export async function POST(req: NextRequest) {
 
     webpush.setVapidDetails("mailto:no-reply@example.com", vapidPublic, vapidPrivate);
 
-    const payload = JSON.stringify({
-      title: "New chat message",
-      body: content ? String(content).slice(0, 120) : "You have a new customer message",
-      icon: "/helpline.png",
-      badge: "/helpline.png",
-      url: `/agent-dashboard?conversationId=${conversation_id}`,
-      tag: `chat-${conversation_id}`,
-    });
-
     // Fan out
     await Promise.all(
       subs.map(async (s) => {
+        const payload = JSON.stringify({
+          title: "New chat message",
+          body: content ? String(content).slice(0, 120) : "You have a new customer message",
+          icon: "/helpline.png",
+          badge: "/helpline.png",
+          url: `/agent-dashboard?agentId=${s.agent_id}&conversationId=${conversation_id}`,
+          tag: `chat-${conversation_id}`,
+        });
         const subscription = {
           endpoint: s.endpoint,
           keys: { p256dh: s.p256dh, auth: s.auth },
