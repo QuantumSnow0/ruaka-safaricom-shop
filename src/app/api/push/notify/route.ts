@@ -10,7 +10,8 @@ export async function POST(req: NextRequest) {
     const webpush = (await import("web-push")).default as any;
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
     const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
-    const vapidPublic = process.env.VAPID_PUBLIC_KEY!;
+    // Accept either server-side VAPID_PUBLIC_KEY or fall back to NEXT_PUBLIC_VAPID_PUBLIC_KEY
+    const vapidPublic = process.env.VAPID_PUBLIC_KEY || process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!;
     const vapidPrivate = process.env.VAPID_PRIVATE_KEY!;
 
     if (!supabaseUrl || !serviceKey || !vapidPublic || !vapidPrivate) {
@@ -21,11 +22,13 @@ export async function POST(req: NextRequest) {
     }
 
     const body = await req.json();
-    // Body can be the raw Supabase row or a shaped payload:
-    // {
-    //   conversation_id, sender_type, content
-    // }
-    const { conversation_id, sender_type, content } = body || {};
+    // Support both shapes:
+    // 1) Flat: { conversation_id, sender_type, content }
+    // 2) Supabase default: { record: { conversation_id, sender_type, content }, ... }
+    const record = body?.record ?? body ?? {};
+    const conversation_id = record?.conversation_id;
+    const sender_type = record?.sender_type;
+    const content = record?.content;
     if (!conversation_id || sender_type !== "customer") {
       return NextResponse.json({ ok: true }); // ignore other events
     }
