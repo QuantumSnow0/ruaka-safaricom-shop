@@ -33,11 +33,13 @@ import { ChatConversation, ChatMessage, ChatAgent } from "../../lib/types";
 interface AgentDashboardProps {
   agentId: string;
   onLogout: () => void;
+  initialConversationId?: string;
 }
 
 export default function AgentDashboard({
   agentId,
   onLogout,
+  initialConversationId,
 }: AgentDashboardProps) {
   // ===== CHAT CONTEXT =====
   const { sendAgentMessage } = useChat();
@@ -60,6 +62,8 @@ export default function AgentDashboard({
   const typingChannelRef = useRef<any>(null);
   const typingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [showListOnMobile, setShowListOnMobile] = useState(true);
 
   // ===== REFS =====
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -70,6 +74,33 @@ export default function AgentDashboard({
   useEffect(() => {
     loadAgentData();
   }, [agentId]);
+
+  // Detect mobile viewport
+  useEffect(() => {
+    const mm = window.matchMedia("(max-width: 768px)");
+    const apply = () => {
+      setIsMobile(mm.matches);
+      if (!mm.matches) {
+        setShowListOnMobile(true);
+      }
+    };
+    apply();
+    mm.addEventListener?.("change", apply);
+    return () => mm.removeEventListener?.("change", apply);
+  }, []);
+
+  // Check existing push subscription to update UI
+  useEffect(() => {
+    (async () => {
+      try {
+        if ("serviceWorker" in navigator) {
+          const reg = await navigator.serviceWorker.ready;
+          const existing = await reg.pushManager.getSubscription();
+          setNotificationsEnabled(!!existing);
+        }
+      } catch {}
+    })();
+  }, []);
 
   // Set up realtime subscriptions
   useEffect(() => {
@@ -258,7 +289,16 @@ export default function AgentDashboard({
         .order("created_at", { ascending: false });
 
       if (error) throw error;
-      setConversations(data || []);
+      const list = data || [];
+      setConversations(list);
+      // Auto-select conversation from deep link once
+      if (initialConversationId && !currentConversation) {
+        const found = list.find((c) => c.id === initialConversationId);
+        if (found) {
+          setCurrentConversation(found);
+          await loadMessages(found.id);
+        }
+      }
     } catch (error) {
       console.error("Failed to load conversations:", error);
       setError("Failed to load conversations");
@@ -423,7 +463,7 @@ export default function AgentDashboard({
         }
       `}</style>
       {/* ===== SIDEBAR ===== */}
-      <div className="w-80 bg-white border-r border-gray-200 flex flex-col">
+      <div className={`w-80 bg-white border-r border-gray-200 flex flex-col ${isMobile ? (showListOnMobile ? "" : "hidden") : ""}`}>
         {/* Agent Header */}
         <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-green-500 to-emerald-600 text-white">
           <div className="flex items-center justify-between">
@@ -437,6 +477,14 @@ export default function AgentDashboard({
               </div>
             </div>
             <div className="flex items-center gap-2">
+              {isMobile && (
+                <button
+                  onClick={() => setShowListOnMobile(false)}
+                  className="px-3 py-1.5 rounded-lg bg-white/20 hover:bg-white/30 text-white text-xs font-medium"
+                >
+                  Open chat
+                </button>
+              )}
               {!notificationsEnabled && (
                 <button
                   onClick={enableNotifications}
@@ -535,7 +583,10 @@ export default function AgentDashboard({
                       ? "bg-green-50 border border-green-200"
                       : "hover:bg-gray-50"
                   }`}
-                  onClick={() => selectConversation(conversation)}
+                  onClick={async () => {
+                    await selectConversation(conversation);
+                    if (isMobile) setShowListOnMobile(false);
+                  }}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -584,7 +635,7 @@ export default function AgentDashboard({
       </div>
 
       {/* ===== MAIN CHAT AREA ===== */}
-      <div className="flex-1 flex flex-col">
+      <div className={`flex-1 flex flex-col ${isMobile ? (showListOnMobile ? "hidden" : "flex") : "flex"}`}>
         {currentConversation ? (
           <>
             {/* Chat Header */}
@@ -633,6 +684,14 @@ export default function AgentDashboard({
                 </div>
 
                 <div className="flex items-center space-x-2">
+                  {isMobile && (
+                    <button
+                      onClick={() => setShowListOnMobile(true)}
+                      className="px-3 py-1.5 rounded-lg border border-gray-300 text-gray-700 text-xs"
+                    >
+                      Conversations
+                    </button>
+                  )}
                   <span
                     className={`px-3 py-1 rounded-full text-sm font-medium ${
                       currentConversation.status === "waiting"

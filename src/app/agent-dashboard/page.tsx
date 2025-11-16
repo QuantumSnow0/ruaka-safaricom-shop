@@ -128,6 +128,7 @@ function AgentDashboardContent() {
 
   // Render dashboard
   const agentId = searchParams.get("agentId");
+  const initialConversationId = searchParams.get("conversationId") || undefined;
 
   if (!agentId) {
     return (
@@ -149,7 +150,13 @@ function AgentDashboardContent() {
     );
   }
 
-  return <AgentDashboard agentId={agentId} onLogout={handleLogout} />;
+  return (
+    <AgentDashboard
+      agentId={agentId}
+      onLogout={handleLogout}
+      initialConversationId={initialConversationId}
+    />
+  );
 }
 
 // ===== MAIN PAGE COMPONENT =====
