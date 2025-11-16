@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { supabase } from "../../lib/supabase";
 import { useChat } from "../../contexts/ChatContext";
@@ -67,6 +67,27 @@ export default function AgentDashboard({
 
   // ===== REFS =====
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // ===== AVATAR HELPERS =====
+
+  const agentAvatarUrl = useMemo(() => {
+    if (!agent) return undefined;
+    const seed = agent.id || agent.email || agent.name || "agent";
+    return `https://api.dicebear.com/9.x/fun-emoji/svg?seed=${encodeURIComponent(
+      seed
+    )}`;
+  }, [agent]);
+
+  const customerAvatarUrl = useMemo(() => {
+    if (!currentConversation) return undefined;
+    const seed =
+      currentConversation.customer_email ||
+      currentConversation.customer_name ||
+      currentConversation.id;
+    return `https://api.dicebear.com/9.x/fun-emoji/svg?seed=${encodeURIComponent(
+      seed || "customer"
+    )}`;
+  }, [currentConversation]);
 
   // ===== EFFECTS =====
 
@@ -452,6 +473,17 @@ export default function AgentDashboard({
     return matchesSearch && matchesStatus;
   });
 
+  // Derive effective status for current conversation:
+  // if DB says "waiting" but we already have an agent message, treat as "active" in UI.
+  const effectiveCurrentStatus = useMemo(() => {
+    if (!currentConversation) return undefined;
+    const hasAgentReply = messages.some((m) => m.sender_type === "agent");
+    if (currentConversation.status === "waiting" && hasAgentReply) {
+      return "active" as const;
+    }
+    return currentConversation.status;
+  }, [currentConversation, messages]);
+
   // ===== RENDER =====
   if (!agent) {
     return (
@@ -463,7 +495,8 @@ export default function AgentDashboard({
   }
 
   return (
-    <div className="flex h-screen bg-gray-50 overflow-hidden">
+    // Fixed full-screen container so only internal panes scroll (better mobile keyboard behavior)
+    <div className="fixed inset-0 flex bg-gray-50 overflow-hidden">
       <style jsx global>{`
         @keyframes pingDot {
           0%, 80%, 100% { transform: scale(0); opacity: 0.4; }
@@ -471,47 +504,90 @@ export default function AgentDashboard({
         }
       `}</style>
       {/* ===== SIDEBAR ===== */}
-      <div className={`w-80 bg-white border-r border-gray-200 flex flex-col ${isMobile ? (showListOnMobile ? "" : "hidden") : ""}`}>
+      <div
+        className={`${
+          isMobile ? "w-full" : "w-80"
+        } md:w-80 bg-white border-r border-gray-200 flex flex-col ${
+          isMobile ? (showListOnMobile ? "" : "hidden") : ""
+        }`}
+      >
         {/* Agent Header */}
         <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-green-500 to-emerald-600 text-white">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-                <User className="w-5 h-5" />
+          {/* Desktop / tablet header */}
+          {!isMobile && (
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <div className="w-12 h-12 rounded-full overflow-hidden bg-white/20 flex items-center justify-center border border-white/40">
+                  {agentAvatarUrl ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={agentAvatarUrl}
+                      alt={agent.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <User className="w-5 h-5" />
+                  )}
+                </div>
+                <div>
+                  <h2 className="font-semibold leading-tight">{agent.name}</h2>
+                  <p className="text-xs text-green-100">Agent Dashboard</p>
+                </div>
               </div>
-              <div>
-                <h2 className="font-semibold">{agent.name}</h2>
-                <p className="text-sm text-green-100">Agent Dashboard</p>
+              <div className="flex items-center gap-2">
+                {!notificationsEnabled && (
+                  <button
+                    onClick={enableNotifications}
+                    className="px-3 py-1.5 rounded-lg bg-white/20 hover:bg-white/30 text-white text-xs font-medium"
+                  >
+                    Enable notifications
+                  </button>
+                )}
+                <button
+                  onClick={onLogout}
+                  className="p-2 hover:bg-white/20 rounded-full transition-colors"
+                >
+                  <LogOut className="w-4 h-4" />
+                </button>
               </div>
             </div>
-            <div className="flex items-center gap-2">
-              {isMobile && (
-                <button
-                  onClick={() => setShowListOnMobile(false)}
-                  className="px-3 py-1.5 rounded-lg bg-white/20 hover:bg-white/30 text-white text-xs font-medium"
-                >
-                  Open chat
-                </button>
-              )}
-              {!notificationsEnabled && (
-                <button
-                  onClick={enableNotifications}
-                  className="px-3 py-1.5 rounded-lg bg-white/20 hover:bg-white/30 text-white text-xs font-medium"
-                >
-                  Enable notifications
-                </button>
-              )}
+          )}
+
+          {/* Mobile header (simpler, less crowded) */}
+          {isMobile && (
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <div className="w-12 h-12 rounded-full overflow-hidden bg-white/20 flex items-center justify-center border border-white/40">
+                  {agentAvatarUrl ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={agentAvatarUrl}
+                      alt={agent.name}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <User className="w-5 h-5" />
+                  )}
+                </div>
+                <div>
+                  <h2 className="font-semibold leading-tight text-sm">
+                    {agent.name}
+                  </h2>
+                  <p className="text-[11px] text-green-100">Agent Dashboard</p>
+                </div>
+              </div>
               <button
                 onClick={onLogout}
                 className="p-2 hover:bg-white/20 rounded-full transition-colors"
+                aria-label="Logout"
               >
                 <LogOut className="w-4 h-4" />
               </button>
             </div>
-          </div>
+          )}
 
           {/* Status Toggle */}
-          <div className="mt-4 flex space-x-2">
+          <div className="mt-4 flex flex-wrap gap-2">
             <button
               onClick={() => updateAgentStatus("online")}
               className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
@@ -542,6 +618,15 @@ export default function AgentDashboard({
             >
               Offline
             </button>
+            {/* Mobile notifications toggle moved below status for more space */}
+            {isMobile && !notificationsEnabled && (
+              <button
+                onClick={enableNotifications}
+                className="px-3 py-1.5 rounded-full border border-white/40 text-xs font-medium"
+              >
+                Enable notifications
+              </button>
+            )}
           </div>
         </div>
 
@@ -654,8 +739,17 @@ export default function AgentDashboard({
             <div className="bg-white border-b border-gray-200 p-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                    <User className="w-5 h-5 text-green-600" />
+                  <div className="w-10 h-10 rounded-full overflow-hidden bg-green-100 flex items-center justify-center">
+                    {customerAvatarUrl ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={customerAvatarUrl}
+                        alt={currentConversation.customer_name || "Customer"}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <User className="w-5 h-5 text-green-600" />
+                    )}
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900">
@@ -704,61 +798,86 @@ export default function AgentDashboard({
                       Conversations
                     </button>
                   )}
-                  <span
-                    className={`px-3 py-1 rounded-full text-sm font-medium ${
-                      currentConversation.status === "waiting"
-                        ? "bg-yellow-100 text-yellow-800"
-                        : currentConversation.status === "active"
-                        ? "bg-green-100 text-green-800"
-                        : "bg-gray-100 text-gray-800"
-                    }`}
-                  >
-                    {currentConversation.status}
-                  </span>
+                  {effectiveCurrentStatus && (
+                    <span
+                      className={`px-3 py-1 rounded-full text-sm font-medium ${
+                        effectiveCurrentStatus === "waiting"
+                          ? "bg-yellow-100 text-yellow-800"
+                          : effectiveCurrentStatus === "active"
+                          ? "bg-green-100 text-green-800"
+                          : "bg-gray-100 text-gray-800"
+                      }`}
+                    >
+                      {effectiveCurrentStatus}
+                    </span>
+                  )}
                 </div>
               </div>
             </div>
 
             {/* Messages Area (only this scrolls) */}
             <div className="flex-1 overflow-y-auto p-4 space-y-4 min-h-0">
-              {messages.map((message, index) => (
-                <div
-                  key={`${message.id}-${index}`}
-                  className={`flex ${
-                    message.sender_type === "agent"
-                      ? "justify-end"
-                      : "justify-start"
-                  }`}
-                >
+              {messages.map((message, index) => {
+                const isAgent = message.sender_type === "agent";
+                const isCustomer = message.sender_type === "customer";
+                const showAvatar = message.sender_type !== "system";
+                const avatarUrl = isAgent ? agentAvatarUrl : customerAvatarUrl;
+
+                return (
                   <div
-                    className={`max-w-xs px-4 py-2 rounded-2xl text-sm ${
-                      message.sender_type === "agent"
-                        ? "bg-green-500 text-white"
-                        : message.sender_type === "system"
-                        ? "bg-gray-100 text-gray-700 text-center"
-                        : "bg-gray-100 text-gray-900"
+                    key={`${message.id}-${index}`}
+                    className={`flex ${
+                      isAgent ? "justify-end" : "justify-start"
                     }`}
                   >
-                    <p>{message.content}</p>
                     <div
-                      className={`text-xs mt-1 opacity-70 ${
-                        message.sender_type === "agent"
-                          ? "text-green-100"
-                          : "text-gray-500"
+                      className={`flex items-end gap-2 ${
+                        isAgent ? "flex-row-reverse" : "flex-row"
                       }`}
                     >
-                      {new Date(message.created_at).toLocaleTimeString([], {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
-                      {message.is_read &&
-                        message.sender_type === "customer" && (
-                          <CheckCircle className="w-3 h-3 inline ml-1" />
+                      {showAvatar && avatarUrl && (
+                        <div className="w-8 h-8 rounded-full overflow-hidden bg-gray-200 flex-shrink-0">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={avatarUrl}
+                            alt={isAgent ? agent?.name || "Agent" : currentConversation?.customer_name || "Customer"}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      )}
+                      <div
+                        className={`max-w-xs px-4 py-2 rounded-2xl text-sm ${
+                          isAgent
+                            ? "bg-green-500 text-white"
+                            : message.sender_type === "system"
+                            ? "bg-gray-100 text-gray-700 text-center"
+                            : "bg-gray-100 text-gray-900"
+                        }`}
+                      >
+                        <p>{message.content}</p>
+                        {message.sender_type !== "system" && (
+                          <div
+                            className={`text-xs mt-1 opacity-70 ${
+                              isAgent ? "text-green-100" : "text-gray-500"
+                            }`}
+                          >
+                            {new Date(message.created_at).toLocaleTimeString(
+                              [],
+                              {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                              }
+                            )}
+                            {message.is_read && isCustomer && (
+                              <CheckCircle className="w-3 h-3 inline ml-1" />
+                            )}
+                          </div>
                         )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
               {/* Customer typing bubble inside chat */}
               {customerTyping && (
                 <div className="flex justify-start">
