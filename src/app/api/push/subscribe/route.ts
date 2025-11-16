@@ -1,25 +1,45 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
+import { createClient } from "@supabase/supabase-js";
 
 export async function POST(req: NextRequest) {
   try {
     const cookieStore = cookies();
-    const supabase = createRouteHandlerClient({ cookies: () => cookieStore });
+    const supabaseCookies = createRouteHandlerClient({ cookies: () => cookieStore });
 
-    const {
-      data: { user },
-      error: authError,
-    } = await supabase.auth.getUser();
-    if (authError || !user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    // Prefer Authorization: Bearer <access_token> if provided
+    const authHeader = req.headers.get("authorization");
+    let userId: string | null = null;
+    if (authHeader?.toLowerCase().startsWith("bearer ")) {
+      const accessToken = authHeader.slice(7).trim();
+      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+      const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+      if (!supabaseUrl || !serviceKey) {
+        return NextResponse.json({ error: "Server not configured" }, { status: 500 });
+      }
+      const supabaseAdmin = createClient(supabaseUrl, serviceKey);
+      const { data: userRes, error: tokenErr } = await supabaseAdmin.auth.getUser(accessToken);
+      if (tokenErr || !userRes?.user) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      }
+      userId = userRes.user.id;
+    } else {
+      const {
+        data: { user },
+        error: authError,
+      } = await supabaseCookies.auth.getUser();
+      if (authError || !user) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      }
+      userId = user.id;
     }
 
     // Ensure agent exists and active
-    const { data: agent, error: agentErr } = await supabase
+    const { data: agent, error: agentErr } = await supabaseCookies
       .from("chat_agents")
       .select("id, is_active")
-      .eq("user_id", user.id)
+      .eq("user_id", userId)
       .eq("is_active", true)
       .maybeSingle();
     if (agentErr || !agent) {
@@ -34,7 +54,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Upsert by endpoint
-    const { error: upsertErr } = await supabase
+    const { error: upsertErr } = await supabaseCookies
       .from("agent_push_subscriptions")
       .upsert(
         {

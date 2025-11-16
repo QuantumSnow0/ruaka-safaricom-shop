@@ -191,22 +191,38 @@ export default function AgentDashboard({
         return;
       }
       // Register service worker
-      const reg = await navigator.serviceWorker.register("/agent-sw.js");
-      // Subscribe
+      await navigator.serviceWorker.register("/agent-sw.js");
+      // Wait for active service worker
+      const swReg = await navigator.serviceWorker.ready;
+      // Reuse existing subscription if present
+      const existing = await swReg.pushManager.getSubscription();
       const vapidPublicKey = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY as string | undefined;
       if (!vapidPublicKey) {
         alert("VAPID public key not configured.");
         return;
       }
       const convertedKey = urlBase64ToUint8Array(vapidPublicKey);
-      const sub = await reg.pushManager.subscribe({
-        userVisibleOnly: true,
-        applicationServerKey: convertedKey,
-      });
+      const sub =
+        existing ||
+        (await swReg.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: convertedKey,
+        }));
       // Save subscription
+      // Include Supabase access token for reliable auth on server
+      let accessToken: string | undefined;
+      try {
+        // supabase is imported at top; get current session
+        // @ts-ignore
+        const sessionRes = await (await import("../../lib/supabase")).supabase.auth.getSession();
+        accessToken = sessionRes.data.session?.access_token;
+      } catch {}
       const res = await fetch("/api/push/subscribe", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+        },
         body: JSON.stringify({ subscription: sub }),
       });
       if (!res.ok) {
