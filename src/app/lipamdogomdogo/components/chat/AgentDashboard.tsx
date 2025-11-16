@@ -56,6 +56,10 @@ export default function AgentDashboard({
     "all" | "waiting" | "active" | "closed"
   >("all");
   const [isOnline, setIsOnline] = useState(false);
+  const [customerTyping, setCustomerTyping] = useState(false);
+  const typingChannelRef = useRef<any>(null);
+  const typingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [notificationsEnabled, setNotificationsEnabled] = useState(false);
 
   // ===== REFS =====
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -115,6 +119,45 @@ export default function AgentDashboard({
     }
   }, [agent]);
 
+  // Subscribe to typing channel for current conversation
+  useEffect(() => {
+    if (!currentConversation) {
+      if (typingChannelRef.current) {
+        supabase.removeChannel(typingChannelRef.current);
+        typingChannelRef.current = null;
+      }
+      setCustomerTyping(false);
+      return;
+    }
+    // Clean existing channel
+    if (typingChannelRef.current) {
+      supabase.removeChannel(typingChannelRef.current);
+      typingChannelRef.current = null;
+    }
+    const channel = supabase
+      .channel(`typing:${currentConversation.id}`)
+      .on("broadcast", { event: "customer_typing" }, (payload) => {
+        const { typing } = (payload as any).payload || {};
+        if (typing) {
+          setCustomerTyping(true);
+          if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
+          typingTimeoutRef.current = setTimeout(() => {
+            setCustomerTyping(false);
+          }, 2500);
+        } else {
+          setCustomerTyping(false);
+        }
+      })
+      .subscribe();
+    typingChannelRef.current = channel;
+    return () => {
+      if (typingChannelRef.current) {
+        supabase.removeChannel(typingChannelRef.current);
+        typingChannelRef.current = null;
+      }
+    };
+  }, [currentConversation]);
+
   // ===== FUNCTIONS =====
 
   // Load agent data
@@ -134,6 +177,59 @@ export default function AgentDashboard({
       setError("Failed to load agent data");
     }
   };
+
+  // Register push notifications
+  const enableNotifications = async () => {
+    try {
+      if (!("Notification" in window) || !("serviceWorker" in navigator)) {
+        alert("Notifications are not supported in this browser.");
+        return;
+      }
+      const perm = await Notification.requestPermission();
+      if (perm !== "granted") {
+        alert("Please allow notifications to receive alerts.");
+        return;
+      }
+      // Register service worker
+      const reg = await navigator.serviceWorker.register("/agent-sw.js");
+      // Subscribe
+      const vapidPublicKey = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY as string | undefined;
+      if (!vapidPublicKey) {
+        alert("VAPID public key not configured.");
+        return;
+      }
+      const convertedKey = urlBase64ToUint8Array(vapidPublicKey);
+      const sub = await reg.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: convertedKey,
+      });
+      // Save subscription
+      const res = await fetch("/api/push/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ subscription: sub }),
+      });
+      if (!res.ok) {
+        const j = await res.json().catch(() => ({}));
+        throw new Error(j.error || "Failed to save subscription");
+      }
+      setNotificationsEnabled(true);
+    } catch (err) {
+      console.error("Enable notifications failed:", err);
+      alert("Failed to enable notifications. Please try again.");
+    }
+  };
+
+  function urlBase64ToUint8Array(base64String: string) {
+    const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
+    const base64 = (base64String + padding).replace(/-/g, "+").replace(/_/g, "/");
+    const rawData = window.atob(base64);
+    const outputArray = new Uint8Array(rawData.length);
+    for (let i = 0; i < rawData.length; ++i) {
+      outputArray[i] = rawData.charCodeAt(i);
+    }
+    return outputArray;
+  }
 
   // Load conversations assigned to this agent
   const loadConversations = async () => {
@@ -304,6 +400,12 @@ export default function AgentDashboard({
 
   return (
     <div className="flex h-screen bg-gray-50">
+      <style jsx global>{`
+        @keyframes pingDot {
+          0%, 80%, 100% { transform: scale(0); opacity: 0.4; }
+          40% { transform: scale(1); opacity: 1; }
+        }
+      `}</style>
       {/* ===== SIDEBAR ===== */}
       <div className="w-80 bg-white border-r border-gray-200 flex flex-col">
         {/* Agent Header */}
@@ -318,12 +420,22 @@ export default function AgentDashboard({
                 <p className="text-sm text-green-100">Agent Dashboard</p>
               </div>
             </div>
-            <button
-              onClick={onLogout}
-              className="p-2 hover:bg-white/20 rounded-full transition-colors"
-            >
-              <LogOut className="w-4 h-4" />
-            </button>
+            <div className="flex items-center gap-2">
+              {!notificationsEnabled && (
+                <button
+                  onClick={enableNotifications}
+                  className="px-3 py-1.5 rounded-lg bg-white/20 hover:bg-white/30 text-white text-xs font-medium"
+                >
+                  Enable notifications
+                </button>
+              )}
+              <button
+                onClick={onLogout}
+                className="p-2 hover:bg-white/20 rounded-full transition-colors"
+              >
+                <LogOut className="w-4 h-4" />
+              </button>
+            </div>
           </div>
 
           {/* Status Toggle */}
@@ -484,6 +596,22 @@ export default function AgentDashboard({
                           <span>{currentConversation.customer_phone}</span>
                         </div>
                       )}
+                      {customerTyping && (
+                        <span className="inline-flex items-center gap-1">
+                          <span
+                            className="inline-block rounded-full bg-emerald-600"
+                            style={{ width: 6, height: 6, animation: "pingDot 1.2s infinite ease-in-out" }}
+                          />
+                          <span
+                            className="inline-block rounded-full bg-emerald-600"
+                            style={{ width: 6, height: 6, animation: "pingDot 1.2s infinite ease-in-out 0.15s" }}
+                          />
+                          <span
+                            className="inline-block rounded-full bg-emerald-600"
+                            style={{ width: 6, height: 6, animation: "pingDot 1.2s infinite ease-in-out 0.3s" }}
+                          />
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -544,6 +672,42 @@ export default function AgentDashboard({
                   </div>
                 </div>
               ))}
+              {/* Customer typing bubble inside chat */}
+              {customerTyping && (
+                <div className="flex justify-start">
+                  <div className="flex items-center gap-2">
+                    {/* Customer avatar placeholder */}
+                    <div className="w-7 h-7 rounded-full bg-gray-200 flex items-center justify-center text-[10px] font-bold text-gray-600 border border-gray-300">
+                      {(() => {
+                        const name =
+                          currentConversation?.customer_name?.trim() || "";
+                        if (!name) return "CU";
+                        const parts = name.split(/\s+/).slice(0, 2);
+                        const initials = parts
+                          .map((p) => p[0]?.toUpperCase())
+                          .join("");
+                        return initials || "CU";
+                      })()}
+                    </div>
+                    <div className="px-3 py-2 rounded-2xl bg-gray-100 border border-gray-200">
+                      <span className="inline-flex items-center gap-1">
+                        <span
+                          className="inline-block rounded-full bg-gray-500"
+                          style={{ width: 6, height: 6, animation: "pingDot 1.2s infinite ease-in-out" }}
+                        />
+                        <span
+                          className="inline-block rounded-full bg-gray-500"
+                          style={{ width: 6, height: 6, animation: "pingDot 1.2s infinite ease-in-out 0.15s" }}
+                        />
+                        <span
+                          className="inline-block rounded-full bg-gray-500"
+                          style={{ width: 6, height: 6, animation: "pingDot 1.2s infinite ease-in-out 0.3s" }}
+                        />
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              )}
               <div ref={messagesEndRef} />
             </div>
 
@@ -553,7 +717,28 @@ export default function AgentDashboard({
                 <input
                   type="text"
                   value={messageInput}
-                  onChange={(e) => setMessageInput(e.target.value)}
+                  onChange={(e) => {
+                    setMessageInput(e.target.value);
+                    if (currentConversation) {
+                      const channel = typingChannelRef.current
+                        ? typingChannelRef.current
+                        : supabase.channel(`typing:${currentConversation.id}`);
+                      channel.send({
+                        type: "broadcast",
+                        event: "agent_typing",
+                        payload: { typing: true },
+                      });
+                      if (typingTimeoutRef.current)
+                        clearTimeout(typingTimeoutRef.current);
+                      typingTimeoutRef.current = setTimeout(() => {
+                        channel.send({
+                          type: "broadcast",
+                          event: "agent_typing",
+                          payload: { typing: false },
+                        });
+                      }, 1200);
+                    }
+                  }}
                   placeholder="Type your message..."
                   disabled={isLoading}
                   className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 disabled:bg-gray-100 text-gray-900 bg-white"

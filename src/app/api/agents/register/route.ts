@@ -58,6 +58,7 @@ export async function POST(req: NextRequest) {
     if (!existing) {
       const { error: insertError } = await supabaseAdmin.from("chat_agents").insert({
         user_id: user.id,
+        name: fullName,
         full_name: fullName,
         email,
         is_active: false,
@@ -69,6 +70,19 @@ export async function POST(req: NextRequest) {
           { error: insertError.message || "Failed to create agent row" },
           { status: 400 }
         );
+      }
+    } else {
+      // If exists but missing name, backfill name from full_name
+      const { data: existingRow } = await supabaseAdmin
+        .from("chat_agents")
+        .select("id,name,full_name")
+        .eq("id", existing.id)
+        .maybeSingle();
+      if (existingRow && (!existingRow.name || existingRow.name.trim() === "")) {
+        await supabaseAdmin
+          .from("chat_agents")
+          .update({ name: existingRow.full_name || fullName })
+          .eq("id", existing.id);
       }
     }
 

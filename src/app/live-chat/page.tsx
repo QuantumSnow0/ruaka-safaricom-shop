@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useChat } from "../lipamdogomdogo/contexts/ChatContext";
 import { MessageCircle, Send, Loader2, ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { supabase } from "@lipam/lib/supabase";
 
 export default function LiveChatPage() {
   const router = useRouter();
@@ -22,6 +23,10 @@ export default function LiveChatPage() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const hasInitialized = useRef(false);
   const [keyboardInset, setKeyboardInset] = useState(0);
+  const [agentTyping, setAgentTyping] = useState(false);
+  const typingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const typingChannelRef = useRef<any>(null);
+  const [agentInitials, setAgentInitials] = useState<string>("AG");
 
   const agentsAvailable = isAgentAvailable();
   const anyAgentOnline = isAnyAgentOnline();
@@ -47,14 +52,80 @@ export default function LiveChatPage() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // Poll for messages every 3 seconds
+  // Poll for messages every 3 seconds and subscribe to typing events
   useEffect(() => {
     if (currentConversation?.id) {
+      // Try to resolve agent initials from assigned agent
+      (async () => {
+        try {
+          if (currentConversation.agent_id) {
+            const { data, error } = await supabase
+              .from("chat_agents")
+              .select("name, full_name, email")
+              .eq("id", currentConversation.agent_id)
+              .maybeSingle();
+            if (!error && data) {
+              const displayName =
+                (data as any).name || (data as any).full_name || (data as any).email || "";
+              const initials = (displayName || "")
+                .trim()
+                .split(/\s+/)
+                .slice(0, 2)
+                .map((s) => s[0]?.toUpperCase())
+                .join("");
+              if (initials) setAgentInitials(initials);
+            }
+          } else {
+            // Fallback: try last agent message sender_name
+            const lastAgent = [...messages]
+              .reverse()
+              .find((m) => m.sender_type === "agent");
+            if (lastAgent?.sender_name) {
+              const initials = lastAgent.sender_name
+                .trim()
+                .split(/\s+/)
+                .slice(0, 2)
+                .map((s) => s[0]?.toUpperCase())
+                .join("");
+              if (initials) setAgentInitials(initials);
+            }
+          }
+        } catch {}
+      })();
+
+      // Setup realtime typing channel for this conversation
+      if (typingChannelRef.current) {
+        supabase.removeChannel(typingChannelRef.current);
+        typingChannelRef.current = null;
+      }
+      const channel = supabase
+        .channel(`typing:${currentConversation.id}`)
+        .on("broadcast", { event: "agent_typing" }, (payload) => {
+          const { typing } = (payload as any).payload || {};
+          if (typing) {
+            setAgentTyping(true);
+            if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
+            typingTimeoutRef.current = setTimeout(() => {
+              setAgentTyping(false);
+            }, 2500);
+          } else {
+            setAgentTyping(false);
+          }
+        })
+        .subscribe();
+      typingChannelRef.current = channel;
+
       const interval = setInterval(() => {
         pollMessages(currentConversation.id);
       }, 3000);
 
-      return () => clearInterval(interval);
+      return () => {
+        clearInterval(interval);
+        if (typingChannelRef.current) {
+          supabase.removeChannel(typingChannelRef.current);
+          typingChannelRef.current = null;
+        }
+      };
     }
   }, [currentConversation?.id, pollMessages]);
 
@@ -471,13 +542,116 @@ export default function LiveChatPage() {
         <div ref={messagesEndRef} />
       </div>
 
+      {/* Typing indicator (subtle bubble with animated dots) */}
+      <style jsx global>{`
+        @keyframes bounceDots {
+          0%, 80%, 100% { transform: scale(0); opacity: 0.4; }
+          40% { transform: scale(1); opacity: 1; }
+        }
+      `}</style>
+      {agentTyping && (
+        <div style={{ position: "fixed", left: 12, right: 12, bottom: 88 + keyboardInset }}>
+          <div style={{ display: "flex", alignItems: "flex-end", gap: 8 }}>
+            {/* Agent initials badge */}
+            <div
+              style={{
+                width: 28,
+                height: 28,
+                borderRadius: 9999,
+                background: "#d1fae5",
+                color: "#065f46",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: 12,
+                fontWeight: 700,
+                border: "1px solid #bbf7d0",
+              }}
+            >
+              {agentInitials || "AG"}
+            </div>
+            {/* Dots bubble */}
+            <div
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 6,
+                background: "#ffffff",
+                color: "#111827",
+                borderRadius: 16,
+                padding: "8px 12px",
+                boxShadow: "0 1px 2px rgba(0,0,0,0.08)",
+                border: "1px solid #e5e7eb",
+                maxWidth: "60%",
+              }}
+            >
+              <span
+                style={{
+                  width: 6,
+                  height: 6,
+                  background: "#6b7280",
+                  borderRadius: 9999,
+                  animation: "bounceDots 1.4s infinite ease-in-out both",
+                  animationDelay: "0s",
+                  display: "inline-block",
+                }}
+              />
+              <span
+                style={{
+                  width: 6,
+                  height: 6,
+                  background: "#6b7280",
+                  borderRadius: 9999,
+                  animation: "bounceDots 1.4s infinite ease-in-out both",
+                  animationDelay: "0.2s",
+                  display: "inline-block",
+                }}
+              />
+              <span
+                style={{
+                  width: 6,
+                  height: 6,
+                  background: "#6b7280",
+                  borderRadius: 9999,
+                  animation: "bounceDots 1.4s infinite ease-in-out both",
+                  animationDelay: "0.4s",
+                  display: "inline-block",
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Input */}
       <div className="chat-input" style={{ bottom: keyboardInset }}>
         <form onSubmit={handleSendMessage} className="input-form">
           <input
             type="text"
             value={messageInput}
-            onChange={(e) => setMessageInput(e.target.value)}
+            onChange={(e) => {
+              setMessageInput(e.target.value);
+              if (currentConversation?.id) {
+                // Broadcast customer typing with debounce stop
+                const channel = typingChannelRef.current
+                  ? typingChannelRef.current
+                  : supabase.channel(`typing:${currentConversation.id}`);
+                channel.send({
+                  type: "broadcast",
+                  event: "customer_typing",
+                  payload: { typing: true },
+                });
+                if (typingTimeoutRef.current)
+                  clearTimeout(typingTimeoutRef.current);
+                typingTimeoutRef.current = setTimeout(() => {
+                  channel.send({
+                    type: "broadcast",
+                    event: "customer_typing",
+                    payload: { typing: false },
+                  });
+                }, 1200);
+              }
+            }}
             placeholder={
               agentsAvailable
                 ? "Type your message..."
