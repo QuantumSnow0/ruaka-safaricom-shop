@@ -35,24 +35,13 @@ export async function POST(req: NextRequest) {
 
     const supabase = createClient(supabaseUrl, serviceKey);
 
-    // Find assigned agent; if none, pick active agents
-    const { data: conversation } = await supabase
-      .from("chat_conversations")
-      .select("id, agent_id, customer_name")
-      .eq("id", conversation_id)
-      .maybeSingle();
+    // Notify all active agents (broadcast)
+    const { data: agents } = await supabase
+      .from("chat_agents")
+      .select("id")
+      .eq("is_active", true);
 
-    let agentIds: string[] = [];
-    if (conversation?.agent_id) {
-      agentIds = [conversation.agent_id];
-    } else {
-      const { data: agents } = await supabase
-        .from("chat_agents")
-        .select("id")
-        .eq("is_active", true)
-        .limit(3);
-      agentIds = (agents || []).map((a) => a.id);
-    }
+    const agentIds: string[] = (agents || []).map((a) => a.id);
     if (agentIds.length === 0) {
       return NextResponse.json({ ok: true }); // nobody to notify
     }

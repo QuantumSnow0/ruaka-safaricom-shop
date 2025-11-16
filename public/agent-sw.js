@@ -6,7 +6,7 @@ self.addEventListener("push", (event) => {
 
   const title = data.title || "New chat message";
   const body = data.body || "You have a new customer message";
-  const icon = data.icon || "/helpline.png";
+  const icon = data.icon || "/notification_logo.png";
   const badge = data.badge || "/helpline.png";
   const url = data.url || "/agent-dashboard";
 
@@ -26,18 +26,18 @@ self.addEventListener("notificationclick", (event) => {
   event.notification.close();
   const url = event.notification.data?.url || "/agent-dashboard";
   event.waitUntil(
-    self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((clientList) => {
-      for (const client of clientList) {
-        if ("focus" in client) {
-          client.postMessage({ type: "OPEN_URL", url });
-          return client.focus();
+    self.clients
+      .matchAll({ type: "window", includeUncontrolled: true })
+      .then((clientList) => {
+        for (const client of clientList) {
+          if ("focus" in client) {
+            client.postMessage({ type: "OPEN_URL", url });
+            return client.focus();
+          }
         }
-      }
-      if (self.clients.openWindow) {
-        return self.clients.openWindow(url);
-      }
-    })
+        if (self.clients.openWindow) {
+          return self.clients.openWindow(url);
+        }
+      })
   );
 });
-
-
