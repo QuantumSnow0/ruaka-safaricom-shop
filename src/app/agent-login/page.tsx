@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { supabase } from "../lipamdogomdogo/lib/supabase";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import {
   MessageCircle,
   User,
@@ -26,6 +27,8 @@ export default function AgentLoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [info, setInfo] = useState("");
+  const [isResending, setIsResending] = useState(false);
 
   // ===== EVENT HANDLERS =====
 
@@ -49,31 +52,74 @@ export default function AgentLoginPage() {
           password,
         });
 
-      if (authError) throw authError;
+      if (authError) {
+        const msg = authError.message || "";
+        if (msg.toLowerCase().includes("email not confirmed")) {
+          setError(
+            "Your email is not confirmed. Please check your inbox for the verification link."
+          );
+          setIsLoading(false);
+          return;
+        }
+        throw authError;
+      }
 
-      // Check if this user is a chat agent
-      const { data: agentData, error: agentError } = await supabase
+      // Check if this user is a chat agent (and whether approved)
+      const { data: agentRow, error: agentLookupError } = await supabase
         .from("chat_agents")
-        .select("*")
+        .select("id,is_active")
         .eq("user_id", authData.user.id)
-        .eq("is_active", true)
-        .single();
+        .maybeSingle();
 
-      if (agentError || !agentData) {
-        // Sign out if not an agent
+      if (agentLookupError) {
+        await supabase.auth.signOut();
+        throw agentLookupError;
+      }
+
+      if (!agentRow) {
         await supabase.auth.signOut();
         throw new Error(
-          "Access denied. You are not authorized as a chat agent."
+          "No agent profile found for this account. Please sign up as an agent or contact your administrator."
+        );
+      }
+
+      if (!agentRow.is_active) {
+        await supabase.auth.signOut();
+        throw new Error(
+          "Your agent account is pending approval. Please wait for admin to activate your access."
         );
       }
 
       // Redirect to agent dashboard
-      router.push(`/agent-dashboard?agentId=${agentData.id}`);
+      router.push(`/agent-dashboard?agentId=${agentRow.id}`);
     } catch (error: any) {
       console.error("Login error:", error);
       setError(error.message || "Login failed. Please try again.");
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  // Resend verification email
+  const handleResendVerification = async () => {
+    if (!email) {
+      setError("Enter your email above to resend verification.");
+      return;
+    }
+    try {
+      setIsResending(true);
+      setError("");
+      setInfo("");
+      const { error: resendError } = await supabase.auth.resend({
+        type: "signup",
+        email,
+      });
+      if (resendError) throw resendError;
+      setInfo("Verification email sent. Please check your inbox (and spam).");
+    } catch (err: any) {
+      setError(err.message || "Failed to resend verification email.");
+    } finally {
+      setIsResending(false);
     }
   };
 
@@ -185,6 +231,29 @@ export default function AgentLoginPage() {
                 <p className="text-sm text-red-700">{error}</p>
               </motion.div>
             )}
+            {error.toLowerCase().includes("not confirmed") && (
+              <div className="flex justify-between items-center text-sm">
+                <span className="text-gray-600">Didn&apos;t get the email?</span>
+                <button
+                  type="button"
+                  onClick={handleResendVerification}
+                  disabled={isResending}
+                  className="text-green-700 hover:text-green-800 font-medium underline disabled:opacity-50"
+                >
+                  {isResending ? "Sending..." : "Resend verification"}
+                </button>
+              </div>
+            )}
+            {info && (
+              <motion.div
+                className="bg-green-50 border border-green-200 rounded-lg p-3 text-sm text-green-700"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.2 }}
+              >
+                {info}
+              </motion.div>
+            )}
 
             {/* Login Button */}
             <motion.button
@@ -207,6 +276,17 @@ export default function AgentLoginPage() {
 
           {/* Additional Info */}
           <div className="mt-6 pt-6 border-t border-gray-200">
+            <div className="text-center mb-3">
+              <p className="text-sm text-gray-700">
+                Don&apos;t have an account?{" "}
+                <Link
+                  href="/agent-signup"
+                  className="text-green-700 hover:text-green-800 font-medium underline"
+                >
+                  Create one
+                </Link>
+              </p>
+            </div>
             <div className="text-center">
               <p className="text-sm text-gray-600 mb-2">
                 For authorized Safaricom Shop staff only
