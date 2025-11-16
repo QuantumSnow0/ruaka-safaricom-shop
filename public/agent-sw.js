@@ -4,7 +4,7 @@ self.addEventListener("push", (event) => {
     data = event.data ? event.data.json() : {};
   } catch (_) {}
 
-  const title = data.title || "Safaricom shop ruaka";
+  const title = data.title || "New chat message";
   const body = data.body || "You have a new customer message";
   const icon = data.icon || "/notification_logo.png";
   const badge = data.badge || "/helpline.png";

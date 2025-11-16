@@ -64,6 +64,12 @@ export default function AgentDashboard({
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [showListOnMobile, setShowListOnMobile] = useState(true);
+  const longPressTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null
+  );
+  const [showCloseModal, setShowCloseModal] = useState(false);
+  const [conversationToClose, setConversationToClose] = useState<string | null>(null);
+  const [showStatusMenu, setShowStatusMenu] = useState(false);
 
   // ===== REFS =====
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -336,6 +342,43 @@ export default function AgentDashboard({
     }
   };
 
+  // Close conversation (mark as closed and remove from default lists)
+  const closeConversation = async (conversationId: string) => {
+    try {
+      const { error } = await supabase
+        .from("chat_conversations")
+        .update({ status: "closed" })
+        .eq("id", conversationId);
+      if (error) throw error;
+
+      setConversations((prev) =>
+        prev.map((c) =>
+          c.id === conversationId ? { ...c, status: "closed" } : c
+        )
+      );
+      if (currentConversation?.id === conversationId) {
+        setCurrentConversation(null);
+        setMessages([]);
+      }
+    } catch (err) {
+      console.error("Failed to close conversation:", err);
+      setError("Failed to close conversation");
+    }
+  };
+
+  const handleConversationLongPress = (conversationId: string) => {
+    setConversationToClose(conversationId);
+    setShowCloseModal(true);
+  };
+
+  const handleConfirmClose = () => {
+    if (conversationToClose) {
+      closeConversation(conversationToClose);
+      setShowCloseModal(false);
+      setConversationToClose(null);
+    }
+  };
+
   // Load messages for a specific conversation
   const loadMessages = async (conversationId: string) => {
     try {
@@ -468,8 +511,10 @@ export default function AgentDashboard({
     const matchesSearch =
       conv.customer_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       conv.customer_email?.toLowerCase().includes(searchTerm.toLowerCase());
+    // Hide closed conversations unless explicitly filtered
     const matchesStatus =
-      statusFilter === "all" || conv.status === statusFilter;
+      (statusFilter === "all" && conv.status !== "closed") ||
+      statusFilter === conv.status;
     return matchesSearch && matchesStatus;
   });
 
@@ -586,47 +631,100 @@ export default function AgentDashboard({
             </div>
           )}
 
-          {/* Status Toggle */}
-          <div className="mt-4 flex flex-wrap gap-2">
-            <button
-              onClick={() => updateAgentStatus("online")}
-              className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-                isOnline
-                  ? "bg-green-400 text-white"
-                  : "bg-white/20 text-white hover:bg-white/30"
-              }`}
-            >
-              Online
-            </button>
-            <button
-              onClick={() => updateAgentStatus("away")}
-              className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-                agent.status === "away"
-                  ? "bg-yellow-400 text-white"
-                  : "bg-white/20 text-white hover:bg-white/30"
-              }`}
-            >
-              Away
-            </button>
-            <button
-              onClick={() => updateAgentStatus("offline")}
-              className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-                !isOnline
-                  ? "bg-red-400 text-white"
-                  : "bg-white/20 text-white hover:bg-white/30"
-              }`}
-            >
-              Offline
-            </button>
-            {/* Mobile notifications toggle moved below status for more space */}
-            {isMobile && !notificationsEnabled && (
+          {/* Status Toggle - 3-dot menu */}
+          <div className="mt-4 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              {!notificationsEnabled && isMobile && (
+                <button
+                  onClick={enableNotifications}
+                  className="px-3 py-1.5 rounded-lg bg-white/20 hover:bg-white/30 text-white text-xs font-medium"
+                >
+                  Enable notifications
+                </button>
+              )}
+            </div>
+            <div className="relative flex items-center gap-2">
+              {/* Current status indicator */}
+              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm">
+                <div
+                  className={`w-2 h-2 rounded-full ${
+                    isOnline
+                      ? "bg-green-400"
+                      : agent.status === "away"
+                      ? "bg-yellow-400"
+                      : "bg-red-400"
+                  }`}
+                />
+                <span className="text-white text-xs font-medium">
+                  {isOnline ? "Online" : agent.status === "away" ? "Away" : "Offline"}
+                </span>
+              </div>
               <button
-                onClick={enableNotifications}
-                className="px-3 py-1.5 rounded-full border border-white/40 text-xs font-medium"
+                onClick={() => setShowStatusMenu(!showStatusMenu)}
+                className="p-2 hover:bg-white/20 rounded-full transition-colors"
+                aria-label="Status menu"
               >
-                Enable notifications
+                <svg
+                  className="w-5 h-5 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
+                  />
+                </svg>
               </button>
-            )}
+              {showStatusMenu && (
+                <>
+                  <div
+                    className="fixed inset-0 z-10"
+                    onClick={() => setShowStatusMenu(false)}
+                  />
+                  <div className="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg border border-gray-200 z-20 py-1">
+                    <button
+                      onClick={() => {
+                        updateAgentStatus("online");
+                        setShowStatusMenu(false);
+                      }}
+                      className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 flex items-center gap-2 ${
+                        isOnline ? "text-green-600 font-medium" : "text-gray-700"
+                      }`}
+                    >
+                      <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                      Online
+                    </button>
+                    <button
+                      onClick={() => {
+                        updateAgentStatus("away");
+                        setShowStatusMenu(false);
+                      }}
+                      className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 flex items-center gap-2 ${
+                        agent.status === "away" ? "text-yellow-600 font-medium" : "text-gray-700"
+                      }`}
+                    >
+                      <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
+                      Away
+                    </button>
+                    <button
+                      onClick={() => {
+                        updateAgentStatus("offline");
+                        setShowStatusMenu(false);
+                      }}
+                      className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 flex items-center gap-2 ${
+                        !isOnline ? "text-red-600 font-medium" : "text-gray-700"
+                      }`}
+                    >
+                      <div className="w-2 h-2 rounded-full bg-red-500"></div>
+                      Offline
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         </div>
 
@@ -667,61 +765,109 @@ export default function AgentDashboard({
               <p>No conversations found</p>
             </div>
           ) : (
-            <div className="space-y-1 p-2">
-              {filteredConversations.map((conversation) => (
-                <motion.div
-                  key={conversation.id}
-                  className={`p-3 rounded-lg cursor-pointer transition-colors ${
-                    currentConversation?.id === conversation.id
-                      ? "bg-green-50 border border-green-200"
-                      : "hover:bg-gray-50"
-                  }`}
-                  onClick={async () => {
-                    await selectConversation(conversation);
-                    if (isMobile) setShowListOnMobile(false);
-                  }}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <div className="flex items-center justify-between mb-1">
-                    <h4 className="font-medium text-sm text-gray-900">
-                      {conversation.customer_name || "Anonymous"}
-                    </h4>
-                    <span
-                      className={`px-2 py-1 rounded-full text-xs font-medium ${
-                        conversation.status === "waiting"
-                          ? "bg-yellow-100 text-yellow-800"
-                          : conversation.status === "active"
-                          ? "bg-green-100 text-green-800"
-                          : "bg-gray-100 text-gray-800"
-                      }`}
-                    >
-                      {conversation.status}
-                    </span>
-                  </div>
+            <div className="space-y-2 p-3">
+              {filteredConversations.map((conversation) => {
+                const isSelected =
+                  currentConversation?.id === conversation.id;
+                const convCustomerAvatar = (() => {
+                  const seed =
+                    conversation.customer_email ||
+                    conversation.customer_name ||
+                    conversation.id;
+                  return `https://api.dicebear.com/9.x/fun-emoji/svg?seed=${encodeURIComponent(
+                    seed || "customer"
+                  )}`;
+                })();
 
-                  <div className="flex items-center space-x-2 text-xs text-gray-500">
-                    <Clock className="w-3 h-3" />
-                    <span>
-                      {new Date(
-                        conversation.last_message_at || conversation.created_at
-                      ).toLocaleString([], {
-                        month: "short",
-                        day: "numeric",
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
-                    </span>
-                  </div>
+                const handlePointerDown = () => {
+                  if (longPressTimeoutRef.current) {
+                    clearTimeout(longPressTimeoutRef.current);
+                  }
+                  longPressTimeoutRef.current = setTimeout(() => {
+                    handleConversationLongPress(conversation.id);
+                  }, 600);
+                };
 
-                  {conversation.customer_email && (
-                    <div className="flex items-center space-x-1 text-xs text-gray-500 mt-1">
-                      <Mail className="w-3 h-3" />
-                      <span>{conversation.customer_email}</span>
+                const clearLongPress = () => {
+                  if (longPressTimeoutRef.current) {
+                    clearTimeout(longPressTimeoutRef.current);
+                    longPressTimeoutRef.current = null;
+                  }
+                };
+
+                const cardClasses = isMobile
+                  ? "p-3 rounded-2xl border shadow-sm bg-white"
+                  : "p-3 rounded-lg cursor-pointer";
+
+                return (
+                  <motion.div
+                    key={conversation.id}
+                    className={`${cardClasses} ${
+                      isSelected
+                        ? "border-green-300 bg-green-50"
+                        : "border-gray-200 hover:bg-gray-50"
+                    }`}
+                    onClick={async () => {
+                      clearLongPress();
+                      await selectConversation(conversation);
+                      if (isMobile) setShowListOnMobile(false);
+                    }}
+                    onPointerDown={handlePointerDown}
+                    onPointerUp={clearLongPress}
+                    onPointerLeave={clearLongPress}
+                    whileHover={{ scale: 1.01 }}
+                    whileTap={{ scale: 0.99 }}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-100 flex-shrink-0">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={convCustomerAvatar}
+                          alt={conversation.customer_name || "Customer"}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between">
+                          <h4 className="font-medium text-sm text-gray-900 truncate">
+                            {conversation.customer_name || "Anonymous"}
+                          </h4>
+                          <span className="text-[11px] text-gray-500 ml-2 flex-shrink-0">
+                            {new Date(
+                              conversation.last_message_at ||
+                                conversation.created_at
+                            ).toLocaleTimeString([], {
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            })}
+                          </span>
+                        </div>
+                        {conversation.customer_email && (
+                          <p className="text-[11px] text-gray-500 truncate">
+                            {conversation.customer_email}
+                          </p>
+                        )}
+                        <div className="mt-1 flex items-center justify-between text-[11px]">
+                          <span
+                            className={`inline-flex px-2 py-0.5 rounded-full font-medium ${
+                              conversation.status === "waiting"
+                                ? "bg-yellow-100 text-yellow-800"
+                                : conversation.status === "active"
+                                ? "bg-green-100 text-green-800"
+                                : "bg-gray-100 text-gray-800"
+                            }`}
+                          >
+                            {conversation.status}
+                          </span>
+                          <span className="text-gray-400">
+                            {/* Placeholder for unread or other meta */}
+                          </span>
+                        </div>
+                      </div>
                     </div>
-                  )}
-                </motion.div>
-              ))}
+                  </motion.div>
+                );
+              })}
             </div>
           )}
         </div>
@@ -821,7 +967,14 @@ export default function AgentDashboard({
                 const isAgent = message.sender_type === "agent";
                 const isCustomer = message.sender_type === "customer";
                 const showAvatar = message.sender_type !== "system";
-                const avatarUrl = isAgent ? agentAvatarUrl : customerAvatarUrl;
+                // Generate unique avatar per agent based on their sender info
+                const messageAvatarUrl = isAgent
+                  ? message.sender_name || message.sender_id
+                    ? `https://api.dicebear.com/9.x/fun-emoji/svg?seed=${encodeURIComponent(
+                        message.sender_name || message.sender_id || "agent"
+                      )}`
+                    : agentAvatarUrl
+                  : customerAvatarUrl;
 
                 return (
                   <div
@@ -835,12 +988,12 @@ export default function AgentDashboard({
                         isAgent ? "flex-row-reverse" : "flex-row"
                       }`}
                     >
-                      {showAvatar && avatarUrl && (
+                      {showAvatar && messageAvatarUrl && (
                         <div className="w-8 h-8 rounded-full overflow-hidden bg-gray-200 flex-shrink-0">
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img
-                            src={avatarUrl}
-                            alt={isAgent ? agent?.name || "Agent" : currentConversation?.customer_name || "Customer"}
+                            src={messageAvatarUrl}
+                            alt={isAgent ? message.sender_name || "Agent" : currentConversation?.customer_name || "Customer"}
                             className="w-full h-full object-cover"
                           />
                         </div>
@@ -857,10 +1010,18 @@ export default function AgentDashboard({
                         <p>{message.content}</p>
                         {message.sender_type !== "system" && (
                           <div
-                            className={`text-xs mt-1 opacity-70 ${
+                            className={`text-xs mt-1 opacity-70 flex items-center gap-1 ${
                               isAgent ? "text-green-100" : "text-gray-500"
                             }`}
                           >
+                            {isAgent && message.sender_name && (
+                              <>
+                                <span className="font-semibold italic opacity-90">
+                                  {message.sender_name.split(/\s+/)[0]}
+                                </span>
+                                <span>·</span>
+                              </>
+                            )}
                             {new Date(message.created_at).toLocaleTimeString(
                               [],
                               {
@@ -981,7 +1142,7 @@ export default function AgentDashboard({
 
       {/* Error Display */}
       {error && (
-        <div className="fixed top-4 right-4 bg-red-50 border border-red-200 rounded-lg p-4 flex items-center space-x-2 max-w-sm">
+        <div className="fixed top-4 right-4 bg-red-50 border border-red-200 rounded-lg p-4 flex items-center space-x-2 max-w-sm z-50">
           <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0" />
           <p className="text-sm text-red-700">{error}</p>
           <button
@@ -992,6 +1153,49 @@ export default function AgentDashboard({
           </button>
         </div>
       )}
+
+      {/* Close Conversation Modal */}
+      <AnimatePresence>
+        {showCloseModal && (
+          <div className="fixed inset-0 z-50 flex items-end md:items-center justify-center bg-black/50 backdrop-blur-sm">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              className="bg-white rounded-t-2xl md:rounded-2xl shadow-2xl w-full max-w-md md:max-w-sm p-6"
+            >
+            <div className="flex items-center justify-center mb-4">
+              <div className="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center">
+                <AlertCircle className="w-8 h-8 text-red-600" />
+              </div>
+            </div>
+            <h3 className="text-xl font-semibold text-gray-900 text-center mb-2">
+              Close Conversation?
+            </h3>
+            <p className="text-gray-600 text-center mb-6">
+              This conversation will be moved to Closed and hidden from your active list.
+            </p>
+            <div className="flex gap-3">
+              <button
+                onClick={() => {
+                  setShowCloseModal(false);
+                  setConversationToClose(null);
+                }}
+                className="flex-1 px-4 py-3 rounded-lg border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleConfirmClose}
+                className="flex-1 px-4 py-3 rounded-lg bg-red-600 text-white font-medium hover:bg-red-700 transition-colors"
+              >
+                Close Conversation
+              </button>
+            </div>
+          </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
