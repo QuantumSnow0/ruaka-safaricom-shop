@@ -3,7 +3,7 @@ import { Inter, Saira, Montserrat, Open_Sans } from "next/font/google";
 import "./globals.css";
 import { ChatProvider } from "./lipamdogomdogo/contexts/ChatContext";
 import ConditionalChatWidget from "./components/ConditionalChatWidget";
-
+import Script from "next/script";
 const inter = Inter({ subsets: ["latin"] });
 const saira = Saira({
   subsets: ["latin"],
@@ -100,6 +100,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+       {/* Google tag (gtag.js)  */}
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CXCB4S3KMC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CXCB4S3KMC');
+</script>
         <link rel="icon" href="/favicon.ico" />
         <link
           rel="icon"
