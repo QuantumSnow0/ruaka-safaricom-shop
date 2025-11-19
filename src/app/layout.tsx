@@ -4,6 +4,7 @@ import "./globals.css";
 import { ChatProvider } from "./lipamdogomdogo/contexts/ChatContext";
 import ConditionalChatWidget from "./components/ConditionalChatWidget";
 import Script from "next/script";
+
 const inter = Inter({ subsets: ["latin"] });
 const saira = Saira({
   subsets: ["latin"],
@@ -27,14 +28,12 @@ export const metadata: Metadata = {
   description:
     "Visit Safaricom Shop Ruaka for customer care, mobile accessories, phones, and Lipa Mdogo Mdogo services. Your one-stop shop for all Safaricom needs in Ruaka.",
   metadataBase: new URL("https://www.safaricomshopruaka.co.ke"),
-  alternates: {
-    canonical: "/",
-  },
+  alternates: { canonical: "/" },
   openGraph: {
     siteName: "Safaricom Shop Ruaka",
     title: "Safaricom Shop Ruaka - Your Trusted Mobile Partner",
     description:
-      "Visit Safaricom Shop Ruaka for customer care, mobile accessories, phones, and Lipa Mdogo Mdogo services. Your one-stop shop for all Safaricom needs in Ruaka.",
+      "Visit Safaricom Shop Ruaka for customer care, mobile accessories, phones, and Lipa Mdogo Mdogo services.",
     url: "https://www.safaricomshopruaka.co.ke",
     type: "website",
     images: [
@@ -56,37 +55,16 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      {
-        url: "/favicon-16x16.png",
-        sizes: "16x16",
-        type: "image/png",
-      },
-      {
-        url: "/favicon-32x32.png",
-        sizes: "32x32",
-        type: "image/png",
-      },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
       { url: "/favicon.ico", rel: "icon" },
-      { url: "/favicon.ico", rel: "shortcut icon" },
     ],
     apple: [
-      {
-        url: "/apple-touch-icon.png",
-        sizes: "180x180",
-        type: "image/png",
-      },
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
     ],
     other: [
-      {
-        rel: "android-chrome",
-        url: "/android-chrome-192x192.png",
-        sizes: "192x192",
-      },
-      {
-        rel: "android-chrome",
-        url: "/android-chrome-512x512.png",
-        sizes: "512x512",
-      },
+      { rel: "android-chrome", url: "/android-chrome-192x192.png" },
+      { rel: "android-chrome", url: "/android-chrome-512x512.png" },
     ],
   },
   manifest: "/site.webmanifest",
@@ -94,40 +72,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <head>
-       {/* Google tag (gtag.js)  */}
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CXCB4S3KMC"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-CXCB4S3KMC');
-</script>
-        <link rel="icon" href="/favicon.ico" />
-        <link
-          rel="icon"
-          href="/favicon-16x16.png"
-          sizes="16x16"
-          type="image/png"
-        />
-        <link
-          rel="icon"
-          href="/favicon-32x32.png"
-          sizes="32x32"
-          type="image/png"
-        />
-        <link
-          rel="apple-touch-icon"
-          href="/apple-touch-icon.png"
-          sizes="180x180"
-        />
-        {/* Structured Data for Organization and Website */}
+        {/* Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -393,9 +344,25 @@ export default function RootLayout({
           }}
         />
       </head>
+
       <body
         className={`${inter.className} ${saira.variable} ${montserrat.variable} ${open_sans.variable}`}
       >
+        {/* Google Analytics Scripts */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-CXCB4S3KMC"
+        />
+
+        <Script id="ga-setup">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-CXCB4S3KMC');
+          `}
+        </Script>
+
         <ChatProvider>
           {children}
           <ConditionalChatWidget />
