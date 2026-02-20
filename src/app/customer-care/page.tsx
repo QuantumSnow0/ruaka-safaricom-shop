@@ -141,7 +141,7 @@ export default function CustomerCarePage() {
       title: "Phone Support",
       description: "Speak directly with our support team",
       icon: Phone,
-      contact: "0700776994",
+      contact: "0711271206",
       availability: "24/7 Available",
       color: "from-green-500 to-emerald-600",
       bgColor: "bg-green-50",
@@ -151,7 +151,7 @@ export default function CustomerCarePage() {
       title: "WhatsApp Support",
       description: "Quick assistance via WhatsApp",
       icon: MessageCircle,
-      contact: "0700776994",
+      contact: "0711271206",
       availability: "24/7 Available",
       color: "from-green-500 to-green-600",
       bgColor: "bg-green-50",
@@ -356,14 +356,14 @@ export default function CustomerCarePage() {
                   </div>
                   <div className="flex gap-3">
                     <a
-                      href="tel:0700776994"
+                      href="tel:0711271206"
                       className="flex-1 flex items-center justify-center space-x-2 px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors shadow-lg text-sm"
                     >
                       <Phone className="w-4 h-4" />
                       <span>Call Now</span>
                     </a>
                     <a
-                      href={`https://wa.me/254700776994?text=Hello! I need help with ${supportOptions
+                      href={`https://wa.me/254711271206?text=Hello! I need help with ${supportOptions
                         .find((s) => s.id === selectedService)
                         ?.title.toLowerCase()}. ${
                         supportOptions.find((s) => s.id === selectedService)
@@ -432,7 +432,7 @@ export default function CustomerCarePage() {
                   </div>
                   {method.title === "Phone Support" ? (
                     <a
-                      href="tel:0700776994"
+                      href="tel:0711271206"
                       className={`w-full mt-6 px-6 py-3 bg-gradient-to-r ${method.color} text-white font-semibold rounded-xl hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-2`}
                     >
                       <span>Call Now</span>
@@ -440,7 +440,7 @@ export default function CustomerCarePage() {
                     </a>
                   ) : method.title === "WhatsApp Support" ? (
                     <a
-                      href="https://wa.me/254700776994"
+                      href="https://wa.me/254711271206"
                       target="_blank"
                       rel="noopener noreferrer"
                       className={`w-full mt-6 px-6 py-3 bg-gradient-to-r ${method.color} text-white font-semibold rounded-xl hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-2`}
@@ -620,7 +620,7 @@ export default function CustomerCarePage() {
                       <h3 className="text-xl font-bold text-gray-900 mb-2">
                         Contact
                       </h3>
-                      <p className="text-gray-700 mb-1">Phone: 0700776994</p>
+                      <p className="text-gray-700 mb-1">Phone: 0711271206</p>
                       <p className="text-gray-700">
                         Email: shop@ruaka.safaricom.co.ke
                       </p>
@@ -675,14 +675,14 @@ export default function CustomerCarePage() {
                   </button>
                   <div className="grid grid-cols-2 gap-4">
                     <a
-                      href="tel:0700776994"
+                      href="tel:0711271206"
                       className="px-4 py-3 bg-white border-2 border-green-200 text-green-600 font-semibold rounded-xl hover:bg-green-50 transition-colors flex items-center justify-center space-x-2"
                     >
                       <Phone className="w-4 h-4" />
                       <span>Call Us</span>
                     </a>
                     <a
-                      href="https://wa.me/254700776994"
+                      href="https://wa.me/254711271206"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="px-4 py-3 bg-white border-2 border-green-200 text-green-600 font-semibold rounded-xl hover:bg-green-50 transition-colors flex items-center justify-center space-x-2"

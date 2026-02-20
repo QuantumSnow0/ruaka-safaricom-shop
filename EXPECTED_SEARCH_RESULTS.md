@@ -23,7 +23,7 @@ After implementing Review structured data, your search results should appear lik
 │ Safaricom needs in Ruaka.                                          │
 │                                                                     │
 │ 📍 Sandton Plaza, Ruaka, Kiambu                                   │
-│ 📞 +254-700-776-994                                                │
+│ 📞 +254-711-271-206                                                │
 │ ⏰ Mon-Fri: 8AM-7PM, Sat-Sun: 9AM-6PM                             │
 └─────────────────────────────────────────────────────────────────────┘
 ```
@@ -45,7 +45,7 @@ After implementing Review structured data, your search results should appear lik
 │ phones, and Lipa Mdogo Mdogo...     │
 │                                      │
 │ 📍 Sandton Plaza, Ruaka            │
-│ 📞 +254-700-776-994                │
+│ 📞 +254-711-271-206                │
 └──────────────────────────────────────┘
 ```
 
@@ -115,7 +115,7 @@ When users click on your result, they may see:
 │    Kiambu, Kenya                    │
 │                                      │
 │ 📞 Phone                            │
-│    +254-700-776-994                 │
+│    +254-711-271-206                 │
 │                                      │
 │ ⏰ Hours                            │
 │    Mon-Fri: 8:00 AM - 7:00 PM      │

@@ -115,8 +115,8 @@ const onboardingSteps = [
 ];
 
 export default function RoutersPage() {
-  const contactNumber = "0700776994";
-  const whatsappLink = "https://wa.me/254700776994";
+  const contactNumber = "0711271206";
+  const whatsappLink = "https://wa.me/254711271206";
 
   return (
     <div className="min-h-screen bg-white text-gray-900 text-[0.95rem] md:text-base">

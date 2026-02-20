@@ -104,14 +104,14 @@ export default function RootLayout({
                   contactPoint: [
                     {
                       "@type": "ContactPoint",
-                      telephone: "+254-700-776-994",
+                      telephone: "+254-711-271-206",
                       contactType: "Customer Service",
                       areaServed: "KE",
                       availableLanguage: ["English", "Swahili"],
                     },
                     {
                       "@type": "ContactPoint",
-                      telephone: "+254-700-776-994",
+                      telephone: "+254-711-271-206",
                       contactType: "Sales",
                       areaServed: "KE",
                       availableLanguage: ["English", "Swahili"],
@@ -152,7 +152,7 @@ export default function RootLayout({
                     longitude: "36.7833",
                   },
                   url: "https://www.safaricomshopruaka.co.ke",
-                  telephone: "+254-700-776-994",
+                  telephone: "+254-711-271-206",
                   openingHoursSpecification: [
                     {
                       "@type": "OpeningHoursSpecification",

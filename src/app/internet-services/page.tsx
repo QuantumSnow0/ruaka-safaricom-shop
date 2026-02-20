@@ -81,7 +81,7 @@ export default function InternetServicesPage() {
         name: "How do I get support?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Call 0700 776 994, chat with us on the website, or visit the Customer Care page. We provide 24/7 technical support for active connections.",
+          text: "Call 0711 271 206, chat with us on the website, or visit the Customer Care page. We provide 24/7 technical support for active connections.",
         },
       },
     ],
@@ -103,7 +103,7 @@ ${plan.features.map((feature: string) => `• ${feature}`).join("\n")}
 Please let me know how to proceed with the order. Thank you!`;
 
     const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/254700776994?text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/254711271206?text=${encodedMessage}`;
 
     window.open(whatsappUrl, "_blank");
   };
@@ -787,14 +787,14 @@ Please let me know how to proceed with the order. Thank you!`;
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="tel:0700776994"
+              href="tel:0711271206"
               className="px-8 py-3 bg-green-600 text-white font-bold rounded-xl hover:bg-green-700 transition-colors flex items-center justify-center space-x-2"
             >
               <Phone className="w-5 h-5" />
               <span>Call Now</span>
             </a>
             <a
-              href="https://wa.me/254700776994?text=Hello! I'm interested in your internet services. Can you help me choose the right plan?"
+              href="https://wa.me/254711271206?text=Hello! I'm interested in your internet services. Can you help me choose the right plan?"
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-3 bg-yellow-500 text-white font-bold rounded-xl hover:bg-green-600 transition-colors flex items-center justify-center space-x-2"

@@ -85,7 +85,7 @@ export default function Home() {
                 name: "How can I reach Customer Care?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Call 0700 776 994, chat with us on the website, or visit the Customer Care page for 24/7 assistance.",
+                  text: "Call 0711 271 206, chat with us on the website, or visit the Customer Care page for 24/7 assistance.",
                 },
               },
               {
@@ -394,56 +394,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Black November Promotion Banner */}
-      <section className="py-6 md:py-10 bg-white relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <a
-            href="https://www.phoneupkenya.co.ke/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block group"
-          >
-            <div className="relative bg-black rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl hover:shadow-orange-500/20 transition-all duration-300">
-              {/* Subtle orange glow effects */}
-              <div className="absolute inset-0 opacity-20">
-                <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500 rounded-full blur-[100px]"></div>
-                <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-orange-600 rounded-full blur-[100px]"></div>
-              </div>
-
-              {/* Content */}
-              <div className="relative z-10 p-6 md:p-10 lg:p-12">
-                <div className="flex items-center justify-between gap-4">
-                  <div className="flex-1">
-                    {/* PhoneUp Kenya Badge */}
-                    <div className="flex items-center gap-2 mb-3 md:mb-4">
-                      <img
-                        src="/logo.jpeg"
-                        alt="PhoneUp Kenya"
-                        className="w-6 h-6 md:w-8 md:h-8 object-contain"
-                      />
-                      <span className="text-white/80 text-xs md:text-sm font-semibold">
-                        At PhoneUp Kenya
-                      </span>
-                    </div>
-                    <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-orange-500 mb-2 md:mb-3 tracking-tight">
-                      BLACK NOVEMBER
-                    </h2>
-                    <p className="text-white text-sm md:text-base lg:text-lg font-medium flex items-center gap-2">
-                      Don&apos;t Miss Out On These Exclusive Deals! 🔥
-                    </p>
-                  </div>
-                  <div className="flex-shrink-0">
-                    <div className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 rounded-full bg-orange-500/20 backdrop-blur-sm border-2 border-orange-500/50 flex items-center justify-center group-hover:bg-orange-500/30 group-hover:border-orange-500 transition-all duration-300">
-                      <ExternalLink className="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 text-orange-500 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-      </section>
-
       {/* Services Section - Zigzag Layout */}
       <section
         id="services"
@@ -653,55 +603,42 @@ export default function Home() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-black/30"></div>
                   <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <div className="mb-2">
-                      <div className="text-orange-500 text-xs font-black tracking-wider mb-1">
-                        BLACK NOVEMBER
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <img
-                          src="/logo.jpeg"
-                          alt="PhoneUp Kenya Logo"
-                          className="w-6 h-6 object-contain"
-                        />
-                        <h3 className="text-white font-montserrat font-bold text-sm">
-                          Shop Latest Smartphones
-                        </h3>
-                      </div>
+                    <div className="flex items-center gap-2">
+                      <img
+                        src="/logo.jpeg"
+                        alt="PhoneUp Kenya Logo"
+                        className="w-6 h-6 object-contain"
+                      />
+                      <h3 className="text-white font-montserrat font-bold text-sm">
+                        Shop Latest Smartphones
+                      </h3>
                     </div>
                   </div>
                 </div>
                 <div className="relative z-10 p-4 md:p-6">
-                  {/* Desktop: Black November Header */}
-                  <div className="hidden md:block mb-3">
-                    <div className="text-orange-500 text-xs md:text-sm font-black tracking-widest mb-2">
-                      BLACK NOVEMBER
+                  {/* Desktop: Header */}
+                  <div className="hidden md:flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 flex items-center justify-center flex-shrink-0 bg-orange-500/20 rounded-lg border border-orange-500/30">
+                      <img
+                        src="/logo.jpeg"
+                        alt="PhoneUp Kenya Logo"
+                        className="w-8 h-8 object-contain"
+                      />
                     </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 flex items-center justify-center flex-shrink-0 bg-orange-500/20 rounded-lg border border-orange-500/30">
-                        <img
-                          src="/logo.jpeg"
-                          alt="PhoneUp Kenya Logo"
-                          className="w-8 h-8 object-contain"
-                        />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="text-lg md:text-xl font-montserrat font-black text-orange-500 mb-0">
-                          Shop Latest Smartphones
-                        </h3>
-                      </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-lg md:text-xl font-montserrat font-black text-orange-500 mb-0">
+                        Shop Latest Smartphones
+                      </h3>
                     </div>
                   </div>
                   <p className="text-xs md:text-sm text-white/90 leading-relaxed mb-3 md:mb-4 line-clamp-2 md:line-clamp-3 font-open-sans">
                     Get your hands on the latest smartphones from top brands
                     with competitive prices, comprehensive warranty, and expert
-                    setup assistance.{" "}
-                    <span className="font-bold text-orange-400">
-                      Exclusive Black November deals! 🔥
-                    </span>
+                    setup assistance.
                   </p>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center text-orange-500 font-bold text-xs md:text-sm group-hover:text-orange-400 transition-colors">
-                      Shop Black November Deals
+                      Shop Latest Phones
                       <svg
                         className="w-3 h-3 md:w-4 md:h-4 ml-2 group-hover:translate-x-1 transition-transform"
                         fill="none"
@@ -1186,7 +1123,7 @@ export default function Home() {
                   <h3 className="text-sm font-semibold text-gray-900 mb-1">
                     Contact
                   </h3>
-                  <p className="text-sm text-gray-600">+254 700 776 994</p>
+                  <p className="text-sm text-gray-600">+254 711 271 206</p>
                 </div>
               </div>
             </div>
@@ -1270,7 +1207,7 @@ export default function Home() {
                   Phone
                 </h3>
                 <p className="text-gray-700 text-lg font-open-sans">
-                  +254 700 776 994
+                  +254 711 271 206
                 </p>
               </div>
             </div>
