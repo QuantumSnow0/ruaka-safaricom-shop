@@ -28,6 +28,8 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
+const WHATSAPP_NUMBER = "254711271206"; // 0711271206
+
 export default function InternetServicesPage() {
   const [activeTab, setActiveTab] = useState("5g");
 
@@ -103,7 +105,7 @@ ${plan.features.map((feature: string) => `• ${feature}`).join("\n")}
 Please let me know how to proceed with the order. Thank you!`;
 
     const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/254711271206?text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
 
     window.open(whatsappUrl, "_blank");
   };
@@ -794,7 +796,7 @@ Please let me know how to proceed with the order. Thank you!`;
               <span>Call Now</span>
             </a>
             <a
-              href="https://wa.me/254711271206?text=Hello! I'm interested in your internet services. Can you help me choose the right plan?"
+              href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hello! I'm interested in your internet services. Can you help me choose the right plan?")}`}
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-3 bg-yellow-500 text-white font-bold rounded-xl hover:bg-green-600 transition-colors flex items-center justify-center space-x-2"
